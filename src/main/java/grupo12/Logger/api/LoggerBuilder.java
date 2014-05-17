@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import grupo12.Logger.conf.Configuration;
 import grupo12.Logger.format.Formatter;
-import grupo12.Logger.output.ConsoleWriter;
 import grupo12.Logger.output.OutputManager;
-import grupo12.Logger.output.RecordWriter;
 import grupo12.Logger.output.Writer;
+import grupo12.Logger.output.WriterFactory;
 
 public class LoggerBuilder {
 
@@ -19,7 +18,7 @@ public class LoggerBuilder {
 	}
 	
 	public LoggerBuilder(String configurationFile) {
-				
+		WriterFactory writerFactory = new WriterFactory();
 		logger = new Logger();
 		conf = new Configuration(configurationFile);
 		
@@ -31,11 +30,7 @@ public class LoggerBuilder {
 		ArrayList<Writer> writers = new ArrayList<Writer>();
 		
 		for (String output : outputs) {
-			// TODO: hacer extensible esto:
-			if (output.equals("console"))
-				writers.add(new ConsoleWriter());
-			else
-				writers.add(new RecordWriter(output));
+			writers.add(writerFactory.getWriter(output));
 		}
 		
 		for (Writer writer : writers) {
