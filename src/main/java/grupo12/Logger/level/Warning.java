@@ -7,4 +7,9 @@ public class Warning extends Level {
 		level = WARNING;
 		levelStr = "WARNING";
 	}
+	
+	@Override
+	public boolean equals(Object anObject) {
+		return anObject instanceof Warning;
+	}
 }

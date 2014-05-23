@@ -5,6 +5,7 @@ public abstract class Level {
 	protected String levelStr;
 	protected int level;
 	
+	@Override
 	public String toString() {
 		return levelStr;
 	}
@@ -13,4 +14,6 @@ public abstract class Level {
 		return level >= otherLevel.level;
 	}
 
+	@Override
+	public abstract boolean equals(Object anObject);
 }

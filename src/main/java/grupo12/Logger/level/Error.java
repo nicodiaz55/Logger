@@ -7,4 +7,9 @@ public class Error extends Level {
 		level = ERROR;
 		levelStr = "ERROR";
 	}
+	
+	@Override
+	public boolean equals(Object anObject) {
+		return anObject instanceof Error;
+	}
 }

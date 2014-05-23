@@ -10,4 +10,8 @@ public class ConsoleWriter implements Writer {
 
 	public void end() {}
 
+	@Override
+	public boolean equals(Object anObject) {
+		return anObject instanceof ConsoleWriter;
+	}
 }

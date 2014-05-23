@@ -3,13 +3,13 @@ package grupo12.Logger.output;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class RecordWriter implements Writer {
+public class FileWriter implements Writer {
 
 	private String filename;
 	private PrintWriter writer;
 	private boolean ok;
 	
-	public RecordWriter(String filename) {
+	public FileWriter(String filename) {
 		writer = null;
 		// TODO: Ver si tengo que meter el init aca... o dejar que lo haga OutputManager.
 		this.filename = filename;
@@ -42,6 +42,11 @@ public class RecordWriter implements Writer {
 			writer.close();
 		filename = "";
 		writer = null;
+	}
+	
+	@Override
+	public boolean equals(Object anObject) {
+		return anObject instanceof FileWriter;
 	}
 
 }

@@ -7,4 +7,9 @@ public class Info extends Level {
 		level = INFO;
 		levelStr = "INFO";
 	}
+
+	@Override
+	public boolean equals(Object anObject) {
+		return anObject instanceof Info;
+	}
 }

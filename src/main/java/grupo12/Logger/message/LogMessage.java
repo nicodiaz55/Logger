@@ -39,7 +39,7 @@ public class LogMessage {
 	}
 	
 	public Level getLevel() {
-		return this.level;
+		return level;
 	}
 	
 	public String getMessage() {
@@ -47,7 +47,7 @@ public class LogMessage {
 	}
 	
 	public void changeFormat(String newFormat) {
-		this.formatedMessage = newFormat;
+		formatedMessage = newFormat;
 	}
 	
 	public String toString() {

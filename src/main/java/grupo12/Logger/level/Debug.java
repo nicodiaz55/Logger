@@ -8,4 +8,9 @@ public class Debug extends Level {
 		level = DEBUG;
 		levelStr = "DEBUG";
 	}
+	
+	@Override
+	public boolean equals(Object anObject) {
+		return anObject instanceof Debug;
+	}
 }

@@ -8,6 +8,6 @@ public class WriterFactory {
 		if (output.equals(CONSOLE))
 			return new ConsoleWriter();
 		// Everything else is considered a file:
-		return new RecordWriter(output);
+		return new FileWriter(output);
 	}
 }
