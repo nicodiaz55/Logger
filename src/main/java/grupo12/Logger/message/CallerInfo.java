@@ -12,10 +12,12 @@ public class CallerInfo {
 	
 	public CallerInfo() {
 		timestamp = new Date();
-		line = "-1"; // TODO
 		thread = Thread.currentThread().getName();
-		method = "null"; // TODO
-		file = "null"; // TODO
+		// TODO: Verificar que estamos accediendo correctamente a los datos del Stack:
+		int len = Thread.currentThread().getStackTrace().length-1;
+		line = Integer.toString(Thread.currentThread().getStackTrace()[len].getLineNumber());
+		method = Thread.currentThread().getStackTrace()[len].getMethodName();
+		file = Thread.currentThread().getStackTrace()[len].getFileName();
 	}
 	
 	public String getLineNumber() {

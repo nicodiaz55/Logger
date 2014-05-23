@@ -9,9 +9,9 @@ public class LogMessage {
 	private String message;
 	private String formatedMessage;
 
-	public LogMessage(String level, String message, CallerInfo info) {
+	public LogMessage(String level, String message) {
 		this.level = new Level(level);
-		this.info = info;
+		this.info = new CallerInfo();
 		this.message = message;
 		this.formatedMessage = message;
 	}

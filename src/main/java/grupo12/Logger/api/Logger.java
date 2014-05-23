@@ -1,18 +1,19 @@
 package grupo12.Logger.api;
 
-import grupo12.Logger.message.CallerInfo;
 import grupo12.Logger.message.LogMessage;
 import grupo12.Logger.output.OutputManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Logger {
-	private ArrayList<OutputManager> managers;
+	private List<OutputManager> managers;
 	
 	public Logger() {
 		managers = new ArrayList<OutputManager>();
 	}
 	
+	// Para que el usuario pueda modificarlo on demand
 	public void addOutput(OutputManager manager) {
 		// TODO: revisar que no agregue uno que ya estaba agregado
 		managers.add(manager);
@@ -27,27 +28,27 @@ public class Logger {
 	}
 	
 	public void debug(String message) {
-		LogMessage logMessage = new LogMessage("DEBUG", message, new CallerInfo());
+		LogMessage logMessage = new LogMessage("DEBUG", message);
 		log(logMessage);
 	}
 	
 	public void info(String message) {
-		LogMessage logMessage = new LogMessage("INFO", message, new CallerInfo());
+		LogMessage logMessage = new LogMessage("INFO", message);
 		log(logMessage);
 	}
 	
 	public void warn(String message) {
-		LogMessage logMessage = new LogMessage("WARNING", message, new CallerInfo());
+		LogMessage logMessage = new LogMessage("WARNING", message);
 		log(logMessage);
 	}
 	
 	public void error(String message) {
-		LogMessage logMessage = new LogMessage("ERROR", message, new CallerInfo());
+		LogMessage logMessage = new LogMessage("ERROR", message);
 		log(logMessage);
 	}
 	
 	public void fatal(String message) {
-		LogMessage logMessage = new LogMessage("FATAL", message, new CallerInfo());
+		LogMessage logMessage = new LogMessage("FATAL", message);
 		log(logMessage);
 	}
 	
