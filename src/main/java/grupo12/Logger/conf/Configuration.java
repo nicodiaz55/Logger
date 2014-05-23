@@ -9,10 +9,10 @@ import java.util.Properties;
 
 public class Configuration {
 	
-	private static final String defaultLevel = "INFO";
-	private static final String defaultPattern = "%d{HH:mm:ss} - %p - %t - %m";
-	private static final String defaultOutput = "console";
-	private static final String defaultSeparator = "-";
+	public static final String defaultLevel = "INFO";
+	public static final String defaultPattern = "%d{HH:mm:ss} - %p - %t - %m";
+	public static final String defaultOutput = "console";
+	public static final String defaultSeparator = "-";
 	
 	private Properties conf;
 	
@@ -52,19 +52,19 @@ public class Configuration {
 		conf.setProperty("output", outputs);*/
 	}
 	
-	public String getLevel() {
-		return conf.getProperty("level", defaultLevel);
+	public ArrayList<String> getLevels() {
+		return new ArrayList<String>(Arrays.asList(conf.getProperty("level", defaultLevel).split(",")));
 	}
 	
-	public String getSeparator() {
-		return conf.getProperty("separator", defaultSeparator);
+	public ArrayList<String> getSeparators() {
+		return new ArrayList<String>(Arrays.asList(conf.getProperty("separator", defaultSeparator).split(",")));
 	}
 	
 	public ArrayList<String> getOutputs() {
 		return new ArrayList<String>(Arrays.asList(conf.getProperty("output", defaultOutput).split(",")));
 	}
 
-	public String getPattern() {
-		return conf.getProperty("pattern", defaultPattern);
+	public ArrayList<String> getPatterns() {
+		return new ArrayList<String>(Arrays.asList(conf.getProperty("pattern", defaultPattern).split(",")));
 	}
 }

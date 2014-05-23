@@ -23,9 +23,9 @@ public class LoggerBuilder {
 		conf = new Configuration(configurationFile);
 		
 		ArrayList<String> outputs = conf.getOutputs();
-		String level = conf.getLevel();
-		String pattern = conf.getPattern();
-		String separator = conf.getSeparator();
+		ArrayList<String> levels = conf.getLevels();
+		ArrayList<String> patterns = conf.getPatterns();
+		ArrayList<String> separators = conf.getSeparators();
 		
 		ArrayList<Writer> writers = new ArrayList<Writer>();
 		
@@ -36,8 +36,9 @@ public class LoggerBuilder {
 		for (Writer writer : writers) {
 			OutputManager manager = new OutputManager();
 			manager.setOutput(writer);
-			manager.setFormatter(new Formatter(pattern, separator));
-			manager.setLevel(level);
+			// TODO: hace que funcione para la nueva Configuracion:
+			manager.setFormatter(new Formatter(patterns.get(0), separators.get(0)));
+			manager.setLevel(levels.get(0));
 			logger.addOutput(manager);
 		}
 		
