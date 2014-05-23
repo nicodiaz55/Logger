@@ -22,6 +22,7 @@ public class Formatter {
 		formatList.add(new ThreadFormat());
 		formatList.add(new DateFormat());
 		formatList.add(new LiteralFormat());
+		formatList.add(new LineNumberFormat());
 	}
 	
 	public String format(LogMessage message) {

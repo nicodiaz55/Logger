@@ -2,15 +2,16 @@ package grupo12.Logger.format;
 
 import grupo12.Logger.message.LogMessage;
 
-public class MessageTextFormat implements Format {
+public class MessageTextFormat extends Format {
 
-	static final String pattern = "(?<!%)%m";
-	
+	public MessageTextFormat() {
+		super("%m");
+	}
+
 	@Override
 	public void format(LogMessage message) {
-		String oldRepr = message.toString() ;
-		String newRepr = oldRepr.replaceAll(pattern, message.getMessage());
-		message.changeFormat(newRepr);
+		String rawMessage = message.getMessage();
+		updateFormat(message, rawMessage);
 	}
 
 }
