@@ -1,5 +1,10 @@
 package grupo12.Logger.api;
 
+import grupo12.Logger.level.Debug;
+import grupo12.Logger.level.Fatal;
+import grupo12.Logger.level.Info;
+import grupo12.Logger.level.Warning;
+import grupo12.Logger.level.Error;
 import grupo12.Logger.message.LogMessage;
 import grupo12.Logger.output.OutputManager;
 
@@ -28,27 +33,27 @@ public class Logger {
 	}
 	
 	public void debug(String message) {
-		LogMessage logMessage = new LogMessage("DEBUG", message);
+		LogMessage logMessage = new LogMessage(new Debug(), message);
 		log(logMessage);
 	}
 	
 	public void info(String message) {
-		LogMessage logMessage = new LogMessage("INFO", message);
+		LogMessage logMessage = new LogMessage(new Info(), message);
 		log(logMessage);
 	}
 	
 	public void warn(String message) {
-		LogMessage logMessage = new LogMessage("WARNING", message);
+		LogMessage logMessage = new LogMessage(new Warning(), message);
 		log(logMessage);
 	}
 	
 	public void error(String message) {
-		LogMessage logMessage = new LogMessage("ERROR", message);
+		LogMessage logMessage = new LogMessage(new Error(), message);
 		log(logMessage);
 	}
 	
 	public void fatal(String message) {
-		LogMessage logMessage = new LogMessage("FATAL", message);
+		LogMessage logMessage = new LogMessage(new Fatal(), message);
 		log(logMessage);
 	}
 	

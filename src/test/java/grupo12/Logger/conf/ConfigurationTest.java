@@ -1,12 +1,13 @@
 package grupo12.Logger.conf;
 
 import static org.junit.Assert.*;
+import grupo12.Logger.conf.Configuration;
 
 import java.util.List;
 
 import org.junit.Test;
 
-public class ConfigurationTests {
+public class ConfigurationTest {
 	
 	@Test
 	public void defaultConfiguration() {

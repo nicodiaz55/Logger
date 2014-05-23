@@ -1,5 +1,7 @@
 package grupo12.Logger.message;
 
+import grupo12.Logger.level.Level;
+
 import java.util.Date;
 
 public class LogMessage {
@@ -9,8 +11,8 @@ public class LogMessage {
 	private String message;
 	private String formatedMessage;
 
-	public LogMessage(String level, String message) {
-		this.level = new Level(level);
+	public LogMessage(Level level, String message) {
+		this.level = level;
 		this.info = new CallerInfo();
 		this.message = message;
 		this.formatedMessage = message;

@@ -1,7 +1,7 @@
 package grupo12.Logger.output;
 
 import grupo12.Logger.format.Formatter;
-import grupo12.Logger.message.Level;
+import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
 
 public class OutputManager {
@@ -13,13 +13,14 @@ public class OutputManager {
 	
 	public OutputManager() {
 		// TODO: revisar estos inits
-		level = new Level("INFO"); // Default level if not set
-		setOutput(new ConsoleWriter()); // Default output if not set
+		level = null;
+		outputWriter = null;
+		//setOutput(new ConsoleWriter()); // TODO: Default output if not set
 		formatter = null; // No format if not set
 	}
 	
-	public void setLevel(String level) {
-		this.level = new Level(level);
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 	
 	public void setFormatter(Formatter formatter) {
@@ -46,7 +47,11 @@ public class OutputManager {
 	}
 
 	private boolean isPublishable(LogMessage message) {
-		return this.level.majorThan(message.getLevel());
+		// If no level is seted, all messages are publishable
+		if (level == null)
+			return true;
+		
+		return level.majorThan(message.getLevel());
 	}
 
 	public void endLog() {
