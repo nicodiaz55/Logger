@@ -6,29 +6,26 @@ import grupo12.Logger.level.Info;
 import grupo12.Logger.level.Warning;
 import grupo12.Logger.level.Error;
 import grupo12.Logger.message.LogMessage;
-import grupo12.Logger.output.OutputManager;
+import grupo12.Logger.output.Output;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Logger {
-	private List<OutputManager> managers;
+	private List<Output> outputs;
 	
 	public Logger() {
-		managers = new ArrayList<OutputManager>();
+		outputs = new ArrayList<Output>();
 	}
 	
-	// Para que el usuario pueda modificarlo on demand
-	public void addOutput(OutputManager manager) {
-		// TODO: revisar que no agregue uno que ya estaba agregado
-		managers.add(manager);
+	// Para que el usuario pueda modificarlo
+	public void addOutput(Output output) {
+		outputs.add(output);
 	}
-
-	// TODO: agregar uno para sacar output manager (?)
 	
 	private void log(LogMessage message) {
-		for (OutputManager manager : managers) {
-			manager.log(message);
+		for (Output output : outputs) {
+			output.log(message);
 		}
 	}
 	
@@ -58,20 +55,20 @@ public class Logger {
 	}
 	
 	public void endLog() {
-		for (OutputManager manager : managers) {
-			manager.endLog();
+		for (Output output : outputs) {
+			output.endLog();
 		}		
 	}
 
 	public void off() {
-		for (OutputManager manager : managers) {
-			manager.turnOff();
+		for (Output output : outputs) {
+			output.turnOff();
 		}		
 	}
 	
 	public void on() {
-		for (OutputManager manager : managers) {
-			manager.turnOn();
+		for (Output output : outputs) {
+			output.turnOn();
 		}		
 	}
 }

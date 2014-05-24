@@ -1,49 +1,60 @@
 package grupo12.Logger.output;
 
+import java.io.FileNotFoundException;
+
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
 
-public class OutputManager {
+public class Output {
 
 	private Level level;
-	private Writer outputWriter;
+	private Writer writer;
 	private Formatter formatter;
-	private boolean imLogging;
+	private boolean logging;
 	
-	public OutputManager() {
-		// TODO: revisar estos inits
-		level = null;
-		outputWriter = null;
-		//setOutput(new ConsoleWriter()); // TODO: Default output if not set
-		formatter = null; // No format if not set
+	public Output(Level level, Writer writer, Formatter formatter) {
+		setLevel(level);
+		setOutput(writer);
+		setFormatter(formatter);
 	}
 	
-	public void setLevel(Level level) {
+	private void setLevel(Level level) {
 		this.level = level;
 	}
 	
-	public void setFormatter(Formatter formatter) {
+	private void setFormatter(Formatter formatter) {
 		this.formatter = formatter;
 	}
 	
 	public void setOutput(Writer output) {
-		this.outputWriter = output;
-		this.outputWriter.init();
-		imLogging = true;
+		if (writer == null) {
+			logging = false;
+			return;
+		}
+		
+		writer = output;
+		try {
+			writer.init();
+			logging = true;
+		} catch (FileNotFoundException e) {
+			logging = false;
+			writer = null;
+			e.printStackTrace();
+		}
 	}
 	
 	public void log(LogMessage message) {
-		if (isPublishable(message) && isOn()) {
+		if (isOn() && isPublishable(message)) {
 			String formatedMessage = message.toString();
 			if (formatter != null)
 				 formatedMessage = formatter.format(message);
-			outputWriter.write(formatedMessage);
+			writer.write(formatedMessage);
 		}
 	}
 
 	private boolean isOn() {
-		return imLogging;
+		return logging;
 	}
 
 	private boolean isPublishable(LogMessage message) {
@@ -55,14 +66,14 @@ public class OutputManager {
 	}
 
 	public void endLog() {
-		outputWriter.end();
+		writer.end();
 	}
 
 	public void turnOff() {
-		imLogging = false;
+		logging = false;
 	}
 
 	public void turnOn() {
-		imLogging = true;
+		logging = true;
 	}
 }

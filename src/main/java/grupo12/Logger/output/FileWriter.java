@@ -10,29 +10,27 @@ public class FileWriter implements Writer {
 	private boolean ok;
 	
 	public FileWriter(String filename) {
-		writer = null;
-		// TODO: Ver si tengo que meter el init aca... o dejar que lo haga OutputManager.
 		this.filename = filename;
+		writer = null;
 		ok = false;
 	}
 	
-	private boolean canWriter() {
+	private boolean canWrite() {
 		return ok;
 	}
 	
 	public void write(String message) {
-		if(canWriter()) {
+		if(canWrite())
 			writer.println(message);
-		}
 	}
 
-	public void init() {
+	public void init() throws FileNotFoundException {
 		try {
 			writer = new PrintWriter(filename);
 		} catch (FileNotFoundException e) {
-			//e.printStackTrace();
 			writer = null;
 			ok = false;
+			throw e;
 		}
 		ok = true;
 	}
@@ -40,8 +38,9 @@ public class FileWriter implements Writer {
 	public void end() {
 		if (writer != null)
 			writer.close();
-		filename = "";
 		writer = null;
+		filename = "";
+		ok = false;
 	}
 	
 	@Override

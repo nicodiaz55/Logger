@@ -38,18 +38,18 @@ public class Configuration {
 				}
 			}
 		}
-		validateOutputField();
+		validateFile();
 	}
 
-	private void validateOutputField() {
-	/*	String outputs = conf.getProperty("output", defaultOutput);
-		// Reemplazo los console que haya de mas por strings vacios:
-
-		// TODO: ver que esta regex funciona:
-		outputs.replaceAll(",console,", ","); // Saco todos los console
-		outputs.replaceAll(",console$", "");
-		//backup.concat(",console"); // Agrego el console que estaba bien al final
-		conf.setProperty("output", outputs);*/
+	private void validateFile() {
+		/* TODO: Falta validar que las listas tengan todas el mismo tamaño...
+		* el usuario podría trollearnos con eso.
+		* 
+		* TODO: Falta ver que no nos pongan más de 1 "console". O podríamos dejarlo...
+		* al poner muchos "console", loggearía en consola todo junto, tantas veces como aparezca :P
+		* 
+		* TODO: si se complica mucho, podríamos no validar nada y ya fue. Pero lo explicamos en el informe!
+		*/ 
 	}
 	
 	public ArrayList<String> getLevels() {

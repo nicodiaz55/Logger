@@ -11,7 +11,9 @@ public abstract class Level {
 	}
 	
 	public boolean majorThan(Level otherLevel) {
-		return level >= otherLevel.level;
+		if (otherLevel != null)
+			return level >= otherLevel.level;
+		return false;
 	}
 
 	@Override
