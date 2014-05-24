@@ -25,8 +25,8 @@ public class Example {
 		Level level = new Info(); // Only logs info, warning, error and fatal messages.
 		
 		// We need a Formatter for our message:
-		Formatter formatter = new Formatter("%d{HH:mm:ss} %n %p %n %m", "|");
-		// This formats the message like this: "23:03:45 | INFO | Info message"
+		Formatter formatter = new Formatter("%d{HH:mm:ss} %n %p %n %m %n %L %n %M %n %F", "|");
+		// This formats the message like this: "23:03:45 | INFO | Info message | Line number | Method name | File name"
 		
 		// We need an output writer, in this case, the console:
 		Writer writer = new ConsoleWriter();

@@ -28,7 +28,7 @@ public class Output {
 	}
 	
 	public void setOutput(Writer output) {
-		if (writer == null) {
+		if (output == null) {
 			logging = false;
 			return;
 		}
