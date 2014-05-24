@@ -10,7 +10,7 @@ public class LineNumberFormat extends Format {
 	
 	@Override
 	public void format(LogMessage message) {
-		String lineNumber = message.getLineNumber();
+		String lineNumber = Integer.toString(message.getLineNumber());
 		updateFormat(message, lineNumber);
 	}
 }

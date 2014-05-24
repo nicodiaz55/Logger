@@ -25,7 +25,7 @@ public class Formatter {
 		formatList.add(new LineNumberFormat());
 	}
 	
-	public String format(LogMessage message) {
+	public String format(LogMessage message){
 		message.changeFormat(format);
 		for (Format formatter : formatList)
 			formatter.format(message);

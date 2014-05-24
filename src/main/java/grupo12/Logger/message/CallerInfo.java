@@ -5,31 +5,24 @@ import java.util.Date;
 public class CallerInfo {
 
 	private Date timestamp;
-	private String line;
-	private String thread;
-	private String method;
-	private String file;
+	private StackTraceElement callerStackTraceElement;
 	
-	public CallerInfo() {
+	public CallerInfo(StackTraceElement callingLine) {
 		timestamp = new Date();
-		thread = Thread.currentThread().getName();
-		// TODO: Verificar que estamos accediendo correctamente a los datos del Stack:
-		int len = Thread.currentThread().getStackTrace().length-1;
-		line = Integer.toString(Thread.currentThread().getStackTrace()[len].getLineNumber());
-		method = Thread.currentThread().getStackTrace()[len].getMethodName();
-		file = Thread.currentThread().getStackTrace()[len].getFileName();
+		callerStackTraceElement = callingLine;
 	}
 	
-	public String getLineNumber() {
-		return line;
+
+	public int getLineNumber() {
+		return callerStackTraceElement.getLineNumber();
 	}
 
 	public String getThreadName() {
-		return thread;
+		return Thread.currentThread().getName();
 	}
 
 	public String getCallingMethodName() {
-		return method;
+		return callerStackTraceElement.getMethodName();
 	}
 
 	public Date getTimestamp() {
@@ -37,7 +30,7 @@ public class CallerInfo {
 	}
 
 	public String getCallingFilename() {
-		return file;
+		return callerStackTraceElement.getFileName();
 	}
 
 }

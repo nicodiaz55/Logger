@@ -24,7 +24,8 @@ public class FormatLogMessageTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		message = new LogMessage(new Info(), "Test message");
+		StackTraceElement[] st = Thread.currentThread().getStackTrace();
+		message = new LogMessage(new Info(), "Test message",st[0]);
 		message.changeFormat(date + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text);
 	}
 

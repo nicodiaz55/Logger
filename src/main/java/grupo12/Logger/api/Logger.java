@@ -13,9 +13,16 @@ import java.util.List;
 
 public class Logger {
 	private List<Output> outputs;
+	static final private int stCallerDepth = 3;
 	
 	public Logger() {
 		outputs = new ArrayList<Output>();
+	}
+	
+	private StackTraceElement getCallingStackTraceElement() {
+		StackTraceElement[] st = Thread.currentThread().getStackTrace();
+		StackTraceElement callingSTE = st[stCallerDepth];
+		return callingSTE;
 	}
 	
 	// Para que el usuario pueda modificarlo
@@ -30,27 +37,27 @@ public class Logger {
 	}
 	
 	public void debug(String message) {
-		LogMessage logMessage = new LogMessage(new Debug(), message);
+		LogMessage logMessage = new LogMessage(new Debug(), message, getCallingStackTraceElement());
 		log(logMessage);
 	}
-	
+
 	public void info(String message) {
-		LogMessage logMessage = new LogMessage(new Info(), message);
+		LogMessage logMessage = new LogMessage(new Info(), message, getCallingStackTraceElement());
 		log(logMessage);
 	}
 	
 	public void warn(String message) {
-		LogMessage logMessage = new LogMessage(new Warning(), message);
+		LogMessage logMessage = new LogMessage(new Warning(), message, getCallingStackTraceElement());
 		log(logMessage);
 	}
 	
 	public void error(String message) {
-		LogMessage logMessage = new LogMessage(new Error(), message);
+		LogMessage logMessage = new LogMessage(new Error(), message, getCallingStackTraceElement());
 		log(logMessage);
 	}
 	
 	public void fatal(String message) {
-		LogMessage logMessage = new LogMessage(new Fatal(), message);
+		LogMessage logMessage = new LogMessage(new Fatal(), message, getCallingStackTraceElement());
 		log(logMessage);
 	}
 	

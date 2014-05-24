@@ -11,14 +11,14 @@ public class LogMessage {
 	private String message;
 	private String formatedMessage;
 
-	public LogMessage(Level level, String message) {
+	public LogMessage(Level level, String message,StackTraceElement callingSTE) {
 		this.level = level;
-		this.info = new CallerInfo();
+		this.info = new CallerInfo(callingSTE);
 		this.message = message;
 		this.formatedMessage = message;
 	}
 
-	public String getLineNumber() {
+	public int getLineNumber() {
 		return info.getLineNumber();
 	}
 	
