@@ -12,7 +12,6 @@ public class LevelFactory {
 			return new Error();
 		case "FATAL":
 			return new Fatal();
-		// TODO: ver si el default estaria bien devolver Info (caso que escriben cualquier cosa en level)
 		case "INFO":
 		default:
 			return new Info();

@@ -5,8 +5,7 @@ import grupo12.Logger.message.LogMessage;
 public class LiteralFormat extends Format {
 	
 	public LiteralFormat() {
-		//TODO: esto es feo
-		super(""); // Para que no se queje (?)
+		super("");
 		pattern = "%%";
 	}
 	

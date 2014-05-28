@@ -37,7 +37,6 @@ public class FormatLogMessageTest {
 		
 		String expected = message.getTimestamp().toString() + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text;
 		assertEquals(expected, message.toString());
-		// TODO: al menos en mi computadora, el expected resulta estar en ingles, pero el message.toString() devuelve en español xD
 	}
 	
 	@Test
@@ -126,7 +125,6 @@ public class FormatLogMessageTest {
 		
 		formatter.format(message);
 		
-		// TODO: mismo problema con DateFormat. Lo demas anda.
 		String expected = message.getTimestamp() + " - " + message.getLevel().toString() + " - " + message.getThreadName() + " - %  - " + message.getCallingFilename() + " - " + message.getLineNumber() + " - " + message.getCallingMethodName() + " - " + message.getMessage();
 		assertEquals(expected, message.toString());
 	}
