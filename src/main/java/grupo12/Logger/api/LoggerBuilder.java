@@ -70,7 +70,7 @@ public class LoggerBuilder {
 	/**
 	 * Returns the Logger
 	 * 
-	 * @return the logger configurated and ready to use.
+	 * @return the logger configured and ready to use.
 	 */
 	public Logger getLogger() {
 		return logger;

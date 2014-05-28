@@ -5,11 +5,22 @@ import java.util.ArrayList;
 
 import grupo12.Logger.message.LogMessage;
 
+/**
+ * Formatter class. Used by an output, contains different Formats.
+ * @author Grupo 12
+ *
+ */
 public class Formatter {
 
 	private ArrayList<Format> formatList;
 	private String format;
 	
+	/**
+	 * Constructor. Needs a format and one or more characters to use as a separator.
+	 * Creates an array of formats and adds all the kinds of formats available
+	 * @param format needed to create a format array
+	 * @param separator/s
+	 */
 	public Formatter(String format, String separator) {
 		this.format = format;
 		formatList = new ArrayList<Format>();

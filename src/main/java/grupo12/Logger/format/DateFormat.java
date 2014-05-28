@@ -6,15 +6,28 @@ import java.util.Locale;
 
 import grupo12.Logger.message.LogMessage;
 
+/**
+ * Details the format needed for Dates. Inherits from Format class.
+ * @author Grupo 12
+ *
+ */
 public class DateFormat extends Format {
 
 	static final String dateFormatPattern = ".*(?<!%)%d\\{([^}]*)\\}.*";
 	static final Locale locale = new Locale("en","US");
 	
+	/**
+	 * Constructor.
+	 */
 	public DateFormat() {
 		super("%d\\{([^}]*)\\}");
 	}
 	
+	/**
+	 * Parses the message passed into the format used for dates.
+	 * @param message to log
+	 * @return the formatted string
+	 */
 	private String parseDateFormatString(LogMessage message){
 		
 		String oldRepr = message.toString();
@@ -25,6 +38,11 @@ public class DateFormat extends Format {
 		return dateFormatString;
 	}
 	
+	/**
+	 * Overrides the format method from Format class according to DateFormat needs.
+	 * @param message to log
+	 * 
+	 */
 	@Override
 	public void format(LogMessage message){
 		
