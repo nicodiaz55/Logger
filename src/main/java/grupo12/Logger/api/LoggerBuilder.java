@@ -13,22 +13,25 @@ import grupo12.Logger.output.WriterFactory;
 /**
  * The LoggerBuilder responsibility consists on building the logger.
  * It can be using a configurationFile or by default.
+ * 
  * @author Grupo 12
- *
  */
 public class LoggerBuilder {
 
 	private Logger logger;
 	private Configuration conf;
 	
+	/**
+	 * Builds and configures a Logger by the default configuration.
+	 */
 	public LoggerBuilder() {
 		this("default.cfg");
 	}
 	
 	/**
-	 * Builds a logger by setting it attributes and creating a writerFactory and a levelFactory.
-	 * It asks for a configurationFile but if nothing is provided, it uses a default file.
-	 * @param configurationFile
+	 * Builds and configures a Logger from a configuration file.
+	 *
+	 * @param configurationFile the configuration file.
 	 */
 	public LoggerBuilder(String configurationFile) {
 		WriterFactory writerFactory = new WriterFactory();
@@ -64,6 +67,11 @@ public class LoggerBuilder {
 		
 	}
 	
+	/**
+	 * Returns the Logger
+	 * 
+	 * @return the logger configurated and ready to use.
+	 */
 	public Logger getLogger() {
 		return logger;
 	}

@@ -12,17 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Main class. Has many outputs which are addable by the user.
- * Can be created from a configuration file or by default mode.
+ * Logger API.
+ * 
  * @author Grupo 12
- *
+ * @see    LoggerBuilder
  */
 public class Logger {
 	private List<Output> outputs;
 	static final private int stCallerDepth = 3;
 	
 	/**
-	 * Constructor. Creates an empty list of outputs.
+	 * Creates an empty Logger. It's recomended to use {@link LoggerBuilder} to create a Logger.
+	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Formatter Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
+	 * start logging.
 	 */
 	public Logger() {
 		outputs = new ArrayList<Output>();
@@ -30,7 +32,8 @@ public class Logger {
 	
 	/**
 	 * Creates our own Stack Trace, its used to track the method which is calling the log method.
-	 * @return the calling StackTraceElement
+	 * 
+	 * @return the calling {@link StackTraceElement}.
 	 */
 	private StackTraceElement getCallingStackTraceElement() {
 		StackTraceElement[] st = Thread.currentThread().getStackTrace();
@@ -39,17 +42,18 @@ public class Logger {
 	}
 	
 	/**
-	 * Adds an output to the output list.
-	 * Public, usable by the user.
-	 * @param output
+	 * Adds an output to the Logger.
+	 * 
+	 * @param output to add.
 	 */
 	public void addOutput(Output output) {
 		outputs.add(output);
 	}
 	
 	/**
-	 * Private method. Logs the same message for all outputs.
-	 * @param message
+	 * Logs the message for all outputs.
+	 * 
+	 * @param message to log.
 	 */
 	private void log(LogMessage message) {
 		for (Output output : outputs) {
@@ -58,9 +62,9 @@ public class Logger {
 	}
 	
 	/**
-	 * Public method.
-	 * Used by the user to log a debug message
-	 * @param message
+	 * Logs a message with Debug priority.
+	 * 
+	 * @param message to log.
 	 */
 	public void debug(String message) {
 		LogMessage logMessage = new LogMessage(new Debug(), message, getCallingStackTraceElement());
@@ -68,9 +72,9 @@ public class Logger {
 	}
 
 	/**
-	 * Public method.
-	 * Used by the user to log an info message
-	 * @param message
+	 * Logs a message with Info priority.
+	 * 
+	 * @param message to log.
 	 */
 	public void info(String message) {
 		LogMessage logMessage = new LogMessage(new Info(), message, getCallingStackTraceElement());
@@ -78,9 +82,9 @@ public class Logger {
 	}
 	
 	/**
-	 * Public method.
-	 * Used by the user to log a warn message
-	 * @param message
+	 * Logs a message with Warning priority.
+	 * 
+	 * @param message to log.
 	 */
 	public void warn(String message) {
 		LogMessage logMessage = new LogMessage(new Warning(), message, getCallingStackTraceElement());
@@ -88,9 +92,9 @@ public class Logger {
 	}
 	
 	/**
-	 * Public method.
-	 * Used by the user to log an error message
-	 * @param message
+	 * Logs a message with Error priority.
+	 * 
+	 * @param message to log.
 	 */
 	public void error(String message) {
 		LogMessage logMessage = new LogMessage(new Error(), message, getCallingStackTraceElement());
@@ -98,9 +102,9 @@ public class Logger {
 	}
 	
 	/**
-	 * Public method.
-	 * Used by the user to log a fatal message
-	 * @param message
+	 * Logs a message with Fatal priority.
+	 * 
+	 * @param message to log.
 	 */
 	public void fatal(String message) {
 		LogMessage logMessage = new LogMessage(new Fatal(), message, getCallingStackTraceElement());
@@ -108,9 +112,7 @@ public class Logger {
 	}
 	
 	/**
-	 * Public method.
-	 * Used by the user to end the log.
-	 * Ends every log from every output in the list
+	 * Finalices the Logger. Use it when you don't want to log anymore.
 	 */
 	public void endLog() {
 		for (Output output : outputs) {
@@ -119,7 +121,7 @@ public class Logger {
 	}
 
 	/**
-	 * Turns off the logger.
+	 * Turns off the logger. No messages will be logged.
 	 */
 	public void off() {
 		for (Output output : outputs) {
@@ -128,7 +130,7 @@ public class Logger {
 	}
 	
 	/**
-	 * Turns on the logger.
+	 * Turns on the logger. Messages will be logged.
 	 */
 	public void on() {
 		for (Output output : outputs) {

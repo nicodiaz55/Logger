@@ -3,18 +3,31 @@ package grupo12.Logger.output;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+/**
+ * Writes messages to a file.
+ * 
+ * @author Grupo 12
+ */
 public class FileWriter implements Writer {
 
 	private String filename;
 	private PrintWriter writer;
 	private boolean ok;
 	
+	/**
+	 * Creates a FileWriter that writes to a file.
+	 * 
+	 * @param filename to write.
+	 */
 	public FileWriter(String filename) {
 		this.filename = filename;
 		writer = null;
 		ok = false;
 	}
 	
+	/**
+	 * Returns if it can write to the file.
+	 */
 	private boolean canWrite() {
 		return ok;
 	}
