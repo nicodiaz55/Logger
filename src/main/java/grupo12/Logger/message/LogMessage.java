@@ -29,30 +29,54 @@ public class LogMessage {
 		this.formatedMessage = message;
 	}
 
+	/**
+	 * Getter for the line number
+	 * @return the line number where log method was called
+	 */
 	public int getLineNumber() {
 		return info.getLineNumber();
 	}
 	
+	/**
+	 * Getter for the thread name
+	 * @return the thread name where log method was called
+	 */
 	public String getThreadName() {
 		return info.getThreadName();
 	}
 	
+	/**
+	 * Getter for the method name
+	 * @return the method name where log method was called
+	 */
 	public String getCallingMethodName() {
 		return info.getCallingMethodName();
 	}
-	
+	/**
+	 * Getter for the time stamp
+	 * @return the date and time where log method was called
+	 */
 	public Date getTimestamp() {
 		return info.getTimestamp();
 	}
-	
+	/**
+	 * Getter for the file name
+	 * @return the name of the file where log method was called
+	 */
 	public String getCallingFilename() {
 		return info.getCallingFilename();
 	}
-	
+	/**
+	 * Getter for the level
+	 * @return level to which the logmessage belongs to
+	 */
 	public Level getLevel() {
 		return level;
 	}
-	
+	/**
+	 * Getter for the message
+	 * @return string containing the message
+	 */
 	public String getMessage() {
 		return message;
 	}

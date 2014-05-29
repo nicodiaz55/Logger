@@ -21,23 +21,39 @@ public class CallerInfo {
 		callerStackTraceElement = callingLine;
 	}
 	
-
+	/**
+	 * Getter for the line number
+	 * @return the line number where log method was called
+	 */
 	public int getLineNumber() {
 		return callerStackTraceElement.getLineNumber();
 	}
-
+	/**
+	 * Getter for the thread name
+	 * @return the thread name where log method was called
+	 */
 	public String getThreadName() {
 		return Thread.currentThread().getName();
 	}
 
+	/**
+	 * Getter for the method name
+	 * @return the method name where log method was called
+	 */
 	public String getCallingMethodName() {
 		return callerStackTraceElement.getMethodName();
 	}
-
+	/**
+	 * Getter for the time stamp
+	 * @return the date and time where log method was called
+	 */
 	public Date getTimestamp() {
 		return timestamp;
 	}
-
+	/**
+	 * Getter for the file name
+	 * @return the name of the file where log method was called
+	 */
 	public String getCallingFilename() {
 		return callerStackTraceElement.getFileName();
 	}
