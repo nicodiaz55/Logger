@@ -19,7 +19,7 @@ public class Formatter {
 	 * Constructor. Needs a format and one or more characters to use as a separator.
 	 * Creates an array of formats and adds all the kinds of formats available
 	 * @param format needed to create a format array
-	 * @param separator/s
+	 * @param separator
 	 */
 	public Formatter(String format, String separator) {
 		this.format = format;
@@ -34,6 +34,7 @@ public class Formatter {
 		formatList.add(new DateFormat());
 		formatList.add(new LiteralFormat());
 		formatList.add(new LineNumberFormat());
+		formatList.add(new LoggerNameFormat());
 	}
 	
 	public String format(LogMessage message){

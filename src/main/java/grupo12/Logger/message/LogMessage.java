@@ -13,18 +13,23 @@ public class LogMessage {
 
 	private Level level;
 	private CallerInfo info;
+	private String loggerName;
 	private String message;
 	private String formatedMessage;
 	private Throwable exception;
 
+	// TODO: este constructor recibe muchos parametros...
+	
 	/**
 	 * Constructor
 	 * @param message level
 	 * @param string message to log
-	 * @param callingSTE, a StackTraceElement in order to know where the message came from. Goes to CallerInfo.
+	 * @param callingSTE is a StackTraceElement in order to know where the message came from. Goes to CallerInfo
 	 * @param exception to log
+	 * @param loggerName the name of the Logger
 	 */
-	public LogMessage(Level level, String message, StackTraceElement callingSTE, Throwable exception) {
+	public LogMessage(Level level, String message, StackTraceElement callingSTE, Throwable exception, String loggerName) {
+		this.loggerName = loggerName;
 		this.level = level;
 		this.info = new CallerInfo(callingSTE);
 		this.message = message;
@@ -34,6 +39,14 @@ public class LogMessage {
 
 	public Throwable getExecption() {
 		return exception;
+	}
+	
+	/**
+	 * Getter for the logger name
+	 * @return the name of the logger
+	 */
+	public String getLoggerName() {
+		return loggerName;
 	}
 	
 	/**

@@ -80,7 +80,7 @@ public class Logger {
 	 * @return the LogMessage.
 	 */
 	private LogMessage createMessage(String message, Level level, Throwable exception) {
-		LogMessage logMessage = new LogMessage(level, message, getCallingStackTraceElement(), exception);
+		LogMessage logMessage = new LogMessage(level, message, getCallingStackTraceElement(), exception, name);
 		return logMessage;
 	}
 	
