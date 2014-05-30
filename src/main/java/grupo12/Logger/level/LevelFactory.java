@@ -14,6 +14,8 @@ public class LevelFactory {
 	 */
 	public Level getLevel(String level) {
 		switch (level) {
+		case "TRACE":
+			return new Trace();
 		case "DEBUG":
 			return new Debug();
 		case "WARNING":

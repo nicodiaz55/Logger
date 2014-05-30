@@ -10,6 +10,7 @@ public class LevelFactoryTest {
 	public void getCorrectLevel() {
 		LevelFactory factory = new LevelFactory();
 		
+		assertEquals(new Trace(), factory.getLevel("TRACE"));
 		assertEquals(new Debug(), factory.getLevel("DEBUG"));
 		assertEquals(new Info(), factory.getLevel("INFO"));
 		assertEquals(new Warning(), factory.getLevel("WARNING"));
