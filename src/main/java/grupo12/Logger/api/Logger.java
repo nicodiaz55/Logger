@@ -18,15 +18,28 @@ import java.util.List;
  * @see    LoggerBuilder
  */
 public class Logger {
+	private String name;
 	private List<Output> outputs;
 	static final private int stCallerDepth = 3;
 	
 	/**
-	 * Creates an empty Logger. It's recomended to use {@link LoggerBuilder} to create a Logger.
+	 * Creates an empty Logger with no name. It's recomended to use {@link LoggerBuilder} to create a Logger.
 	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Formatter Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
 	 * start logging.
 	 */
 	public Logger() {
+		this("");
+	}
+	
+	/**
+	 * Creates an empty Logger with a given name. It's recomended to use {@link LoggerBuilder} to create a Logger.
+	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Formatter Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
+	 * start logging.
+	 * 
+	 * @param name of the Logger.
+	 */
+	public Logger(String name) {
+		this.name = name;
 		outputs = new ArrayList<Output>();
 	}
 	
@@ -136,5 +149,14 @@ public class Logger {
 		for (Output output : outputs) {
 			output.turnOn();
 		}		
+	}
+	
+	/**
+	 * Returns the name of the Logger.
+	 * 
+	 * @return the logger name.
+	 */
+	public String getName() {
+		return name;
 	}
 }

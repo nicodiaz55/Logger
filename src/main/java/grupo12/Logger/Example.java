@@ -19,7 +19,7 @@ public class Example {
 
 	private static void createLoggerManualMode() {
 		// We create our logger:
-		Logger logger = new Logger();
+		Logger logger = new Logger("MyLogger");
 		
 		// We need a Level for our logger:
 		Level level = new Info(); // Only logs info, warning, error and fatal messages.
