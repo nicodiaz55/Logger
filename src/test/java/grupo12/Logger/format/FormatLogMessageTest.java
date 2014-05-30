@@ -22,10 +22,12 @@ public class FormatLogMessageTest {
 	private static String method = "%M";
 	private static String separator = "%n"; 
 	
+	// TODO: faltan test para Excepciones, JSON, 
+	
 	@Before
 	public void setUp() throws Exception {
 		StackTraceElement[] st = Thread.currentThread().getStackTrace();
-		message = new LogMessage(new Info(), "Test message",st[0]);
+		message = new LogMessage(new Info(), "Test message", st[0], null);
 		message.changeFormat(date + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text);
 	}
 

@@ -15,20 +15,27 @@ public class LogMessage {
 	private CallerInfo info;
 	private String message;
 	private String formatedMessage;
+	private Throwable exception;
 
 	/**
 	 * Constructor
 	 * @param message level
 	 * @param string message to log
-	 * @param StackTraceElement acting as callingSTE, in order to know where the message came from. Goes to CallerInfo.
+	 * @param callingSTE, a StackTraceElement in order to know where the message came from. Goes to CallerInfo.
+	 * @param exception to log
 	 */
-	public LogMessage(Level level, String message,StackTraceElement callingSTE) {
+	public LogMessage(Level level, String message, StackTraceElement callingSTE, Throwable exception) {
 		this.level = level;
 		this.info = new CallerInfo(callingSTE);
 		this.message = message;
 		this.formatedMessage = message;
+		this.exception = exception;
 	}
 
+	public Throwable getExecption() {
+		return exception;
+	}
+	
 	/**
 	 * Getter for the line number
 	 * @return the line number where log method was called
