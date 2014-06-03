@@ -2,7 +2,7 @@ package grupo12.Logger;
 
 import grupo12.Logger.api.Logger;
 import grupo12.Logger.format.Formatter;
-//import grupo12.Logger.api.LoggerFactory;
+import grupo12.Logger.api.LoggerFactory;
 import grupo12.Logger.format.Pattern;
 import grupo12.Logger.level.Info;
 import grupo12.Logger.level.Level;
@@ -65,14 +65,16 @@ public class Example {
 	}
 	
 	private static void createLoggerFromConfigurationFile() {
-		//Logger logger = LoggerFactory.getLogger("DefaultLogger"); // Preloaded default logger;
+		LoggerFactory factory = new LoggerFactory();
+		
+		Logger logger = factory.getLogger("DefaultLogger"); // Preloaded default logger;
 		
 		// If we write our logger-config.properties or logger-config.xml, we can load
 		// custom loggers. If the name of the logger doesn't exists, or no configuration
 		// file is provided, we get default loggers with this method:
-		//Logger logger = LoggerFactory.getLogger("MyLogger");
+		//Logger logger = factory.getLogger("MyLogger");
 		
-		/*logger.debug("Debug message");
+		logger.debug("Debug message");
 		logger.info("Info message");
 		logger.warn("Warning message");
 		logger.error("Error message");
@@ -94,7 +96,7 @@ public class Example {
 		logger.error("Error message 2");
 		logger.fatal("Fatal error message 2");
 		
-		logger.endLog(); // Always end the logger!*/
+		logger.endLog(); // Always end the logger!
 	}
 
 }
