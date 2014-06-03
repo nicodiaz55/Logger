@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <users>
+<user>
+	<userName>alex</userName>
+	<mode>INFO</mode>
+	<pattern>%d{HH:mm:ss} - %p - %t - %m</pattern>
+	<output>console</output>
+</user>
+<user>
+	<userName>joaco</userName>
+	<mode>WARN</mode>
+	<pattern>%d{HH:mm:ss} - %p - %L - %t - %m</pattern>
+	<output>console</output>
+</user>
+<user>
+	<userName>nico</userName>
+	<mode>DEBUG</mode>
+	<pattern>%d{HH:mm:ss} - %p - %t - %m</pattern>
+	<output>console</output>
+</user>
+</users>
