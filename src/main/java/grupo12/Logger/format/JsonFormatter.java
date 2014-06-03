@@ -6,8 +6,8 @@ public class JsonFormatter implements Formatter {
 
 	@Override
 	public String format(LogMessage message) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO: No se si esto es lo pedido por el enunciado...
+		return "{‘datetime’: ‘" + message.getTimestamp().toString() + "’, ‘level’: ‘" + message.getLevel().toString() + "’, ‘logger’: ‘" + message.getLoggerName() + "’, ‘message’: ‘" + message.getMessage() + "’}";
 	}
 
 }
