@@ -21,7 +21,7 @@ public class ConfigurationTest {
 		assertTrue(strings.contains(Configuration.defaultLevel));
 		
 		// Check message format:
-		strings = conf.getPatterns();
+		strings = conf.getFormatters();
 		assertEquals(1, strings.size());
 		assertTrue(strings.contains(Configuration.defaultPattern));
 		
@@ -67,7 +67,7 @@ public class ConfigurationTest {
 		List<String> strings;
 		
 		// Check level:
-		strings = conf.getPatterns();
+		strings = conf.getFormatters();
 		assertEquals(1, strings.size());
 		assertTrue(strings.contains(Configuration.defaultPattern));
 	}
@@ -119,7 +119,7 @@ public class ConfigurationTest {
 		List<String> strings;
 		
 		// Check level:
-		strings = conf.getPatterns();
+		strings = conf.getFormatters();
 		assertEquals(3, strings.size());
 		assertEquals("%d{HH:mm:ss} %n %m", strings.get(0));
 		assertEquals("%d{HH:mm:ss} %n %p %n %m", strings.get(1));
@@ -157,7 +157,7 @@ public class ConfigurationTest {
 		assertEquals("FATAL",strings.get(2));
 		
 		// Check message formats:
-		strings = conf.getPatterns();
+		strings = conf.getFormatters();
 		assertEquals(3, strings.size());
 		assertEquals("%d{HH:mm:ss} %n %m", strings.get(0));
 		assertEquals("%d{HH:mm:ss} %n %p %n %m", strings.get(1));

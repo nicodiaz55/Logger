@@ -1,8 +1,9 @@
 package grupo12.Logger;
 
 import grupo12.Logger.api.Logger;
-import grupo12.Logger.api.LoggerBuilder;
 import grupo12.Logger.format.Formatter;
+//import grupo12.Logger.api.LoggerFactory;
+import grupo12.Logger.format.Pattern;
 import grupo12.Logger.level.Info;
 import grupo12.Logger.level.Level;
 import grupo12.Logger.output.ConsoleWriter;
@@ -25,7 +26,7 @@ public class Example {
 		Level level = new Info(); // Only logs info, warning, error and fatal messages.
 		
 		// We need a Formatter for our message:
-		Formatter formatter = new Formatter("%d{HH:mm:ss} %n %p %n %m %n %L %n %M %n %F", "|");
+		Formatter formatter = new Pattern("%d{HH:mm:ss} %n %p %n %m %n %L %n %M %n %F", "|");
 		// This formats the message like this: "23:03:45 | INFO | Info message | Line number | Method name | File name"
 		
 		// We need an output writer, in this case, the console:
@@ -64,11 +65,14 @@ public class Example {
 	}
 	
 	private static void createLoggerFromConfigurationFile() {
-		LoggerBuilder builder = new LoggerBuilder(); // Default configuration.
-		//LoggerBuilder builder = new LoggerBuilder("user.cfg"); // User configuration.
-		Logger logger = builder.getLogger();
+		//Logger logger = LoggerFactory.getLogger("DefaultLogger"); // Preloaded default logger;
 		
-		logger.debug("Debug message");
+		// If we write our logger-config.properties or logger-config.xml, we can load
+		// custom loggers. If the name of the logger doesn't exists, or no configuration
+		// file is provided, we get default loggers with this method:
+		//Logger logger = LoggerFactory.getLogger("MyLogger");
+		
+		/*logger.debug("Debug message");
 		logger.info("Info message");
 		logger.warn("Warning message");
 		logger.error("Error message");
@@ -90,7 +94,7 @@ public class Example {
 		logger.error("Error message 2");
 		logger.fatal("Fatal error message 2");
 		
-		logger.endLog(); // Always end the logger!
+		logger.endLog(); // Always end the logger!*/
 	}
 
 }

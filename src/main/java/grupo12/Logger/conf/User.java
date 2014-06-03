@@ -1,4 +1,4 @@
-package grupo12.Logger.api;
+package grupo12.Logger.conf;
 
 public class User {
 

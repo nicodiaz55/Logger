@@ -134,7 +134,7 @@ public class FormatLogMessageTest {
 	
 	@Test
 	public void fullFormat() {
-		Formatter formatter = new Formatter(date + separator + name + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text, " - ");
+		Pattern formatter = new Pattern(date + separator + name + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text, " - ");
 		
 		formatter.format(message);
 		

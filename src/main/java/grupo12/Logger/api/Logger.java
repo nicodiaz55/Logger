@@ -21,7 +21,7 @@ public class Logger {
 	
 	/**
 	 * Creates an empty Logger with no name. It's recomended to use {@link LoggerBuilder} to create a Logger.
-	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Formatter Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
+	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Pattern Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
 	 * start logging.
 	 */
 	public Logger() {
@@ -30,7 +30,7 @@ public class Logger {
 	
 	/**
 	 * Creates an empty Logger with a given name. It's recomended to use {@link LoggerBuilder} to create a Logger.
-	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Formatter Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
+	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Pattern Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
 	 * start logging.
 	 * 
 	 * @param name of the Logger.

@@ -89,7 +89,7 @@ public class Configuration {
 	 * 
 	 * @return list of patterns.
 	 */
-	public ArrayList<String> getPatterns() {
+	public ArrayList<String> getFormatters() {
 		return new ArrayList<String>(Arrays.asList(conf.getProperty("pattern", defaultPattern).split(",")));
 	}
 }
