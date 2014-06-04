@@ -1,5 +1,7 @@
 package grupo12.Logger;
 
+import java.io.IOException;
+
 import grupo12.Logger.api.Logger;
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.api.LoggerFactory;
@@ -26,7 +28,7 @@ public class Example {
 		Level level = new Info(); // Only logs info, warning, error and fatal messages.
 		
 		// We need a Formatter for our message:
-		Formatter formatter = new Pattern("%d{HH:mm:ss} %n %p %n %m %n %L %n %M %n %F", "|");
+		Formatter formatter = new Pattern("%d{HH:mm:ss} %n %g %n %p %n %L %n %M %n %F %n %m", "|");
 		// This formats the message like this: "23:03:45 | INFO | Info message | Line number | Method name | File name"
 		
 		// We need an output writer, in this case, the console:
@@ -61,13 +63,16 @@ public class Example {
 		logger.error("Error message 2");
 		logger.fatal("Fatal error message 2");
 		
+		// We can pass an exception too:
+		logger.error("An exception occured:", new IOException("IO exception"));
+		
 		logger.endLog(); // Always end the logger!
 	}
 	
 	private static void createLoggerFromConfigurationFile() {
 		LoggerFactory factory = new LoggerFactory();
 		
-		Logger logger = factory.getLogger("DefaultLogger"); // Preloaded default logger;
+		Logger logger = factory.getLogger(); // Preloaded default logger;
 		
 		// If we write our logger-config.properties or logger-config.xml, we can load
 		// custom loggers. If the name of the logger doesn't exists, or no configuration

@@ -17,7 +17,7 @@ import java.util.List;
 public class Logger {
 	private String name;
 	private List<Output> outputs;
-	static final private int stCallerDepth = 3; // TODO: como agregue un metodo más, quizas sea 4.
+	static final private int stCallerDepth = 4;
 	
 	/**
 	 * Creates an empty Logger with no name. It's recomended to use {@link LoggerBuilder} to create a Logger.

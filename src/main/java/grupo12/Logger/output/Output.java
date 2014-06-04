@@ -104,6 +104,8 @@ public class Output {
 		if (level == null)
 			return true;
 		
+		// TODO: aca iría el filtro, si lo dejamos pasar o no.
+		
 		return level.majorThan(message.getLevel());
 	}
 

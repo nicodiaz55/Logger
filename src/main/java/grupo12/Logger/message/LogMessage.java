@@ -2,6 +2,8 @@ package grupo12.Logger.message;
 
 import grupo12.Logger.level.Level;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Date;
 
 /**
@@ -35,6 +37,14 @@ public class LogMessage {
 		this.message = message;
 		this.formatedMessage = message;
 		this.exception = exception;
+		
+		// Concatenate de excepcion stack trace:
+		if (exception != null) {
+			StringWriter error = new StringWriter();
+			exception.printStackTrace(new PrintWriter(error));
+		
+			this.message += "\n   " + error.toString();
+		}
 	}
 
 	public Throwable getExecption() {
@@ -108,5 +118,4 @@ public class LogMessage {
 	public String toString() {
 		return formatedMessage;
 	}
-
 }
