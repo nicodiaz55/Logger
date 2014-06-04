@@ -1,6 +1,7 @@
 package grupo12.Logger.conf;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,16 +10,13 @@ import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException; 
-
 public class XMLReader {
 
 	private List<Configuration> confList = new ArrayList<Configuration>();
 	
 	
-	public XMLReader(String configurationXML){
-		try {
+	public XMLReader(String configurationXML) throws Throwable{
+		
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse (new File("src/main/resources/"+configurationXML));
@@ -59,18 +57,7 @@ public class XMLReader {
         	
 			}
         
-		}catch (SAXParseException err) {
-	        System.out.println ("** Parsing error" + ", line " 
-	                + err.getLineNumber () + ", uri " + err.getSystemId ());
-	           System.out.println(" " + err.getMessage ());
-
-	           }catch (SAXException e) {
-	           Exception x = e.getException ();
-	           ((x == null) ? e : x).printStackTrace ();
-
-	           }catch (Throwable t) {
-	           t.printStackTrace ();
-	           }
+		
 	}
 	public List<Configuration> getConfigurationsList(){
 		return confList;
