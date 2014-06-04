@@ -76,14 +76,14 @@ public class XMLReader {
 		return confList;
 	}
 	
-	public static void main (String argv []){
-		XMLReader XMLprueba=new XMLReader("default.xml");
-		for (Configuration c : XMLprueba.getConfigurationsList()){
-			System.out.println(c.getName());
-			System.out.println(c.getLevels());
-			System.out.println(c.getFormatters());
-			System.out.println(c.getOutputs());
-		}
-	}
+//	public static void main (String argv []){
+//		XMLReader XMLprueba=new XMLReader("default.xml");
+//		for (Configuration c : XMLprueba.getConfigurationsList()){
+//			System.out.println(c.getName());
+//			System.out.println(c.getLevels());
+//			System.out.println(c.getFormatters());
+//			System.out.println(c.getOutputs());
+//		}
+//	}
 }
 	
