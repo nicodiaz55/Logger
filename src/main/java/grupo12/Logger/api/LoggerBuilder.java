@@ -32,7 +32,7 @@ public class LoggerBuilder {
 		LevelFactory levelFactory = new LevelFactory();
 		FormatterFactory formatterFactory = new FormatterFactory();
 		
-		Logger logger = new Logger();
+		Logger logger = new Logger(conf.getName());
 		
 		ArrayList<String> confOutputs = conf.getOutputs();
 		ArrayList<String> confLevels = conf.getLevels();

@@ -8,8 +8,7 @@ import java.util.Arrays;
 import java.util.Properties;
 
 /**
- * This class stores the configuration for the @{link Logger},
- * loaded from a file.  
+ * This class stores the configuration for a single @{link Logger}.
  * 
  * @author Grupo 12
  */
@@ -23,16 +22,26 @@ public class Configuration {
 	private Properties conf;
 	
 	/**
-	 * Creates the configuration from a file.
+	 * Creates an empty configuration. Use the "set" methods to load the configuration.
+	 */
+	public Configuration() {
+		conf = new Properties();
+	}
+	
+	/**
+	 * Creates the configuration from a properties file.
+	 * Use only if the file contains a single {@link Logger} configuration.
 	 * 
-	 * @param file with the configuration.
+	 * @param file with the configuration of the logger.
 	 */
 	public Configuration(String file) {
+		this();
 		loadFromFile(file);
 	}
 
+	
 	/**
-	 * Loads the file and stores the configuration.
+	 * Loads a properties file and stores the configuration.
 	 * If it ocurrs and error with the file, it loads the default configuration.
 	 * 
 	 * @param file with the configuration.
@@ -40,7 +49,6 @@ public class Configuration {
 	private void loadFromFile(String file) {
 		String getFile = this.getClass().getResource("/" + file).getFile();
 		InputStream input = null;
-		conf = new Properties();
 		try {
 			input = new FileInputStream(getFile);
 			conf.load(input);
@@ -57,6 +65,15 @@ public class Configuration {
 		}
 	}
 
+	/**
+	 * Returns the name of the Logger.
+	 * 
+	 * @return name of the logger.
+	 */
+	public String getName() {
+		return conf.getProperty("name");
+	}
+	
 	/**
 	 * Returns a list of levels.
 	 * 
@@ -91,5 +108,44 @@ public class Configuration {
 	 */
 	public ArrayList<String> getFormatters() {
 		return new ArrayList<String>(Arrays.asList(conf.getProperty("pattern", defaultPattern).split(",")));
+	}
+	
+	/**
+	 * Sets the name of the Logger.
+	 */
+	public void setName(String name) {
+		conf.setProperty("name", name);
+	}
+	
+	/**
+	 * Sets the list of levels.
+	 * The levels must be comma-separated.
+	 */
+	public void setLevels(String levels) {
+		conf.setProperty("level", levels);
+	}
+	
+	/**
+	 * Sets a list of separators.
+	 * The separators must be comma-separated.
+	 */
+	public void setSeparators(String separators) {
+		conf.setProperty("separator", separators);
+	}
+	
+	/**
+	 * Sets a list of outputs.
+	 * The outputs must be comma-separated.
+	 */
+	public void setOutputs(String outputs) {
+		conf.setProperty("output", outputs);
+	}
+
+	/**
+	 * Sets a list of formatters.
+	 * The formatters must be comma-separated.
+	 */
+	public void setFormatters(String formatters) {
+		conf.setProperty("pattern", formatters);
 	}
 }

@@ -1,52 +1,77 @@
 package grupo12.Logger.api;
 
 import grupo12.Logger.conf.Configuration;
+import grupo12.Logger.conf.ConfigurationParser;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+/**
+ * Factory of Loggers. This is the main class you can use to
+ * get Loggers. It uses the configuration files to create them.
+ * 
+ * @author Grupo 12
+ */
 public class LoggerFactory {
 
-	private static final String DEFAULTCONF = "Default";
-	private static final String DEFAULTNAME = "DefaultLogger";
+	private static final String DEFAULTCONF = "default.cfg";
+	private static final String DEFAULTNAME = "Logger";
 	
 	private Hashtable<String, Logger> loggers;
 	private LoggerBuilder builder;
 	
+	/**
+	 * Creates a new Logger Factory.
+	 */
 	public LoggerFactory() {
 		loggers = new Hashtable<String, Logger>();		
 		builder = new LoggerBuilder();
-		addDefaultLogger(DEFAULTNAME);
 		loadConfiguration();
 	}
 	
-	private void loadConfiguration() {
+	/**
+	 * Initialices the factory. Search and load the
+	 * configuration files (via ConfigurationParser)
+	 * and then stores the Loggers.
+	 */
+	private void loadConfiguration() {		
+		// Get the configurations:
+		ConfigurationParser parser = new ConfigurationParser();
+		ArrayList<Configuration> parsedConfigurations = parser.getConfigurations();
 		
-		ArrayList<String> configurationFiles = new ArrayList<String>();
-		configurationFiles.add("logger-config.properties");
-		configurationFiles.add("logger-config.xml");
-			
-		/* TODO: llamar a alguna clase, darle esa lista, y que me arme un array de Configuration.
-		 * Cada Configuration tiene la configuración de un logger (incluye su nombre).
-		 */
+		// We add the Default Logger (it's always available):
+		parsedConfigurations.add(new Configuration(DEFAULTCONF));
 		
-		ArrayList<Configuration> parsedConfigurations = new ArrayList<Configuration>(); // aca me devuelven la lista.
-		
-		// Construct every logger from the configuration file:
+		// Construct every logger:
 		for (Configuration conf : parsedConfigurations) {
 			Logger log = builder.build(conf);
 			loggers.put(log.getName(), log);
 		}
 	}
 
-	public Logger getLoger() {
-		return loggers.get("Logger");
+	/**
+	 * Returns the default {@link Logger}.
+	 * 
+	 * @return a Logger with default configuration, named "Logger"
+	 */
+	public Logger getLogger() {
+		return loggers.get(DEFAULTNAME);
 	}
 	
+	/**
+	 * Returns the {@link Logger} with the specified name.
+	 * If no Logger exists with that name, it returns a new Logger
+	 * with that name and default configuration.
+	 * 
+	 * All the names and configurations are stored in a configuration file.
+	 * 
+	 * @param name of the Logger
+	 * @return the Logger
+	 */
 	public Logger getLogger(String name) {
 		Logger log = loggers.get(name);
 
-		// Returns a default Logger:
+		// Returns a new default Logger:
 		if (log == null) {
 			log = addDefaultLogger(name);
 		}
@@ -54,9 +79,14 @@ public class LoggerFactory {
 		return log;
 	}
 
+	/**
+	 * Creates a new default {@link Logger}.
+	 * 
+	 * @param name of the Logger
+	 * @return the new default logger
+	 */
 	private Logger addDefaultLogger(String name) {
-		Logger log = null;
-		log = builder.build(new Configuration(DEFAULTCONF));
+		Logger log = builder.build(new Configuration(DEFAULTCONF));
 		loggers.put(name, log);
 		return log;
 	}
