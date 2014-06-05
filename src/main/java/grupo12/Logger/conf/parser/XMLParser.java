@@ -4,6 +4,7 @@ import grupo12.Logger.conf.Configuration;
 
 import java.io.File;
 import java.io.IOException;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.*;
@@ -26,7 +27,7 @@ public class XMLParser implements Parser {
 	@Override
 	public void loadConfigurations(List<Configuration> configurations) {    
 		doc.getDocumentElement().normalize ();
-		NodeList Loggers = doc.getElementsByTagName("loggers");
+		NodeList Loggers = doc.getElementsByTagName("logger");
 		int totalUsers = Loggers.getLength();
     
 		for(int s=0; s<totalUsers; s++){
@@ -41,21 +42,38 @@ public class XMLParser implements Parser {
                 NodeList textLoggerNameList = loggerNameElement.getChildNodes();
                 aConfiguration.setName(((Node)textLoggerNameList.item(0)).getNodeValue().trim());
                 
-                NodeList levelList = confElement.getElementsByTagName("level");
-                Element levelElement = (Element)levelList.item(0);
-                NodeList textLevelList = levelElement.getChildNodes();
-                aConfiguration.setLevels(((Node)textLevelList.item(0)).getNodeValue().trim());
+            	NodeList OutputsList = confElement.getElementsByTagName("outputs");
+            	Element OutputsElement = (Element)OutputsList.item(0);
+            	NodeList textOutputsList = OutputsElement.getChildNodes();
+            	int totalOutputs = textOutputsList.getLength();
+            	for (int l=0; l<totalOutputs; l++) {
+            		Node outputNode = textOutputsList.item(l);
+                    if(outputNode.getNodeType() == Node.ELEMENT_NODE){
+            				
+            				Element outputElement = (Element)outputNode;
+            				
+                    		NodeList typeList = outputElement.getElementsByTagName("type");
+                    		Element typeElement = (Element)typeList.item(0);
+                    		NodeList textTypeList = typeElement.getChildNodes();
+                    		aConfiguration.addOutput(((Node)textTypeList.item(0)).getNodeValue().trim());
                 
-                NodeList formatterList = confElement.getElementsByTagName("formatter");
-                Element formatterElement = (Element)formatterList.item(0);
-                NodeList textFormatterList = formatterElement.getChildNodes();
-                aConfiguration.setFormatters(((Node)textFormatterList.item(0)).getNodeValue().trim());
+                    		NodeList separatorList = outputElement.getElementsByTagName("separator");
+                    		Element separatorElement = (Element)separatorList.item(0);
+                    		NodeList textSeparatorList = separatorElement.getChildNodes();
+                    		aConfiguration.addSeparator(((Node)textSeparatorList.item(0)).getNodeValue().trim());
                 
-                NodeList outputList = confElement.getElementsByTagName("output");
-                Element outputElement = (Element)outputList.item(0);
-                NodeList textOutputList = outputElement.getChildNodes();
-                aConfiguration.setOutputs(((Node)textOutputList.item(0)).getNodeValue().trim());
+                    		NodeList formatterList = outputElement.getElementsByTagName("formatter");
+                    		Element formatterElement = (Element)formatterList.item(0);
+                    		NodeList textFormatterList = formatterElement.getChildNodes();
+                    		aConfiguration.addFormatter(((Node)textFormatterList.item(0)).getNodeValue().trim());
+                 
                 
+                    		NodeList levelList = outputElement.getElementsByTagName("level");
+                    		Element levelElement = (Element)levelList.item(0);
+                    		NodeList textLevelList = levelElement.getChildNodes();
+                    		aConfiguration.addLevel(((Node)textLevelList.item(0)).getNodeValue().trim());
+                    }
+            	}           
                 configurations.add(aConfiguration);
             }
     	
@@ -65,7 +83,14 @@ public class XMLParser implements Parser {
 	
 	@Override
 	public boolean init() {
-		cfg = new File(file);
+		String getFile;
+		try {
+			getFile = this.getClass().getResource("/" + file).getFile();
+		} catch (Exception e) {
+			return false;
+		}
+		
+		cfg = new File(getFile);
 		
 		if (cfg == null || !cfg.exists()) {
 			return false;
@@ -83,5 +108,28 @@ public class XMLParser implements Parser {
 		
 		return true;
 	}
+	
+//	public static void main(String [ ] args)
+//	{
+//		XMLParser xml = new XMLParser("logger-config.xml");
+//		System.out.println("cacacacacacaa");
+//		List<Configuration> lista = new ArrayList<Configuration>();
+//		xml.init();
+//		xml.loadConfigurations(lista);
+//		int len=lista.size();
+//		for(int i=0; i<len; i++) {
+//            
+//			System.out.println(lista.get(i).getName());
+//           
+//			int len2=lista.get(i).getOutputs().size();
+//			for(int j=0; j<len2; j++){
+//				System.out.println(lista.get(i).getOutputs().get(j));
+//				System.out.println(lista.get(i).getLevels().get(j));
+//				System.out.println(lista.get(i).getFormatters().get(j));
+//				System.out.println(lista.get(i).getSeparators().get(j));
+//			}
+//            
+//        }
+//	}
 }
 	
