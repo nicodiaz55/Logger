@@ -3,6 +3,7 @@ package grupo12.Logger.api;
 import grupo12.Logger.conf.Configuration;
 import grupo12.Logger.conf.ConfigurationParser;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -30,14 +31,14 @@ public class LoggerFactory {
 	}
 	
 	/**
-	 * Initialices the factory. Search and load the
+	 * Initializes the factory. Search and load the
 	 * configuration files (via ConfigurationParser)
 	 * and then stores the Loggers.
 	 */
 	private void loadConfiguration() {		
 		// Get the configurations:
 		ConfigurationParser parser = new ConfigurationParser();
-		ArrayList<Configuration> parsedConfigurations = parser.getConfigurations();
+		List<Configuration> parsedConfigurations = parser.getConfigurations();
 		
 		// We add the Default Logger (it's always available):
 		parsedConfigurations.add(new Configuration(DEFAULTCONF));
