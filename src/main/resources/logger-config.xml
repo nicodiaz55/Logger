@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Loggers>
+<logger>
+	<name>Logger1</name>
+	<outputs>
+		<output>
+			<type>Log1.json</type>
+			<level>INFO</level>
+			<formatter>JSON</formatter>
+			<separator>|</separator>
+		</output>
+		<output>
+			<type>console</type>
+			<level>DEBUG</level>
+			<formatter>%d{HH:mm:ss} | %p | %m</formatter>
+			<separator>-</separator>
+		</output>
+	</outputs>
+</logger>
+
+<logger>
+	<name>MyLogger</name>
+	<outputs>
+		<output>
+			<type>Log2.txt</type>
+			<level>TRACE</level>
+			<formatter>%d{HH:mm:ss} %n %g %n %m</formatter>
+			<separator>/</separator>
+		</output>
+		<output>
+			<type>Log22.txt</type>
+			<level>ERROR</level>
+			<formatter>%d{HH:mm:ss} %n %p %n %m</formatter>
+			<separator>#</separator>
+		</output>
+	</outputs>
+</logger>
+</Loggers>
