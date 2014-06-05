@@ -10,6 +10,7 @@ public class ConfigurationParser {
 	
 	private static final String propertiesFile = "logger-config.properties";
 	private static final String xmlFile = "logger-config.xml";
+	
 	private List<Configuration> configurations; 
 	private List<Parser> parsers;
 	

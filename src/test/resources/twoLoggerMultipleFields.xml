@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <Loggers>
+<logger>
+	<name>Logger1</name>
+	<outputs>
+		<output>
+			<type>log1.txt</type>
+			<level>INFO</level>
+			<formatter>%d{HH:mm:ss} %n %m</formatter>
+			<separator>|</separator>
+		</output>
+		<output>
+			<type>log2.txt</type>
+			<level>DEBUG</level>
+			<formatter>%d{HH:mm:ss} %n %p %n %m</formatter>
+			<separator>-</separator>
+		</output>
+		<output>
+			<type>console</type>
+			<level>FATAL</level>
+			<formatter>%d{HH:mm:ss} %n %t %n %m</formatter>
+			<separator>/</separator>
+		</output>
+	</outputs>
+</logger>
+
+<logger>
+	<name>Logger2</name>
+	<outputs>
+		<output>
+			<type>log1.txt</type>
+			<level>INFO</level>
+			<formatter>%d{HH:mm:ss} %n %m</formatter>
+			<separator>|</separator>
+		</output>
+		<output>
+			<type>log2.txt</type>
+			<level>DEBUG</level>
+			<formatter>%d{HH:mm:ss} %n %p %n %m</formatter>
+			<separator>-</separator>
+		</output>
+		<output>
+			<type>console</type>
+			<level>FATAL</level>
+			<formatter>%d{HH:mm:ss} %n %t %n %m</formatter>
+			<separator>/</separator>
+		</output>
+	</outputs>
+</logger>
+</Loggers>

@@ -26,11 +26,11 @@ public class XMLParser implements Parser {
 	@Override
 	public void loadConfigurations(List<Configuration> configurations) {    
 		doc.getDocumentElement().normalize ();
-		NodeList Names = doc.getElementsByTagName("name");
-		int totalUsers = Names.getLength();
+		NodeList Loggers = doc.getElementsByTagName("loggers");
+		int totalUsers = Loggers.getLength();
     
 		for(int s=0; s<totalUsers; s++){
-			Node confNode = Names.item(s);
+			Node confNode = Loggers.item(s);
             if(confNode.getNodeType() == Node.ELEMENT_NODE){
             	
             	Element confElement = (Element)confNode;
@@ -41,17 +41,17 @@ public class XMLParser implements Parser {
                 NodeList textLoggerNameList = loggerNameElement.getChildNodes();
                 aConfiguration.setName(((Node)textLoggerNameList.item(0)).getNodeValue().trim());
                 
-                NodeList levelList = confElement.getElementsByTagName("levels");
+                NodeList levelList = confElement.getElementsByTagName("level");
                 Element levelElement = (Element)levelList.item(0);
                 NodeList textLevelList = levelElement.getChildNodes();
                 aConfiguration.setLevels(((Node)textLevelList.item(0)).getNodeValue().trim());
                 
-                NodeList formatterList = confElement.getElementsByTagName("formatters");
+                NodeList formatterList = confElement.getElementsByTagName("formatter");
                 Element formatterElement = (Element)formatterList.item(0);
                 NodeList textFormatterList = formatterElement.getChildNodes();
                 aConfiguration.setFormatters(((Node)textFormatterList.item(0)).getNodeValue().trim());
                 
-                NodeList outputList = confElement.getElementsByTagName("outputs");
+                NodeList outputList = confElement.getElementsByTagName("output");
                 Element outputElement = (Element)outputList.item(0);
                 NodeList textOutputList = outputElement.getChildNodes();
                 aConfiguration.setOutputs(((Node)textOutputList.item(0)).getNodeValue().trim());

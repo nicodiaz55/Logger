@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <Loggers>
+<logger>
+	<name>Logger1</name>
+	<outputs>
+		<output>
+			<type>console</type>
+			<level>INFO</level>
+			<formatter>%d{HH:mm:ss} - %p - %t - %m</formatter>
+			<separator>-</separator>
+		</output>
+	</outputs>
+</logger>
+
+<logger>
+	<name>Logger2</name>
+	<outputs>
+		<output>
+			<type>console</type>
+			<level>INFO</level>
+			<formatter>%d{HH:mm:ss} - %p - %t - %m</formatter>
+			<separator>-</separator>
+		</output>
+	</outputs>
+</logger>
+</Loggers>
