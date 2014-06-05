@@ -1,11 +1,8 @@
 package grupo12.Logger.conf;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Properties;
+import java.util.List;
 
 /**
  * This class stores the configuration for a single @{link Logger}.
@@ -14,64 +11,36 @@ import java.util.Properties;
  */
 public class Configuration {
 	
+	public static final String defaultName = "Logger";
 	public static final String defaultLevel = "INFO";
-	public static final String defaultPattern = "%d{HH:mm:ss} - %p - %t - %m";
+	public static final String defaultFormatter = "%d{HH:mm:ss} - %p - %t - %m";
 	public static final String defaultOutput = "console";
 	public static final String defaultSeparator = "-";
 	
-	private Properties conf;
+	private List<String> levels;
+	private List<String> formatters;
+	private List<String> separators;
+	private List<String> outputs;
+	private String name;
 	
 	/**
 	 * Creates an empty configuration. Use the "set" methods to load the configuration.
 	 */
 	public Configuration() {
-		conf = new Properties();
+		name = "";
+		levels = null;
+		formatters = null;
+		separators = null;
+		outputs = null;
 	}
 	
-	/**
-	 * Creates the configuration from a properties file.
-	 * Use only if the file contains a single {@link Logger} configuration.
-	 * 
-	 * @param file with the configuration of the logger.
-	 */
-	public Configuration(String file) {
-		this();
-		loadFromFile(file);
-	}
-
-	
-	/**
-	 * Loads a properties file and stores the configuration.
-	 * If it ocurrs and error with the file, it loads the default configuration.
-	 * 
-	 * @param file with the configuration.
-	 */
-	private void loadFromFile(String file) {
-		String getFile = this.getClass().getResource("/" + file).getFile();
-		InputStream input = null;
-		try {
-			input = new FileInputStream(getFile);
-			conf.load(input);
-		} catch (IOException ex) {
-			//ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					//e.printStackTrace();
-				}
-			}
-		}
-	}
-
 	/**
 	 * Returns the name of the Logger.
 	 * 
 	 * @return name of the logger.
 	 */
 	public String getName() {
-		return conf.getProperty("name");
+		return name;
 	}
 	
 	/**
@@ -79,8 +48,8 @@ public class Configuration {
 	 * 
 	 * @return list of levels.
 	 */
-	public ArrayList<String> getLevels() {
-		return new ArrayList<String>(Arrays.asList(conf.getProperty("level", defaultLevel).split(",")));
+	public List<String> getLevels() {
+		return levels;
 	}
 	
 	/**
@@ -88,8 +57,8 @@ public class Configuration {
 	 * 
 	 * @return list of separators.
 	 */
-	public ArrayList<String> getSeparators() {
-		return new ArrayList<String>(Arrays.asList(conf.getProperty("separator", defaultSeparator).split(",")));
+	public List<String> getSeparators() {
+		return separators;
 	}
 	
 	/**
@@ -97,8 +66,8 @@ public class Configuration {
 	 * 
 	 * @return list of outputs.
 	 */
-	public ArrayList<String> getOutputs() {
-		return new ArrayList<String>(Arrays.asList(conf.getProperty("output", defaultOutput).split(",")));
+	public List<String> getOutputs() {
+		return outputs;
 	}
 
 	/**
@@ -106,15 +75,15 @@ public class Configuration {
 	 * 
 	 * @return list of patterns.
 	 */
-	public ArrayList<String> getFormatters() {
-		return new ArrayList<String>(Arrays.asList(conf.getProperty("pattern", defaultPattern).split(",")));
+	public List<String> getFormatters() {
+		return formatters;
 	}
 	
 	/**
 	 * Sets the name of the Logger.
 	 */
 	public void setName(String name) {
-		conf.setProperty("name", name);
+		this.name = name;
 	}
 	
 	/**
@@ -122,7 +91,7 @@ public class Configuration {
 	 * The levels must be comma-separated.
 	 */
 	public void setLevels(String levels) {
-		conf.setProperty("level", levels);
+		this.levels = new ArrayList<String>(Arrays.asList(levels.split(",")));
 	}
 	
 	/**
@@ -130,7 +99,7 @@ public class Configuration {
 	 * The separators must be comma-separated.
 	 */
 	public void setSeparators(String separators) {
-		conf.setProperty("separator", separators);
+		this.separators = new ArrayList<String>(Arrays.asList(separators.split(",")));
 	}
 	
 	/**
@@ -138,7 +107,7 @@ public class Configuration {
 	 * The outputs must be comma-separated.
 	 */
 	public void setOutputs(String outputs) {
-		conf.setProperty("output", outputs);
+		this.outputs = new ArrayList<String>(Arrays.asList(outputs.split(",")));
 	}
 
 	/**
@@ -146,6 +115,14 @@ public class Configuration {
 	 * The formatters must be comma-separated.
 	 */
 	public void setFormatters(String formatters) {
-		conf.setProperty("pattern", formatters);
+		this.formatters = new ArrayList<String>(Arrays.asList(formatters.split(",")));
+	}
+
+	public void configureAsDefault() {
+		name = defaultName;
+		levels = new ArrayList<String>(Arrays.asList(defaultLevel.split(",")));
+		formatters = new ArrayList<String>(Arrays.asList(defaultFormatter.split(",")));
+		separators = new ArrayList<String>(Arrays.asList(defaultSeparator.split(",")));
+		outputs = new ArrayList<String>(Arrays.asList(defaultOutput.split(",")));
 	}
 }

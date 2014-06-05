@@ -1,6 +1,7 @@
 package grupo12.Logger.api;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import grupo12.Logger.conf.Configuration;
 import grupo12.Logger.format.Formatter;
@@ -34,13 +35,13 @@ public class LoggerBuilder {
 		
 		Logger logger = new Logger(conf.getName());
 		
-		ArrayList<String> confOutputs = conf.getOutputs();
-		ArrayList<String> confLevels = conf.getLevels();
-		ArrayList<String> confFormatters = conf.getFormatters();
-		ArrayList<String> confSeparators = conf.getSeparators();
+		List<String> confOutputs = conf.getOutputs();
+		List<String> confLevels = conf.getLevels();
+		List<String> confFormatters = conf.getFormatters();
+		List<String> confSeparators = conf.getSeparators();
 		
-		ArrayList<Writer> writers = new ArrayList<Writer>();
-		ArrayList<Level> levels = new ArrayList<Level>();
+		List<Writer> writers = new ArrayList<Writer>();
+		List<Level> levels = new ArrayList<Level>();
 		
 		for (String output : confOutputs) {
 			writers.add(writerFactory.getWriter(output));
