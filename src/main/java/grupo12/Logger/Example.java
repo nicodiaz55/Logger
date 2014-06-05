@@ -111,6 +111,9 @@ public class Example {
 		logger.error("Error message 2");
 		logger.fatal("Fatal error message 2");
 		
+		// We can pass an exception too:
+		logger.error("An exception occured:", new IOException("IO exception"));
+		
 		logger.end(); // Always end the logger!
 	}
 
