@@ -211,12 +211,18 @@ public class Logger {
 		log(logMessage);
 	}
 	
+	public void init() {
+		for (Output output : outputs) {
+			output.init();
+		}
+	}
+	
 	/**
 	 * Finalices the Logger. Use it when you don't want to log anymore.
 	 */
-	public void endLog() {
+	public void end() {
 		for (Output output : outputs) {
-			output.endLog();
+			output.end();
 		}		
 	}
 

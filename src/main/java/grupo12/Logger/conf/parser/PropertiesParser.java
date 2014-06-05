@@ -84,6 +84,7 @@ public class PropertiesParser implements Parser {
 				aConfiguration.setFormatters(formatters);
 				aConfiguration.setSeparators(separators);
 				aConfiguration.setOutputs(outputs);
+				aConfiguration.setName(name);
 				
 				configurations.add(aConfiguration);
 			}

@@ -17,7 +17,7 @@ public class Example {
 
 	public static void main(String[] args) {
 		createLoggerFromConfigurationFile();
-		createLoggerManualMode();
+		//createLoggerManualMode();
 	}
 
 	private static void createLoggerManualMode() {
@@ -40,7 +40,11 @@ public class Example {
 		// We can add as many outputs as we wish, each with different levels and formats.
 		// We recommend to use the configuration file, however. 
 		
+		// We must init the logger:
+		logger.init();
+		
 		// Now we can log:
+		logger.trace("Trace message");
 		logger.debug("Debug message");
 		logger.info("Info message");
 		logger.warn("Warning message");
@@ -49,6 +53,7 @@ public class Example {
 		
 		// These messages won't be logged:
 		logger.off(); // Turn off the logger.
+		logger.trace("Unlogged Trace message");
 		logger.debug("Unlogged Debug message");
 		logger.info("Unlogged Info message");
 		logger.warn("Unlogged Warning message");
@@ -57,6 +62,7 @@ public class Example {
 		
 		// Now these messages are logged:
 		logger.on(); // Turn on the logger.
+		logger.trace("Trace message 2");
 		logger.debug("Debug message 2");
 		logger.info("Info message 2");
 		logger.warn("Warning message 2");
@@ -66,7 +72,7 @@ public class Example {
 		// We can pass an exception too:
 		logger.error("An exception occured:", new IOException("IO exception"));
 		
-		logger.endLog(); // Always end the logger!
+		logger.end(); // Always end the logger!
 	}
 	
 	private static void createLoggerFromConfigurationFile() {
@@ -79,6 +85,10 @@ public class Example {
 		// file is provided, we get default loggers with this method:
 		//Logger logger = factory.getLogger("MyLogger");
 		
+		// We need to init the logger:
+		logger.init();
+		
+		// Now we can log!
 		logger.debug("Debug message");
 		logger.info("Info message");
 		logger.warn("Warning message");
@@ -101,7 +111,7 @@ public class Example {
 		logger.error("Error message 2");
 		logger.fatal("Fatal error message 2");
 		
-		logger.endLog(); // Always end the logger!
+		logger.end(); // Always end the logger!
 	}
 
 }

@@ -57,20 +57,8 @@ public class Output {
 	 * @param output ({@link grupo12.Logger.output.Writer Writer}) to set.
 	 */
 	public void setOutput(Writer output) {
-		if (output == null) {
-			logging = false;
-			return;
-		}
-		
+		logging = false;	
 		writer = output;
-		try {
-			writer.init();
-			logging = true;
-		} catch (FileNotFoundException e) {
-			logging = false;
-			writer = null;
-			e.printStackTrace();
-		}
 	}
 	
 	/**
@@ -112,7 +100,7 @@ public class Output {
 	/**
 	 * Closes the output.
 	 */
-	public void endLog() {
+	public void end() {
 		if (writer != null)
 			writer.end();
 	}
@@ -130,5 +118,17 @@ public class Output {
 	public void turnOn() {
 		if (writer != null)
 			logging = true;
+	}
+
+	public void init() {
+		if (writer != null) {
+			try {
+				writer.init();
+				logging = true;
+			} catch (FileNotFoundException e) {
+				// TODO: tirar excepcion?
+				logging = false;
+			}
+		}
 	}
 }
