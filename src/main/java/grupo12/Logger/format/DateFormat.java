@@ -3,6 +3,7 @@ package grupo12.Logger.format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
 
 import grupo12.Logger.message.LogMessage;
 
@@ -13,7 +14,7 @@ import grupo12.Logger.message.LogMessage;
  */
 public class DateFormat extends Format {
 
-	static final String dateFormatPattern = ".*(?<!%)%d\\{([^}]*)\\}.*";
+	static final String dateFormatPattern = "(?<!%)%d\\{([^}]*)\\}";
 	static final Locale locale = new Locale("en","US");
 	
 	/**
@@ -31,8 +32,11 @@ public class DateFormat extends Format {
 	private String parseDateFormatString(LogMessage message){
 		
 		String oldRepr = message.toString();
-		String dateFormatString = oldRepr.replaceAll(dateFormatPattern,"$1");
-		
+		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(dateFormatPattern);
+		Matcher m = pattern.matcher(oldRepr);
+		m.find();
+		String dateFormatString = m.group(1);
+				
 		if (dateFormatString.equals(oldRepr)) return "";
 		
 		return dateFormatString;
