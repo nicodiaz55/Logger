@@ -4,7 +4,6 @@ import grupo12.Logger.conf.Configuration;
 import grupo12.Logger.conf.ConfigurationParser;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Hashtable;
  * 
  * @author Grupo 12
  */
-public class LoggerFactory {
+public class LoggerFactory{
 
 	private static final String DEFAULTCONF = "default.cfg";
 	private static final String DEFAULTNAME = "Logger";
