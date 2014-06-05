@@ -1,7 +1,5 @@
 package grupo12.Logger.sl4jBinding;
 
-import grupo12.Logger.api.LoggerFactory;
-
 import org.slf4j.ILoggerFactory;
 import org.slf4j.spi.LoggerFactoryBinder;
 

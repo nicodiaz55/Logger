@@ -39,7 +39,12 @@ public class PropertiesParser implements Parser {
 	 * @return boolean to indicate if the file was loaded correctly or not.
 	 */
 	public boolean init() {
-		String getFile = this.getClass().getResource("/" + file).getFile();
+		String getFile;
+		try {
+			getFile = this.getClass().getResource("/" + file).getFile();
+		} catch (Exception e) {
+			return false;
+		}
 		
 		InputStream input = null;
 		conf = new Properties();
