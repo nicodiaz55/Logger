@@ -100,7 +100,7 @@ public class Configuration {
 	 */
 	public void addLevel(String level) {
 		if (this.levels == null){
-			this.levels = Arrays.asList(level.split(","));
+			this.levels = new ArrayList<String>(Arrays.asList(level.split(",")));
 		} else {
 			levels.add(level);
 		}
@@ -118,7 +118,7 @@ public class Configuration {
 	 * If it exists, it adds a separator to the end of the separators array list
 	 * @param separator to be added
 	 */
-	public void addSeparator(String separator){
+	public void addSeparator(String separator) {
 		if (this.separators == null) {
 			this.separators = new ArrayList<String>(Arrays.asList(separator.split(",")));
 		} else {
@@ -140,7 +140,7 @@ public class Configuration {
 	 */
 	public void addOutput(String output) {
 		if (this.outputs == null) {
-			this.outputs = Arrays.asList(output.split(","));
+			this.outputs = new ArrayList<String>(Arrays.asList(output.split(",")));
 		} else {
 			outputs.add(output);
 		}
@@ -160,7 +160,7 @@ public class Configuration {
 	 */
 	public void addFormatter(String formatter) {
 		if (this.formatters == null) {
-			this.formatters = Arrays.asList(formatter.split(","));
+			this.formatters = new ArrayList<String>(Arrays.asList(formatter.split(",")));
 		} else {
 			formatters.add(formatter);
 		}

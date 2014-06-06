@@ -54,14 +54,17 @@ public class XMLParser implements Parser {
                     		Element typeElement = (Element) typeList.item(0);
                     		NodeList textTypeList = typeElement.getChildNodes();
                     		aConfiguration.addOutput(((Node) textTypeList.item(0)).getNodeValue().trim());
+                    		
                     		NodeList separatorList = outputElement.getElementsByTagName("separator");
                     		Element separatorElement = (Element) separatorList.item(0);
                     		NodeList textSeparatorList = separatorElement.getChildNodes();
                     		aConfiguration.addSeparator(((Node) textSeparatorList.item(0)).getNodeValue().trim());
+
                     		NodeList formatterList = outputElement.getElementsByTagName("formatter");
                     		Element formatterElement = (Element) formatterList.item(0);
                     		NodeList textFormatterList = formatterElement.getChildNodes();
                     		aConfiguration.addFormatter(((Node) textFormatterList.item(0)).getNodeValue().trim());
+
                     		NodeList levelList = outputElement.getElementsByTagName("level");
                     		Element levelElement = (Element) levelList.item(0);
                     		NodeList textLevelList = levelElement.getChildNodes();
