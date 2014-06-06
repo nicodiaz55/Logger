@@ -11,9 +11,9 @@ public class ConsoleWriter implements Writer {
 		System.out.println(message);
 	}
 
-	public void init() {}
+	public void init() throws NotInitializedException { }
 
-	public void end() {}
+	public void end() { }
 
 	@Override
 	public boolean equals(Object anObject) {

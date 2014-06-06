@@ -7,7 +7,7 @@ package grupo12.Logger.output;
  */
 public class WriterFactory {
 	
-	private static final String CONSOLE = "console";
+	public static final String CONSOLE = "console";
 	
 	/**
 	 * Returns a instantiated {@link grupo12.Logger.output.Writer Writer} accodring to its name.

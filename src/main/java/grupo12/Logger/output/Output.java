@@ -1,7 +1,5 @@
 package grupo12.Logger.output;
 
-import java.io.FileNotFoundException;
-
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
@@ -129,8 +127,8 @@ public class Output {
 			try {
 				writer.init();
 				logging = true;
-			} catch (FileNotFoundException e) {
-				// TODO: tirar excepcion?
+			} catch (NotInitializedException e) {
+				System.out.println("Warning: Output not initialized. Reason: " + e.getMessage());
 				logging = false;
 			}
 		}

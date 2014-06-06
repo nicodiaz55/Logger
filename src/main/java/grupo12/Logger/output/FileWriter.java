@@ -12,7 +12,6 @@ public class FileWriter implements Writer {
 
 	private String filename;
 	private PrintWriter writer;
-	private boolean ok;
 	
 	/**
 	 * Creates a FileWriter that writes to a file.
@@ -22,14 +21,13 @@ public class FileWriter implements Writer {
 	public FileWriter(String filename) {
 		this.filename = filename;
 		writer = null;
-		ok = false;
 	}
 	
 	/**
 	 * Returns if it can write to the file.
 	 */
-	private boolean canWrite() {
-		return ok;
+	public boolean canWrite() {
+		return (writer != null);
 	}
 	
 	public void write(String message) {
@@ -38,15 +36,13 @@ public class FileWriter implements Writer {
 		}
 	}
 
-	public void init() throws FileNotFoundException {
+	public void init() throws NotInitializedException {
 		try {
 			writer = new PrintWriter(filename);
 		} catch (FileNotFoundException e) {
 			writer = null;
-			ok = false;
-			throw e;
+			throw new NotInitializedException("Can't open the file " + filename);
 		}
-		ok = true;
 	}
 
 	public void end() {
@@ -55,7 +51,6 @@ public class FileWriter implements Writer {
 		}
 		writer = null;
 		filename = "";
-		ok = false;
 	}
 	
 	@Override

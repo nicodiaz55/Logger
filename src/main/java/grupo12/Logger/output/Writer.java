@@ -1,7 +1,5 @@
 package grupo12.Logger.output;
 
-import java.io.FileNotFoundException;
-
 /**
  * A Writer interface.
  * All writers need to know how to write, how it's initialized and how it's ended.
@@ -19,7 +17,7 @@ public interface Writer {
 	/**
 	 * Inits the writer.
 	 */
-	public void init() throws FileNotFoundException;
+	public void init() throws NotInitializedException;
 	
 	/**
 	 * Ends the writer.
