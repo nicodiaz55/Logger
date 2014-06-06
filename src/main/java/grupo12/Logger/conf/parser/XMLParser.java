@@ -19,68 +19,60 @@ public class XMLParser implements Parser {
 	private String file;
 	private File cfg;
 	private Document doc;
-	
+
 	public XMLParser(String xmlFile) {
 		file = xmlFile;
 	}
-	
+
 	@Override
 	public void loadConfigurations(List<Configuration> configurations) {    
-		doc.getDocumentElement().normalize ();
-		NodeList Loggers = doc.getElementsByTagName("logger");
-		int totalUsers = Loggers.getLength();
-    
-		for(int s=0; s<totalUsers; s++){
-			Node confNode = Loggers.item(s);
-            if(confNode.getNodeType() == Node.ELEMENT_NODE){
+		doc.getDocumentElement().normalize();
+		NodeList loggers = doc.getElementsByTagName("logger");
+		int totalUsers = loggers.getLength();
+
+		for (int s = 0; s < totalUsers; s++) {
+			Node confNode = loggers.item(s);
+            if (confNode.getNodeType() == Node.ELEMENT_NODE) {
             	
-            	Element confElement = (Element)confNode;
-            	Configuration aConfiguration=new Configuration();
+            	Element confElement = (Element) confNode;
+            	Configuration aConfiguration = new Configuration();
             	
             	NodeList loggerNameList = confElement.getElementsByTagName("name");
-                Element loggerNameElement = (Element)loggerNameList.item(0);
+                Element loggerNameElement = (Element) loggerNameList.item(0);
                 NodeList textLoggerNameList = loggerNameElement.getChildNodes();
-                aConfiguration.setName(((Node)textLoggerNameList.item(0)).getNodeValue().trim());
+                aConfiguration.setName(((Node) textLoggerNameList.item(0)).getNodeValue().trim());
                 
-            	NodeList OutputsList = confElement.getElementsByTagName("outputs");
-            	Element OutputsElement = (Element)OutputsList.item(0);
-            	NodeList textOutputsList = OutputsElement.getChildNodes();
+            	NodeList outputsList = confElement.getElementsByTagName("outputs");
+            	Element outputsElement = (Element) outputsList.item(0);
+            	NodeList textOutputsList = outputsElement.getChildNodes();
             	int totalOutputs = textOutputsList.getLength();
-            	for (int l=0; l<totalOutputs; l++) {
+            	for (int l = 0; l < totalOutputs; l++) {
             		Node outputNode = textOutputsList.item(l);
-                    if(outputNode.getNodeType() == Node.ELEMENT_NODE){
-            				
-            				Element outputElement = (Element)outputNode;
-            				
+                    if (outputNode.getNodeType() == Node.ELEMENT_NODE) {	
+            				Element outputElement = (Element) outputNode;
                     		NodeList typeList = outputElement.getElementsByTagName("type");
-                    		Element typeElement = (Element)typeList.item(0);
+                    		Element typeElement = (Element) typeList.item(0);
                     		NodeList textTypeList = typeElement.getChildNodes();
-                    		aConfiguration.addOutput(((Node)textTypeList.item(0)).getNodeValue().trim());
-                
+                    		aConfiguration.addOutput(((Node) textTypeList.item(0)).getNodeValue().trim());
                     		NodeList separatorList = outputElement.getElementsByTagName("separator");
-                    		Element separatorElement = (Element)separatorList.item(0);
+                    		Element separatorElement = (Element) separatorList.item(0);
                     		NodeList textSeparatorList = separatorElement.getChildNodes();
-                    		aConfiguration.addSeparator(((Node)textSeparatorList.item(0)).getNodeValue().trim());
-                
+                    		aConfiguration.addSeparator(((Node) textSeparatorList.item(0)).getNodeValue().trim());
                     		NodeList formatterList = outputElement.getElementsByTagName("formatter");
-                    		Element formatterElement = (Element)formatterList.item(0);
+                    		Element formatterElement = (Element) formatterList.item(0);
                     		NodeList textFormatterList = formatterElement.getChildNodes();
-                    		aConfiguration.addFormatter(((Node)textFormatterList.item(0)).getNodeValue().trim());
-                 
-                
+                    		aConfiguration.addFormatter(((Node) textFormatterList.item(0)).getNodeValue().trim());
                     		NodeList levelList = outputElement.getElementsByTagName("level");
-                    		Element levelElement = (Element)levelList.item(0);
+                    		Element levelElement = (Element) levelList.item(0);
                     		NodeList textLevelList = levelElement.getChildNodes();
-                    		aConfiguration.addLevel(((Node)textLevelList.item(0)).getNodeValue().trim());
+                    		aConfiguration.addLevel(((Node) textLevelList.item(0)).getNodeValue().trim());
                     }
-            	}           
+            	}
                 configurations.add(aConfiguration);
             }
-    	
 		}
 	}
 
-	
 	@Override
 	public boolean init() {
 		String getFile;
@@ -89,15 +81,12 @@ public class XMLParser implements Parser {
 		} catch (Exception e) {
 			return false;
 		}
-		
 		cfg = new File(getFile);
-		
 		if (cfg == null || !cfg.exists()) {
 			return false;
 		}
-		
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-		
+
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -105,31 +94,6 @@ public class XMLParser implements Parser {
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			return false;
 		}
-		
 		return true;
 	}
-	
-//	public static void main(String [ ] args)
-//	{
-//		XMLParser xml = new XMLParser("logger-config.xml");
-//		System.out.println("cacacacacacaa");
-//		List<Configuration> lista = new ArrayList<Configuration>();
-//		xml.init();
-//		xml.loadConfigurations(lista);
-//		int len=lista.size();
-//		for(int i=0; i<len; i++) {
-//            
-//			System.out.println(lista.get(i).getName());
-//           
-//			int len2=lista.get(i).getOutputs().size();
-//			for(int j=0; j<len2; j++){
-//				System.out.println(lista.get(i).getOutputs().get(j));
-//				System.out.println(lista.get(i).getLevels().get(j));
-//				System.out.println(lista.get(i).getFormatters().get(j));
-//				System.out.println(lista.get(i).getSeparators().get(j));
-//			}
-//            
-//        }
-//	}
 }
-	

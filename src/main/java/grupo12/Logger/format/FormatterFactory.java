@@ -17,10 +17,11 @@ public class FormatterFactory {
 	 * @return a Formatter implementation.
 	 */
 	public Formatter getFormatter(String formatter, String separator) {
-		if (formatter.equals(JSON))
+		if (formatter.equals(JSON)) {
 			return new JsonFormatter();
-		// Everything else is considered a pattern:
-		return new Pattern(formatter, separator);
+		} else {
+			return new Pattern(formatter, separator);
+		}
 	}
 
 }

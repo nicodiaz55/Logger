@@ -15,34 +15,34 @@ import java.util.Hashtable;
 public class LoggerFactory{
 
 	private static final String DEFAULTNAME = "Logger";
-	
+
 	private Hashtable<String, Logger> loggers;
 	private LoggerBuilder builder;
-	
+
 	/**
 	 * Creates a new Logger Factory.
 	 */
 	public LoggerFactory() {
-		loggers = new Hashtable<String, Logger>();		
+		loggers = new Hashtable<String, Logger>();
 		builder = new LoggerBuilder();
 		loadConfiguration();
 	}
-	
+
 	/**
 	 * Initializes the factory. Search and load the
 	 * configuration files (via ConfigurationParser)
 	 * and then stores the Loggers.
 	 */
-	private void loadConfiguration() {		
+	private void loadConfiguration() {
 		// Get the configurations:
 		ConfigurationParser parser = new ConfigurationParser();
 		List<Configuration> parsedConfigurations = parser.getConfigurations();
-		
+
 		// We add the Default Logger (it's always available):
 		Configuration defconf = new Configuration();
 		defconf.configureAsDefault();
 		parsedConfigurations.add(defconf);
-		
+
 		// Construct every logger:
 		for (Configuration conf : parsedConfigurations) {
 			Logger log = builder.build(conf);
@@ -90,7 +90,7 @@ public class LoggerFactory{
 		Configuration defaultConf = new Configuration();
 		defaultConf.configureAsDefault();
 		defaultConf.setName(name);
-		
+
 		Logger log = builder.build(defaultConf);
 		loggers.put(name, log);
 		return log;

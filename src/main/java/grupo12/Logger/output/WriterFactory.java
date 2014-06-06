@@ -16,9 +16,10 @@ public class WriterFactory {
 	 * @return a Writer implementation.
 	 */
 	public Writer getWriter(String output) {
-		if (output.equals(CONSOLE))
+		if (output.equals(CONSOLE)) {
 			return new ConsoleWriter();
-		// Everything else is considered a file:
-		return new FileWriter(output);
+		} else {
+			return new FileWriter(output);
+		}
 	}
 }

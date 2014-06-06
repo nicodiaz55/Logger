@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class XMLParserTest {
 
-	ArrayList<Configuration> configurations;
+	List<Configuration> configurations;
 	Parser parser;
 	
 	private void loadConf(String file) {
@@ -63,9 +63,9 @@ public class XMLParserTest {
 		strings = configurations.get(0).getLevels();
 		
 		assertEquals(3, strings.size());
-		assertEquals("INFO",strings.get(0));
-		assertEquals("DEBUG",strings.get(1));
-		assertEquals("FATAL",strings.get(2));
+		assertEquals("INFO", strings.get(0));
+		assertEquals("DEBUG", strings.get(1));
+		assertEquals("FATAL", strings.get(2));
 	}
 	
 	@Test
@@ -125,9 +125,9 @@ public class XMLParserTest {
 		strings2 = configurations.get(1).getLevels();
 		
 		assertEquals(strings1.size(), strings2.size());
-		assertEquals(strings1.get(0),strings2.get(0));
-		assertEquals(strings1.get(1),strings2.get(1));
-		assertEquals(strings1.get(2),strings2.get(2));
+		assertEquals(strings1.get(0), strings2.get(0));
+		assertEquals(strings1.get(1), strings2.get(1));
+		assertEquals(strings1.get(2), strings2.get(2));
 	}
 	
 	@Test
@@ -141,9 +141,9 @@ public class XMLParserTest {
 		strings2 = configurations.get(1).getOutputs();
 		
 		assertEquals(strings1.size(), strings2.size());
-		assertEquals(strings1.get(0),strings2.get(0));
-		assertEquals(strings1.get(1),strings2.get(1));
-		assertEquals(strings1.get(2),strings2.get(2));
+		assertEquals(strings1.get(0), strings2.get(0));
+		assertEquals(strings1.get(1), strings2.get(1));
+		assertEquals(strings1.get(2), strings2.get(2));
 	}
 	
 	@Test
@@ -157,9 +157,9 @@ public class XMLParserTest {
 		strings2 = configurations.get(1).getFormatters();
 		
 		assertEquals(strings1.size(), strings2.size());
-		assertEquals(strings1.get(0),strings2.get(0));
-		assertEquals(strings1.get(1),strings2.get(1));
-		assertEquals(strings1.get(2),strings2.get(2));
+		assertEquals(strings1.get(0), strings2.get(0));
+		assertEquals(strings1.get(1), strings2.get(1));
+		assertEquals(strings1.get(2), strings2.get(2));
 	}
 	
 	@Test
@@ -173,9 +173,8 @@ public class XMLParserTest {
 		strings2 = configurations.get(1).getSeparators();
 		
 		assertEquals(strings1.size(), strings2.size());
-		assertEquals(strings1.get(0),strings2.get(0));
-		assertEquals(strings1.get(1),strings2.get(1));
-		assertEquals(strings1.get(2),strings2.get(2));
+		assertEquals(strings1.get(0), strings2.get(0));
+		assertEquals(strings1.get(1), strings2.get(1));
+		assertEquals(strings1.get(2), strings2.get(2));
 	}
-	
 }

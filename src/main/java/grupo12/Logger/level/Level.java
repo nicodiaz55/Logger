@@ -23,8 +23,9 @@ public abstract class Level {
 	 * @return true or false
 	 */
 	public boolean majorThan(Level otherLevel) {
-		if (otherLevel != null)
+		if (otherLevel != null) {
 			return level >= otherLevel.level;
+		}
 		return false;
 	}
 

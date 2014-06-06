@@ -23,8 +23,8 @@ public class LoggerBuilder {
 	/**
 	 * Constructor.
 	 */
-	public LoggerBuilder() {}
-	
+	public LoggerBuilder() { }
+
 	/**
 	 * Builds and configures a {@link grupo12.Logger.api.Logger Logger}.
 	 */
@@ -32,27 +32,26 @@ public class LoggerBuilder {
 		WriterFactory writerFactory = new WriterFactory();
 		LevelFactory levelFactory = new LevelFactory();
 		FormatterFactory formatterFactory = new FormatterFactory();
-		
+
 		Logger logger = new Logger(conf.getName());
-		
+
 		List<String> confOutputs = conf.getOutputs();
 		List<String> confLevels = conf.getLevels();
 		List<String> confFormatters = conf.getFormatters();
 		List<String> confSeparators = conf.getSeparators();
-		
+
 		List<Writer> writers = new ArrayList<Writer>();
 		List<Level> levels = new ArrayList<Level>();
-		
+
 		for (String output : confOutputs) {
 			writers.add(writerFactory.getWriter(output));
 		}
-		
+
 		for (String level : confLevels) {
 			levels.add(levelFactory.getLevel(level));
 		}
-		
-		
-		int i = 0; 
+
+		int i = 0;
 		for (Writer writer : writers) {
 			Level level = levels.get(i);
 			Formatter formatter = formatterFactory.getFormatter(confFormatters.get(i), confSeparators.get(i));

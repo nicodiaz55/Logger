@@ -57,7 +57,7 @@ public class Output {
 	 * @param output ({@link grupo12.Logger.output.Writer Writer}) to set.
 	 */
 	public void setOutput(Writer output) {
-		logging = false;	
+		logging = false;
 		writer = output;
 	}
 	
@@ -69,8 +69,9 @@ public class Output {
 	public void log(LogMessage message) {
 		if (isOn() && isPublishable(message)) {
 			String formatedMessage = message.toString();
-			if (formatter != null)
+			if (formatter != null) {
 				 formatedMessage = formatter.format(message);
+			}
 			writer.write(formatedMessage);
 		}
 	}
@@ -89,8 +90,9 @@ public class Output {
 	 */
 	private boolean isPublishable(LogMessage message) {
 		// If no level is seted, all messages are publishable
-		if (level == null)
+		if (level == null) {
 			return true;
+		}
 		
 		// TODO: aca iría el filtro, si lo dejamos pasar o no.
 		
@@ -101,8 +103,9 @@ public class Output {
 	 * Closes the output.
 	 */
 	public void end() {
-		if (writer != null)
+		if (writer != null) {
 			writer.end();
+		}
 	}
 
 	/**
@@ -116,8 +119,9 @@ public class Output {
 	 * Turns on the output, it will log.
 	 */
 	public void turnOn() {
-		if (writer != null)
+		if (writer != null) {
 			logging = true;
+		}
 	}
 
 	public void init() {

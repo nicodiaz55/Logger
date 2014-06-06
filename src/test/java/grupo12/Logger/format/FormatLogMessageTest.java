@@ -20,7 +20,7 @@ public class FormatLogMessageTest {
 	private static String line = "%L";
 	private static String text = "%m";
 	private static String method = "%M";
-	private static String separator = "%n"; 
+	private static String separator = "%n";
 	private static String name = "%g";
 	
 	// TODO: faltan test para Excepciones, JSON, 

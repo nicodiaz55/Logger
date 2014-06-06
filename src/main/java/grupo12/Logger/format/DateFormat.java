@@ -14,8 +14,8 @@ import grupo12.Logger.message.LogMessage;
  */
 public class DateFormat extends Format {
 
-	static final String dateFormatPattern = "(?<!%)%d\\{([^}]*)\\}";
-	static final Locale locale = new Locale("en","US");
+	private static final String dateFormatPattern = "(?<!%)%d\\{([^}]*)\\}";
+	private static final Locale locale = new Locale("en", "US");
 	
 	/**
 	 * Constructor.
@@ -29,7 +29,7 @@ public class DateFormat extends Format {
 	 * @param message to log
 	 * @return the formatted string
 	 */
-	private String parseDateFormatString(LogMessage message){
+	private String parseDateFormatString(LogMessage message) {
 		
 		String oldRepr = message.toString();
 		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(dateFormatPattern);
@@ -37,7 +37,9 @@ public class DateFormat extends Format {
 		m.find();
 		String dateFormatString = m.group(1);
 				
-		if (dateFormatString.equals(oldRepr)) return "";
+		if (dateFormatString.equals(oldRepr)) {
+			return "";
+		}
 		
 		return dateFormatString;
 	}
@@ -48,19 +50,19 @@ public class DateFormat extends Format {
 	 * 
 	 */
 	@Override
-	public void format(LogMessage message){
+	public void format(LogMessage message) {
 		
 		Date date = message.getTimestamp();
 		
 		String dateFormatString = parseDateFormatString(message);
 
-		if (!dateFormatString.isEmpty()){
+		if (!dateFormatString.isEmpty()) {
 			try {
-				SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatString,locale);
+				SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatString, locale);
 				updateFormat(message, dateFormat.format(date));
 			} catch (IllegalArgumentException e) {
 				System.out.println("Invalid Date format");
-			}	
+			}
 		}
 	}
 

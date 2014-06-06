@@ -91,78 +91,86 @@ public class Configuration {
 	 * The levels must be comma-separated.
 	 */
 	public void setLevels(String levels) {
-		this.levels = new ArrayList<String>(Arrays.asList(levels.split(",")));
+		this.levels = Arrays.asList(levels.split(","));
 	}
+	
 	/**
 	 * If it exists, it adds a level to the end of the levels array list
 	 * @param level to be added
 	 */
-	public void addLevel(String level){
-		if (this.levels==null){
-			this.levels=new ArrayList<String>(Arrays.asList(level.split(",")));
-		}else{
+	public void addLevel(String level) {
+		if (this.levels == null){
+			this.levels = Arrays.asList(level.split(","));
+		} else {
 			levels.add(level);
 		}
 	}
+	
 	/**
 	 * Sets a list of separators.
 	 * The separators must be comma-separated.
 	 */
 	public void setSeparators(String separators) {
-		this.separators = new ArrayList<String>(Arrays.asList(separators.split(",")));
+		this.separators = Arrays.asList(separators.split(","));
 	}
+	
 	/**
 	 * If it exists, it adds a separator to the end of the separators array list
 	 * @param separator to be added
 	 */
 	public void addSeparator(String separator){
-		if (this.separators==null){
-			this.separators=new ArrayList<String>(Arrays.asList(separator.split(",")));
-		}else{
+		if (this.separators == null) {
+			this.separators = new ArrayList<String>(Arrays.asList(separator.split(",")));
+		} else {
 			separators.add(separator);
 		}
 	}
+	
 	/**
 	 * Sets a list of outputs.
 	 * The outputs must be comma-separated.
 	 */
 	public void setOutputs(String outputs) {
-		this.outputs = new ArrayList<String>(Arrays.asList(outputs.split(",")));
+		this.outputs = Arrays.asList(outputs.split(","));
 	}
+	
 	/**
 	 * If it exists, it adds an output to the end of the outputs array list
 	 * @param output to be added
 	 */
-	public void addOutput(String output){
-		if (this.outputs==null){
-			this.outputs=new ArrayList<String>(Arrays.asList(output.split(",")));
-		}else{
+	public void addOutput(String output) {
+		if (this.outputs == null) {
+			this.outputs = Arrays.asList(output.split(","));
+		} else {
 			outputs.add(output);
 		}
 	}
+	
 	/**
 	 * Sets a list of formatters.
 	 * The formatters must be comma-separated.
 	 */
 	public void setFormatters(String formatters) {
-		this.formatters = new ArrayList<String>(Arrays.asList(formatters.split(",")));
+		this.formatters = Arrays.asList(formatters.split(","));
 	}
+	
 	/**
 	 * If it exists, it adds a formatter to the end of the formatters array list
 	 * @param formatter to be added
 	 */
-	public void addFormatter(String formatter){
-		if (this.formatters==null){
-			this.formatters=new ArrayList<String>(Arrays.asList(formatter.split(",")));
-		}else{
+	public void addFormatter(String formatter) {
+		if (this.formatters == null) {
+			this.formatters = Arrays.asList(formatter.split(","));
+		} else {
 			formatters.add(formatter);
 		}
 	}
+	
 	public void configureAsDefault() {
 		name = defaultName;
-		levels = new ArrayList<String>(Arrays.asList(defaultLevel.split(",")));
-		formatters = new ArrayList<String>(Arrays.asList(defaultFormatter.split(",")));
-		separators = new ArrayList<String>(Arrays.asList(defaultSeparator.split(",")));
-		outputs = new ArrayList<String>(Arrays.asList(defaultOutput.split(",")));
+		levels = Arrays.asList(defaultLevel.split(","));
+		formatters = Arrays.asList(defaultFormatter.split(","));
+		separators = Arrays.asList(defaultSeparator.split(","));
+		outputs = Arrays.asList(defaultOutput.split(","));
 	}
 }

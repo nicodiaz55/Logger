@@ -8,7 +8,7 @@ import grupo12.Logger.message.LogMessage;
  *
  */
 public class MethodNameFormat extends Format {
-	
+
 	/**
 	 * Constructor
 	 */

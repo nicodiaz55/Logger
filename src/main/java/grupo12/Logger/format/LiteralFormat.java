@@ -8,7 +8,7 @@ import grupo12.Logger.message.LogMessage;
  *
  */
 public class LiteralFormat extends Format {
-	
+
 	/**
 	 * Constructor
 	 */
@@ -16,7 +16,7 @@ public class LiteralFormat extends Format {
 		super("");
 		pattern = "%%";
 	}
-	
+
 	/**
 	 * Overrides the format method from Format class according to LiteralFormat needs.
 	 * @param message to log

@@ -27,8 +27,7 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
 	// to avoid constant folding by the compiler, this field must *not* be final
 	public static String REQUESTED_API_VERSION = "1.7.7"; // !final
 
-	private static final String loggerFactoryClassStr = AdapterFactory.class
-			.getName();
+	private static final String loggerFactoryClassStr = AdapterFactory.class.getName();
 
 	/**
 	 * The ILoggerFactory instance returned by the {@link #getLoggerFactory}

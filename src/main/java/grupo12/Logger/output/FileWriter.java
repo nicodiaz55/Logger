@@ -33,8 +33,9 @@ public class FileWriter implements Writer {
 	}
 	
 	public void write(String message) {
-		if(canWrite())
+		if (canWrite()) {
 			writer.println(message);
+		}
 	}
 
 	public void init() throws FileNotFoundException {
@@ -49,8 +50,9 @@ public class FileWriter implements Writer {
 	}
 
 	public void end() {
-		if (writer != null)
+		if (writer != null) {
 			writer.close();
+		}
 		writer = null;
 		filename = "";
 		ok = false;

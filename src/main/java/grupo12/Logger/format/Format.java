@@ -31,9 +31,9 @@ public abstract class Format {
 	 * @param message to log
 	 * @param data which replaces old format
 	 */
-	protected void updateFormat(LogMessage message,String data) {
+	protected void updateFormat(LogMessage message, String data) {
 		String oldFormat = message.toString();
-		String newFormat = oldFormat.replaceAll(pattern,data);
+		String newFormat = oldFormat.replaceAll(pattern, data);
 		message.changeFormat(newFormat);
 	}
 }

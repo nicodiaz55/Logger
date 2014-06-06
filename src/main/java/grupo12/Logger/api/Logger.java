@@ -18,18 +18,18 @@ public class Logger {
 	private String name;
 	private List<Output> outputs;
 	static final private int stCallerDepth = 4;
-	
+
 	/**
-	 * Creates an empty Logger with no name. It's recomended to use {@link LoggerBuilder} to create a Logger.
+	 * Creates an empty Logger with no name. It's recommended to use {@link LoggerBuilder} to create a Logger.
 	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Pattern Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
 	 * start logging.
 	 */
 	public Logger() {
 		this("");
 	}
-	
+
 	/**
-	 * Creates an empty Logger with a given name. It's recomended to use {@link LoggerBuilder} to create a Logger.
+	 * Creates an empty Logger with a given name. It's recommended to use {@link LoggerBuilder} to create a Logger.
 	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Pattern Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
 	 * start logging.
 	 * 
@@ -39,7 +39,7 @@ public class Logger {
 		this.name = name;
 		outputs = new ArrayList<Output>();
 	}
-	
+
 	/**
 	 * Creates our own Stack Trace, its used to track the method which is calling the log method.
 	 * 
@@ -241,7 +241,7 @@ public class Logger {
 	public void on() {
 		for (Output output : outputs) {
 			output.turnOn();
-		}		
+		}
 	}
 	
 	/**

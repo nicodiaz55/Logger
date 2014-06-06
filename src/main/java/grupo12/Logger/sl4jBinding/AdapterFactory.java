@@ -12,7 +12,7 @@ public class AdapterFactory implements ILoggerFactory {
 		LoggerFactory factory = new LoggerFactory();
 		grupo12.Logger.api.Logger logger = factory.getLogger(name);
 		logger.init();
-		return new Slf4jAdapter(logger);		
+		return new Slf4jAdapter(logger);
 	}
 
 }

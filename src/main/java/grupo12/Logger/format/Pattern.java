@@ -1,7 +1,9 @@
 package grupo12.Logger.format;
 
 import grupo12.Logger.format.Format;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import grupo12.Logger.message.LogMessage;
 
@@ -13,7 +15,7 @@ import grupo12.Logger.message.LogMessage;
  */
 public class Pattern implements Formatter {
 
-	private ArrayList<Format> formatList;
+	private List<Format> formatList;
 	private String format;
 	
 	/**
@@ -38,10 +40,11 @@ public class Pattern implements Formatter {
 		formatList.add(new LoggerNameFormat());
 	}
 	
-	public String format(LogMessage message){
+	public String format(LogMessage message) {
 		message.changeFormat(format);
-		for (Format formatter : formatList)
+		for (Format formatter : formatList) {
 			formatter.format(message);
+		}
 		return message.toString();
 	}
 
