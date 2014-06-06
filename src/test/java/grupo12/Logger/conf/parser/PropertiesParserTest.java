@@ -31,7 +31,7 @@ public class PropertiesParserTest {
 		// Check:
 		assertEquals(1, configurations.size());
 		assertEquals("Logger", conf.getName());
-		assertEquals("INFO", conf.getLevels().get(0));
+		assertEquals("INFO", conf.getLevel());
 		assertEquals("%d{HH:mm:ss} - %p - %t - %m", conf.getFormatters().get(0));
 		assertEquals("-", conf.getSeparators().get(0));
 		assertEquals("console", conf.getOutputs().get(0));
@@ -46,26 +46,10 @@ public class PropertiesParserTest {
 		assertEquals(2, configurations.size());
 		assertEquals("Logger1", configurations.get(0).getName());
 		assertEquals("Logger2", configurations.get(1).getName());
-		assertEquals(configurations.get(0).getLevels().get(0), configurations.get(1).getLevels().get(0));
+		assertEquals(configurations.get(0).getLevel(), configurations.get(1).getLevel());
 		assertEquals(configurations.get(0).getFormatters().get(0), configurations.get(1).getFormatters().get(0));
 		assertEquals(configurations.get(0).getSeparators().get(0), configurations.get(1).getSeparators().get(0));
 		assertEquals(configurations.get(0).getOutputs().get(0), configurations.get(1).getOutputs().get(0));
-	}
-	
-	@Test
-	public void loadFileWithMultipleLevelInfo() {
-		// Setup:
-		loadConf("oneLoggerMultipleFields.properties");
-		
-		List<String> strings;
-		
-		// Check levels:
-		strings = configurations.get(0).getLevels();
-		
-		assertEquals(3, strings.size());
-		assertEquals("INFO", strings.get(0));
-		assertEquals("DEBUG", strings.get(1));
-		assertEquals("FATAL", strings.get(2));
 	}
 	
 	@Test
@@ -113,23 +97,6 @@ public class PropertiesParserTest {
 		assertEquals("/", strings.get(2));
 	}
 
-	
-	@Test
-	public void loadFileWithMultipleLevelInfoAndMultipleLoggers() {
-		// Setup:
-		loadConf("twoLoggerMultipleFields.properties");
-		List<String> strings1, strings2;
-		
-		// Check levels:
-		strings1 = configurations.get(0).getLevels();
-		strings2 = configurations.get(1).getLevels();
-		
-		assertEquals(strings1.size(), strings2.size());
-		assertEquals(strings1.get(0), strings2.get(0));
-		assertEquals(strings1.get(1), strings2.get(1));
-		assertEquals(strings1.get(2), strings2.get(2));
-	}
-	
 	@Test
 	public void loadFileWithMultipleOutputsInfoAndMultipleLoggers() {
 		// Setup:

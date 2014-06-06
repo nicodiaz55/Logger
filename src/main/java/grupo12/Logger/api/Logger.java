@@ -179,4 +179,23 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	public String getName() {
 		return logger.getName();
 	}
+	
+	/**
+	 * Returns the level of the Logger.
+	 * 
+	 * @return the level.
+	 */
+	public Level getLevel() {
+		return logger.getLevel();
+	}
+	
+	/**
+	 * Sets the level of the Logger.
+	 * 
+	 * @param level to set.
+	 */
+	public void setLevel(Level level) {
+		logger.setLevel(level);
+	}
+	
 }

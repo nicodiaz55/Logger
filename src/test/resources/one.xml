@@ -2,10 +2,10 @@
  <Loggers>
 <logger>
 	<name>Logger</name>
+	<level>INFO</level>
 	<outputs>
 		<output>
 			<type>console</type>
-			<level>INFO</level>
 			<formatter>%d{HH:mm:ss} - %p - %t - %m</formatter>
 			<separator>-</separator>
 		</output>

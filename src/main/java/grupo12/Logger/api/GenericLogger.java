@@ -9,6 +9,7 @@ import java.util.List;
 
 public class GenericLogger {
 	private String name;
+	private Level level;
 	private List<Output> outputs;
 	private static final int stCallerDepth = 4;
 
@@ -22,6 +23,7 @@ public class GenericLogger {
 	public GenericLogger(String name) {
 		this.name = name;
 		outputs = new ArrayList<Output>();
+		level = null;
 	}
 
 	/**
@@ -42,6 +44,15 @@ public class GenericLogger {
 	 */
 	public void addOutput(Output output) {
 		outputs.add(output);
+	}
+	
+	/**
+	 * Sets the level of the Logger.
+	 * 
+	 * @param level to set.
+	 */
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 	
 	/**
@@ -115,5 +126,14 @@ public class GenericLogger {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * Returns the level of the Logger.
+	 * 
+	 * @return the level.
+	 */
+	public Level getLevel() {
+		return level;
 	}
 }

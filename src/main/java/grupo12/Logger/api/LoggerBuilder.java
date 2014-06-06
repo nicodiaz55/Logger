@@ -29,31 +29,34 @@ public class LoggerBuilder {
 	 * Builds and configures a {@link grupo12.Logger.api.Logger Logger}.
 	 */
 	public Logger build(Configuration conf) {
+		// Create needed Factories:
 		WriterFactory writerFactory = new WriterFactory();
 		LevelFactory levelFactory = new LevelFactory();
 		FormatterFactory formatterFactory = new FormatterFactory();
 
-		Logger logger = new Logger(conf.getName());
-
+		// Get all configuration attributes:
+		String confName = conf.getName();
+		String confLevel = conf.getLevel();
 		List<String> confOutputs = conf.getOutputs();
-		List<String> confLevels = conf.getLevels();
 		List<String> confFormatters = conf.getFormatters();
 		List<String> confSeparators = conf.getSeparators();
 
+		// Create a logger:
+		Logger logger = new Logger(confName);
+		
+		// Set it's level:
+		Level level = levelFactory.getLevel(confLevel);
+		logger.setLevel(level);
+		
+		// Create writers:
 		List<Writer> writers = new ArrayList<Writer>();
-		List<Level> levels = new ArrayList<Level>();
-
 		for (String output : confOutputs) {
 			writers.add(writerFactory.getWriter(output));
 		}
 
-		for (String level : confLevels) {
-			levels.add(levelFactory.getLevel(level));
-		}
-
+		// Create the outputs and add them to the logger:
 		int i = 0;
 		for (Writer writer : writers) {
-			Level level = levels.get(i);
 			Formatter formatter = formatterFactory.getFormatter(confFormatters.get(i), confSeparators.get(i));
 			Output manager = new Output(level, writer, formatter);
 			logger.addOutput(manager);

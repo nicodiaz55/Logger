@@ -2,22 +2,20 @@
 <Loggers>
 <logger>
 	<name>Logger1</name>
+	<level>INFO</level>
 	<outputs>
 		<output>
 			<type>log1.txt</type>
-			<level>INFO</level>
 			<formatter>%d{HH:mm:ss} %n %m</formatter>
 			<separator>|</separator>
 		</output>
 		<output>
 			<type>log2.txt</type>
-			<level>DEBUG</level>
 			<formatter>%d{HH:mm:ss} %n %p %n %m</formatter>
 			<separator>-</separator>
 		</output>
 		<output>
 			<type>console</type>
-			<level>FATAL</level>
 			<formatter>%d{HH:mm:ss} %n %t %n %m</formatter>
 			<separator>/</separator>
 		</output>
@@ -26,22 +24,20 @@
 
 <logger>
 	<name>Logger2</name>
+	<level>INFO</level>
 	<outputs>
 		<output>
 			<type>log1.txt</type>
-			<level>INFO</level>
 			<formatter>%d{HH:mm:ss} %n %m</formatter>
 			<separator>|</separator>
 		</output>
 		<output>
 			<type>log2.txt</type>
-			<level>DEBUG</level>
 			<formatter>%d{HH:mm:ss} %n %p %n %m</formatter>
 			<separator>-</separator>
 		</output>
 		<output>
 			<type>console</type>
-			<level>FATAL</level>
 			<formatter>%d{HH:mm:ss} %n %t %n %m</formatter>
 			<separator>/</separator>
 		</output>

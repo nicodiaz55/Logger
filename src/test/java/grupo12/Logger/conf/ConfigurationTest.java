@@ -16,10 +16,11 @@ public class ConfigurationTest {
 		conf.configureAsDefault();
 		List<String> strings;
 		
+		// Check name:
+		assertEquals(Configuration.defaultName, conf.getName());
+		
 		// Check level:
-		strings = conf.getLevels();
-		assertEquals(1, strings.size());
-		assertTrue(strings.contains(Configuration.defaultLevel));
+		assertEquals(Configuration.defaultLevel, conf.getLevel());
 		
 		// Check message format:
 		strings = conf.getFormatters();

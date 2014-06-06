@@ -17,18 +17,18 @@ public class Configuration {
 	public static final String defaultOutput = "console";
 	public static final String defaultSeparator = "-";
 	
-	private List<String> levels;
+	private String name;
+	private String level;
 	private List<String> formatters;
 	private List<String> separators;
 	private List<String> outputs;
-	private String name;
 	
 	/**
 	 * Creates an empty configuration. Use the "set" methods to load the configuration.
 	 */
 	public Configuration() {
 		name = "";
-		levels = null;
+		level = "";
 		formatters = null;
 		separators = null;
 		outputs = null;
@@ -44,12 +44,12 @@ public class Configuration {
 	}
 	
 	/**
-	 * Returns a list of levels.
+	 * Returns the level of the Logger.
 	 * 
-	 * @return list of levels.
+	 * @return the level.
 	 */
-	public List<String> getLevels() {
-		return levels;
+	public String getLevel() {
+		return level;
 	}
 	
 	/**
@@ -87,23 +87,10 @@ public class Configuration {
 	}
 	
 	/**
-	 * Sets the list of levels.
-	 * The levels must be comma-separated.
+	 * Sets the level.
 	 */
-	public void setLevels(String levels) {
-		this.levels = Arrays.asList(levels.split(","));
-	}
-	
-	/**
-	 * If it exists, it adds a level to the end of the levels array list
-	 * @param level to be added
-	 */
-	public void addLevel(String level) {
-		if (this.levels == null){
-			this.levels = new ArrayList<String>(Arrays.asList(level.split(",")));
-		} else {
-			levels.add(level);
-		}
+	public void setLevel(String level) {
+		this.level = level;
 	}
 	
 	/**
@@ -168,7 +155,7 @@ public class Configuration {
 	
 	public void configureAsDefault() {
 		name = defaultName;
-		levels = Arrays.asList(defaultLevel.split(","));
+		level = defaultLevel;
 		formatters = Arrays.asList(defaultFormatter.split(","));
 		separators = Arrays.asList(defaultSeparator.split(","));
 		outputs = Arrays.asList(defaultOutput.split(","));
