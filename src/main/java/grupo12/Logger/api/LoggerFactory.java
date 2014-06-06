@@ -14,7 +14,10 @@ import java.util.Hashtable;
  */
 public class LoggerFactory{
 
-	private static final String DEFAULTNAME = "Logger";
+	/**
+	 * The name of the Default Logger.
+	 */
+	public static final String DEFAULTNAME = "Logger";
 
 	private Hashtable<String, Logger> loggers;
 	private LoggerBuilder builder;

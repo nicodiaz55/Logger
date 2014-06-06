@@ -1,4 +1,4 @@
-package grupo12.Logger;
+package example;
 
 import java.io.IOException;
 
@@ -52,7 +52,7 @@ public class Example {
 		logger.fatal("Fatal error message");
 		
 		// These messages won't be logged:
-		logger.off(); // Turn off the logger.
+		logger.turnOff(); // Turn off the logger.
 		logger.trace("Unlogged Trace message");
 		logger.debug("Unlogged Debug message");
 		logger.info("Unlogged Info message");
@@ -61,7 +61,7 @@ public class Example {
 		logger.fatal("Unlogged Fatal error message");
 		
 		// Now these messages are logged:
-		logger.on(); // Turn on the logger.
+		logger.turnOn(); // Turn on the logger.
 		logger.trace("Trace message 2");
 		logger.debug("Debug message 2");
 		logger.info("Info message 2");
@@ -98,7 +98,7 @@ public class Example {
 		logger.fatal("Fatal error message");
 		
 		// These messages won't be logged:
-		logger.off(); // Turn off the logger.
+		logger.turnOff(); // Turn off the logger.
 		logger.trace("Unlogged Trace message");
 		logger.debug("Unlogged Debug message");
 		logger.info("Unlogged Info message");
@@ -107,7 +107,7 @@ public class Example {
 		logger.fatal("Unlogged Fatal error message");
 		
 		// Now these messages are logged:
-		logger.on(); // Turn on the logger.
+		logger.turnOn(); // Turn on the logger.
 		logger.trace("Trace message 2");
 		logger.debug("Debug message 2");
 		logger.info("Info message 2");
