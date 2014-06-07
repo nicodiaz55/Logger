@@ -3,6 +3,8 @@ package grupo12.Logger.api;
 import grupo12.Logger.level.*;
 import grupo12.Logger.level.Error;
 import grupo12.Logger.output.Output;
+import grupo12.Logger.filter.Filter;
+
 
 /**
  * Logger API.
@@ -197,5 +199,21 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	public void setLevel(Level level) {
 		logger.setLevel(level);
 	}
+	/**
+	 * Returns the level of the Logger.
+	 * 
+	 * @return the level.
+	 */
+	public Filter getFilter() {
+		return logger.getFilter();
+	}
 	
+	/**
+	 * Sets the level of the Logger.
+	 * 
+	 * @param level to set.
+	 */
+	public void setFilter(Filter filter) {
+		logger.setFilter(filter);
+	}
 }
