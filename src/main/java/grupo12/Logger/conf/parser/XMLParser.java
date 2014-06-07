@@ -42,6 +42,11 @@ public class XMLParser implements Parser {
                 NodeList textLoggerNameList = loggerNameElement.getChildNodes();
                 aConfiguration.setName(((Node) textLoggerNameList.item(0)).getNodeValue().trim());
                 
+                NodeList levelList = confElement.getElementsByTagName("level");
+        		Element levelElement = (Element) levelList.item(0);
+        		NodeList textLevelList = levelElement.getChildNodes();
+        		aConfiguration.setLevel(((Node) textLevelList.item(0)).getNodeValue().trim());
+                
             	NodeList outputsList = confElement.getElementsByTagName("outputs");
             	Element outputsElement = (Element) outputsList.item(0);
             	NodeList textOutputsList = outputsElement.getChildNodes();
@@ -65,10 +70,7 @@ public class XMLParser implements Parser {
                     		NodeList textFormatterList = formatterElement.getChildNodes();
                     		aConfiguration.addFormatter(((Node) textFormatterList.item(0)).getNodeValue().trim());
 
-                    		NodeList levelList = outputElement.getElementsByTagName("level");
-                    		Element levelElement = (Element) levelList.item(0);
-                    		NodeList textLevelList = levelElement.getChildNodes();
-                    		aConfiguration.setLevel(((Node) textLevelList.item(0)).getNodeValue().trim());
+                   		
                     }
             	}
                 configurations.add(aConfiguration);
@@ -104,4 +106,6 @@ public class XMLParser implements Parser {
 	public void setFile(String file) {
 		this.file = file;
 	}
+	
+	
 }
