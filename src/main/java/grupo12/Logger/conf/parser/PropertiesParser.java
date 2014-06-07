@@ -13,6 +13,7 @@ public class PropertiesParser implements Parser {
 	
 	private Properties conf;
 	private String file;
+	private boolean ready;
 	
 	/**
 	 * Creates a parser for Properties files, so we can load the configuration for each {@link grupo12.Logger.api.Logger Logger} to create.
@@ -21,6 +22,7 @@ public class PropertiesParser implements Parser {
 	 */
 	public PropertiesParser(String propertiesFile) {
 		file = propertiesFile;
+		ready = false;
 	}
 
 	/**
@@ -30,6 +32,9 @@ public class PropertiesParser implements Parser {
 	 */
 	@Override
 	public void loadConfigurations(List<Configuration> configurations) {
+		if (!canParse()) {
+			return;
+		}
 		createConfigurations(conf, configurations);
 	}
 
@@ -53,16 +58,19 @@ public class PropertiesParser implements Parser {
 			input = new FileInputStream(getFile);
 			conf.load(input);
 		} catch (IOException ex) {
+			ready = false;
 			return false; // empty
 		} finally {
 			if (input != null) {
 				try {
 					input.close();
 				} catch (IOException e) {
+					ready = false;
 					return false; // empty
 				}
 			}
 		}
+		ready = true;
 		return true;
 	}
 	
@@ -102,5 +110,10 @@ public class PropertiesParser implements Parser {
 	@Override
 	public void setFile(String file) {
 		this.file = file;
+	}
+
+	@Override
+	public boolean canParse() {
+		return ready;
 	}
 }

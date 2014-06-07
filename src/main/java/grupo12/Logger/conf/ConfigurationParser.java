@@ -36,9 +36,16 @@ public class ConfigurationParser {
 	
 	public List<Configuration> getConfigurations() {
 		loadConfiguration();
+		addDefaultConfiguration(); // We always add it
 		return configurations;
 	}
 	
+	private void addDefaultConfiguration() {
+		Configuration defconf = new Configuration();
+		defconf.configureAsDefault();
+		configurations.add(defconf);	
+	}
+
 	private void loadConfiguration() {
 		// The LinkedHashMap keeps the order of insertion defined in the method addParsers():
 		for (Parser parser : parsers.values()) {

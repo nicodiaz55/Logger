@@ -30,6 +30,11 @@ public class ConfigurationParserTest {
 		propParser.init();
 		propParser.loadConfigurations(expected);
 		
+		// Don't forget the default configuration:
+		Configuration def = new Configuration();
+		def.configureAsDefault();
+		expected.add(def);
+		
 		assertEquals(expected, configurations);
 	}
 
@@ -46,6 +51,11 @@ public class ConfigurationParserTest {
 		Parser xmlParser = new XMLParser(parser.defaultXMLFile);
 		xmlParser.init();
 		xmlParser.loadConfigurations(expected);
+		
+		// Don't forget the default configuration:
+		Configuration def = new Configuration();
+		def.configureAsDefault();
+		expected.add(def);
 		
 		assertEquals(expected, configurations);
 	}

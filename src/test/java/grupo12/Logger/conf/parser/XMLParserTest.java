@@ -22,6 +22,22 @@ public class XMLParserTest {
 	}
 	
 	@Test
+	public void cantInitIfFileDoesntExists() {
+		parser = new XMLParser("");
+		assertFalse(parser.init());
+		assertFalse(parser.canParse());
+	}
+
+	@Test
+	public void cantLoadConfigurationIfFileDoesntExists() {
+		configurations = new ArrayList<Configuration>();
+		parser = new XMLParser("");
+		parser.init();
+		parser.loadConfigurations(configurations);
+		assertTrue(configurations.isEmpty());
+	}
+	
+	@Test
 	public void loadsOneSimpleConfiguration() {
 		// Setup:
 		loadConf("one.xml");

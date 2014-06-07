@@ -8,6 +8,8 @@ public interface Parser {
 
 	public boolean init();
 
+	public boolean canParse();
+	
 	public void loadConfigurations(List<Configuration> configurations);
 
 	public void setFile(String file);

@@ -20,6 +20,22 @@ public class PropertiesParserTest {
 		parser.init();
 		parser.loadConfigurations(configurations);
 	}
+
+	@Test
+	public void cantInitIfFileDoesntExists() {
+		parser = new PropertiesParser("");
+		assertFalse(parser.init());
+		assertFalse(parser.canParse());
+	}
+
+	@Test
+	public void cantLoadConfigurationIfFileDoesntExists() {
+		configurations = new ArrayList<Configuration>();
+		parser = new PropertiesParser("");
+		parser.init();
+		parser.loadConfigurations(configurations);
+		assertTrue(configurations.isEmpty());
+	}
 	
 	@Test
 	public void loadsOneSimpleConfiguration() {

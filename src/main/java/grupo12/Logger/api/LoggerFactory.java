@@ -41,11 +41,6 @@ public class LoggerFactory{
 		ConfigurationParser parser = new ConfigurationParser();
 		List<Configuration> parsedConfigurations = parser.getConfigurations();
 
-		// We add the Default Logger (it's always available):
-		Configuration defconf = new Configuration();
-		defconf.configureAsDefault();
-		parsedConfigurations.add(defconf);
-
 		// Construct every logger:
 		for (Configuration conf : parsedConfigurations) {
 			Logger log = builder.build(conf);
@@ -84,7 +79,7 @@ public class LoggerFactory{
 	}
 
 	/**
-	 * Creates a new default {@link Logger}.
+	 * Creates a new {@link Logger} with default configuration (except it's name).
 	 * 
 	 * @param name of the Logger
 	 * @return the new default logger

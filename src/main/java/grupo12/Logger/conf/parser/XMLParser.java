@@ -2,9 +2,9 @@ package grupo12.Logger.conf.parser;
 
 import grupo12.Logger.conf.Configuration;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-//import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.List;
 
 import org.w3c.dom.*;
@@ -17,15 +17,25 @@ import javax.xml.parsers.ParserConfigurationException;
 public class XMLParser implements Parser {
 
 	private String file;
-	private File cfg;
 	private Document doc;
+	private boolean ready;
 
 	public XMLParser(String xmlFile) {
 		file = xmlFile;
+		ready = false;
 	}
 
 	@Override
-	public void loadConfigurations(List<Configuration> configurations) {    
+	public boolean canParse() {
+		return ready;
+	}
+	
+	@Override
+	public void loadConfigurations(List<Configuration> configurations) {
+		if (!canParse()) {
+			return;
+		}
+		
 		doc.getDocumentElement().normalize();
 		NodeList loggers = doc.getElementsByTagName("logger");
 		int totalUsers = loggers.getLength();
@@ -89,21 +99,39 @@ public class XMLParser implements Parser {
 		try {
 			getFile = this.getClass().getResource("/" + file).getFile();
 		} catch (Exception e) {
+			ready = false;
 			return false;
 		}
-		cfg = new File(getFile);
-		if (cfg == null || !cfg.exists()) {
-			return false;
+		
+		InputStream input = null;
+		try {
+			input = new FileInputStream(getFile);
+		} catch (IOException ex) {
+			ready = false;
+			return false; // empty
 		}
+		
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
-			doc = docBuilder.parse(cfg);
+			doc = docBuilder.parse(input);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
+			ready = false;
 			return false;
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					ready = false;
+					return false; // empty
+				}
+			}
 		}
+		
+		ready = true;
 		return true;
 	}
 
