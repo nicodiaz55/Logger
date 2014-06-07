@@ -7,7 +7,6 @@ import grupo12.Logger.format.Formatter;
 import grupo12.Logger.api.LoggerFactory;
 import grupo12.Logger.format.Pattern;
 import grupo12.Logger.level.Info;
-import grupo12.Logger.level.Level;
 import grupo12.Logger.output.ConsoleWriter;
 import grupo12.Logger.output.Output;
 import grupo12.Logger.output.Writer;
@@ -25,7 +24,7 @@ public class Example {
 		Logger logger = new Logger("MyLogger");
 		
 		// We need a Level for our logger:
-		Level level = new Info(); // Only logs info, warning, error and fatal messages.
+		logger.setLevel(new Info()); // Only logs info, warning, error and fatal messages.
 		
 		// We need a Formatter for our message:
 		Formatter formatter = new Pattern("%d{HH:mm:ss} %n %g %n %p %n %L %n %M %n %F %n %m", "|");
@@ -35,7 +34,7 @@ public class Example {
 		Writer writer = new ConsoleWriter();
 		
 		// Finally, we need to add the Output to our Logger:
-		Output output = new Output(level, writer, formatter);
+		Output output = new Output(writer, formatter);
 		logger.addOutput(output);
 		// We can add as many outputs as we wish, each with different levels and formats.
 		// We recommend to use the configuration file, however. 

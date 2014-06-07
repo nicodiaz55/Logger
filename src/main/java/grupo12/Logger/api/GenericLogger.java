@@ -11,7 +11,7 @@ public class GenericLogger {
 	private String name;
 	private Level level;
 	private List<Output> outputs;
-	private static final int stCallerDepth = 4;
+	private static final int stCallerDepth = 5;
 
 	/**
 	 * Creates an empty Logger with a given name. It's recommended to use {@link LoggerBuilder} to create a Logger.
@@ -64,8 +64,10 @@ public class GenericLogger {
 	 */
 	public void log(String message, Level level, Throwable exception) {
 		LogMessage logMessage = createMessage(message, level, exception);
-		for (Output output : outputs) {
-			output.log(logMessage);
+		if (isPublishable(logMessage)) {
+			for (Output output : outputs) {
+				output.log(logMessage);
+			}
 		}
 	}
 	
@@ -81,6 +83,21 @@ public class GenericLogger {
 	private LogMessage createMessage(String message, Level level, Throwable exception) {
 		LogMessage logMessage = new LogMessage(level, message, getCallingStackTraceElement(), exception, name);
 		return logMessage;
+	}
+	
+	/** 
+	 * Verifies if the {@link LogMessage} is publishable in this Logger.
+	 * 
+	 * @param the message to log.
+	 * @return boolean indicating if the message is publishable or not.
+	 */
+	private boolean isPublishable(LogMessage message) {
+		// If no level is set, all messages are publishable
+		if (level == null) {
+			return true;
+		}
+		
+		return level.majorThan(message.getLevel());
 	}
 	
 	/**

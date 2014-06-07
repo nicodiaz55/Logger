@@ -1,7 +1,6 @@
 package grupo12.Logger.output;
 
 import grupo12.Logger.format.Formatter;
-import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
 
 /**
@@ -12,32 +11,20 @@ import grupo12.Logger.message.LogMessage;
  */
 public class Output {
 
-	private Level level;
 	private Writer writer;
 	private Formatter formatter;
 	private boolean logging;
 	
 	/**
 	 * Creates an Output.
-	 * It requires a level, a writer and a formatter.
+	 * It requires a {@link grupo12.Logger.output.Writer Writer} and a {@link grupo12.Logger.output.Formatter Formatter}.
 	 * 
-	 * @param level of the output. Required to filter the messages to log.
 	 * @param writer implementation. Could be a {@link ConsoleWriter} or a {@link grupo12.Logger.output.FileWriter FileWriter}.
 	 * @param formatter to format the messages.
 	 */
-	public Output(Level level, Writer writer, Formatter formatter) {
-		setLevel(level);
+	public Output(Writer writer, Formatter formatter) {
 		setOutput(writer);
 		setFormatter(formatter);
-	}
-	
-	/**
-	 * Sets the {@link Level} of the Output.
-	 * 
-	 * @param level to set.
-	 */
-	private void setLevel(Level level) {
-		this.level = level;
 	}
 	
 	/**
@@ -65,11 +52,12 @@ public class Output {
 	 * @param message to log
 	 */
 	public void log(LogMessage message) {
-		if (isOn() && isPublishable(message)) {
+		if (isOn()) {
 			String formatedMessage = message.toString();
 			if (formatter != null) {
 				 formatedMessage = formatter.format(message);
 			}
+			// TODO: Meter filtro aca
 			writer.write(formatedMessage);
 		}
 	}
@@ -79,22 +67,6 @@ public class Output {
 	 */
 	private boolean isOn() {
 		return logging;
-	}
-
-	/** 
-	 * Verifies if the {@link LogMessage} is publishable in this output.
-	 * 
-	 * @param the message to log.
-	 */
-	private boolean isPublishable(LogMessage message) {
-		// If no level is seted, all messages are publishable
-		if (level == null) {
-			return true;
-		}
-		
-		// TODO: aca iría el filtro, si lo dejamos pasar o no.
-		
-		return level.majorThan(message.getLevel());
 	}
 
 	/**
