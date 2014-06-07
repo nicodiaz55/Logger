@@ -160,4 +160,23 @@ public class Configuration {
 		separators = Arrays.asList(defaultSeparator.split(","));
 		outputs = Arrays.asList(defaultOutput.split(","));
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Configuration other = (Configuration) o;
+		
+		if (!name.equals(other.name))
+			return false;
+		if (!level.equals(other.level))
+			return false;
+		if (!formatters.equals(other.formatters))
+			return false;
+		if (!separators.equals(other.separators))
+			return false;
+		if (!outputs.equals(other.outputs))
+			return false;
+		
+		return true;
+		
+	}
 }

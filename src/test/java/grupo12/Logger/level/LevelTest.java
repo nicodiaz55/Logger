@@ -95,4 +95,14 @@ public class LevelTest {
 		assertFalse(fatal.majorThan(error));
 		assertTrue(fatal.majorThan(fatal));
 	}
+	
+	@Test
+	public void nullTesting() {
+		assertFalse(trace.majorThan(null));
+		assertFalse(debug.majorThan(null));
+		assertFalse(info.majorThan(null));
+		assertFalse(warn.majorThan(null));
+		assertFalse(error.majorThan(null));
+		assertFalse(fatal.majorThan(null));
+	}
 }

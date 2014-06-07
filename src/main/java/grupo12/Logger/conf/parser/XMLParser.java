@@ -68,7 +68,7 @@ public class XMLParser implements Parser {
                     		NodeList levelList = outputElement.getElementsByTagName("level");
                     		Element levelElement = (Element) levelList.item(0);
                     		NodeList textLevelList = levelElement.getChildNodes();
-                    		aConfiguration.addLevel(((Node) textLevelList.item(0)).getNodeValue().trim());
+                    		aConfiguration.setLevel(((Node) textLevelList.item(0)).getNodeValue().trim());
                     }
             	}
                 configurations.add(aConfiguration);
@@ -98,5 +98,10 @@ public class XMLParser implements Parser {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void setFile(String file) {
+		this.file = file;
 	}
 }

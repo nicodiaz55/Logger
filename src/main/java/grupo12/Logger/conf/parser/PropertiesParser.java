@@ -96,4 +96,9 @@ public class PropertiesParser implements Parser {
 			}
 		}	
 	}
+
+	@Override
+	public void setFile(String file) {
+		this.file = file;
+	}
 }

@@ -47,7 +47,7 @@ public class LogMessage {
 		}
 	}
 
-	public Throwable getExecption() {
+	public Throwable getException() {
 		return exception;
 	}
 	

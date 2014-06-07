@@ -48,4 +48,9 @@ public class Pattern implements Formatter {
 		return message.toString();
 	}
 
+	@Override
+	public boolean equals(Object anObject) {
+		return anObject instanceof Pattern;
+	}
+	
 }

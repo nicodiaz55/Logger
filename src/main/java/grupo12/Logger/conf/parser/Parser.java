@@ -10,4 +10,5 @@ public interface Parser {
 
 	public void loadConfigurations(List<Configuration> configurations);
 
+	public void setFile(String file);
 }
