@@ -16,9 +16,11 @@ public class Configuration {
 	public static final String defaultFormatter = "%d{HH:mm:ss} - %p - %t - %m";
 	public static final String defaultOutput = "console";
 	public static final String defaultSeparator = "-";
+	public static final String defaultFilter = ""; //No filter is default
 	
 	private String name;
 	private String level;
+	private String filter;
 	private List<String> formatters;
 	private List<String> separators;
 	private List<String> outputs;
@@ -29,6 +31,7 @@ public class Configuration {
 	public Configuration() {
 		name = "";
 		level = "";
+		filter = "";
 		formatters = null;
 		separators = null;
 		outputs = null;
@@ -52,6 +55,14 @@ public class Configuration {
 		return level;
 	}
 	
+	/**
+	 * Returns the level of the Logger.
+	 * 
+	 * @return the level.
+	 */
+	public String getFilter() {
+		return filter;
+	}
 	/**
 	 * Returns a list of separators.
 	 * 
@@ -93,6 +104,12 @@ public class Configuration {
 		this.level = level;
 	}
 	
+	/**
+	 * Sets the filter.
+	 */
+	public void setFilter(String filter) {
+		this.filter = filter;
+	}
 	/**
 	 * Sets a list of separators.
 	 * The separators must be comma-separated.
@@ -156,6 +173,7 @@ public class Configuration {
 	public void configureAsDefault() {
 		name = defaultName;
 		level = defaultLevel;
+		filter = defaultFilter;
 		formatters = Arrays.asList(defaultFormatter.split(","));
 		separators = Arrays.asList(defaultSeparator.split(","));
 		outputs = Arrays.asList(defaultOutput.split(","));
@@ -168,6 +186,8 @@ public class Configuration {
 		if (!name.equals(other.name))
 			return false;
 		if (!level.equals(other.level))
+			return false;
+		if (!filter.equals(other.filter))
 			return false;
 		if (!formatters.equals(other.formatters))
 			return false;

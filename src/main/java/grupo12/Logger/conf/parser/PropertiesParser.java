@@ -76,17 +76,19 @@ public class PropertiesParser implements Parser {
 		
 		// TODO: ver si el null (en asList) pasa:
 		if (names != null) {
-			String level, formatters, separators, outputs;
+			String level, filter, formatters, separators, outputs;
 
 			// Create a configuration for each name (Logger):
 			for (String name : names) {
 				level = conf.getProperty(name + ".level");
+				filter = conf.getProperty(name + ".filter");
 				formatters = conf.getProperty(name + ".formatters");
 				separators = conf.getProperty(name + ".separators");
 				outputs = conf.getProperty(name + ".outputs");
 
 				Configuration aConfiguration = new Configuration();
 				aConfiguration.setLevel(level);
+				aConfiguration.setFilter(filter);
 				aConfiguration.setFormatters(formatters);
 				aConfiguration.setSeparators(separators);
 				aConfiguration.setOutputs(outputs);
