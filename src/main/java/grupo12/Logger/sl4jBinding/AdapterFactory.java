@@ -9,7 +9,7 @@ public class AdapterFactory implements ILoggerFactory {
 
 	@Override
 	public Logger getLogger(String name) {
-		LoggerFactory factory = new LoggerFactory();
+		LoggerFactory factory = LoggerFactory.getInstance();
 		grupo12.Logger.api.Logger logger = factory.getLogger(name);
 		logger.init();
 		return new Slf4jAdapter(logger);

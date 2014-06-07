@@ -15,6 +15,20 @@ import java.util.Hashtable;
 public class LoggerFactory{
 
 	/**
+	 * The unique instance of this class.
+	 */
+	private static final LoggerFactory INSTANCE = new LoggerFactory();
+	
+	/**
+	 * Return the singleton of this class.
+	 * 
+	 * @return the LoggerFactory singleton
+	 */
+	public static final LoggerFactory getInstance() {
+		return INSTANCE;
+	}
+	
+	/**
 	 * The name of the Default Logger.
 	 */
 	public static final String DEFAULTNAME = "Logger";
@@ -25,7 +39,7 @@ public class LoggerFactory{
 	/**
 	 * Creates a new Logger Factory.
 	 */
-	public LoggerFactory() {
+	private LoggerFactory() {
 		loggers = new Hashtable<String, Logger>();
 		builder = new LoggerBuilder();
 		loadConfiguration();

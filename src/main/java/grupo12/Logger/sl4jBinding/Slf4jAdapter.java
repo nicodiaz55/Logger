@@ -1,5 +1,8 @@
 package grupo12.Logger.sl4jBinding;
 
+import grupo12.Logger.level.*;
+import grupo12.Logger.level.Error;
+
 import org.slf4j.Marker;
 
 public class Slf4jAdapter implements org.slf4j.Logger {
@@ -167,62 +170,52 @@ public class Slf4jAdapter implements org.slf4j.Logger {
 
 	@Override
 	public boolean isDebugEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Debug());
 	}
 
 	@Override
 	public boolean isDebugEnabled(Marker arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Debug());
 	}
 
 	@Override
 	public boolean isErrorEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Error());
 	}
 
 	@Override
 	public boolean isErrorEnabled(Marker arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Error());
 	}
 
 	@Override
 	public boolean isInfoEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Info());
 	}
 
 	@Override
 	public boolean isInfoEnabled(Marker arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Info());
 	}
 
 	@Override
 	public boolean isTraceEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Trace());
 	}
 
 	@Override
 	public boolean isTraceEnabled(Marker arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Trace());
 	}
 
 	@Override
 	public boolean isWarnEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Warning());
 	}
 
 	@Override
 	public boolean isWarnEnabled(Marker arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		return logger.getLevel().majorThan(new Warning());
 	}
 
 	@Override

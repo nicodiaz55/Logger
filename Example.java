@@ -75,7 +75,7 @@ public class Example {
 	}
 	
 	private static void createLoggerFromConfigurationFile() {
-		LoggerFactory factory = new LoggerFactory();
+		LoggerFactory factory = LoggerFactory.getInstance();
 		
 		Logger logger = factory.getLogger(); // Preloaded default logger;
 		
