@@ -33,7 +33,7 @@ public class LoggerBuilder {
 	public Logger build(Configuration conf) {
 		// Create needed Factories:
 		WriterFactory writerFactory = new WriterFactory();
-		LevelFactory levelFactory = new LevelFactory();
+		LevelFactory levelFactory = new LevelFactory(conf.getAvailableLevels());
 		FormatterFactory formatterFactory = new FormatterFactory();
 		FilterFactory filterFactory = new FilterFactory();
 

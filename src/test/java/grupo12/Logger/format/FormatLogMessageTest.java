@@ -1,7 +1,7 @@
 package grupo12.Logger.format;
 
 import static org.junit.Assert.*;
-import grupo12.Logger.level.Info;
+import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
 
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class FormatLogMessageTest {
 	@Before
 	public void setUp() throws Exception {
 		StackTraceElement[] st = Thread.currentThread().getStackTrace();
-		message = new LogMessage(new Info(), "Test message", st[0], null, "MyLogger");
+		message = new LogMessage(Level.INFO, "Test message", st[0], null, "MyLogger");
 		message.changeFormat(date + separator + name + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text);
 	}
 

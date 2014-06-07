@@ -2,22 +2,31 @@ package grupo12.Logger.level;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 public class LevelFactoryTest {
 
 	@Test
-	public void getCorrectLevel() {
-		LevelFactory factory = new LevelFactory();
+	public void getDefaultLevelByOrder() {
+		List<String> levels = new ArrayList<String>();
+		levels.add("TRACE");
+		levels.add("DEBUG");
+		levels.add("INFO");
+		levels.add("WARNING");
+		levels.add("ERROR");
+		levels.add("FATAL");
 		
-		assertEquals(new Trace(), factory.getLevel("TRACE"));
-		assertEquals(new Debug(), factory.getLevel("DEBUG"));
-		assertEquals(new Info(), factory.getLevel("INFO"));
-		assertEquals(new Warning(), factory.getLevel("WARNING"));
-		assertEquals(new Error(), factory.getLevel("ERROR"));
-		assertEquals(new Fatal(), factory.getLevel("FATAL"));
+		LevelFactory factory = new LevelFactory(levels);
 		
-		assertEquals(new Info(), factory.getLevel("asd"));
+		assertEquals(Level.TRACE, factory.getLevel("TRACE"));
+		assertEquals(Level.DEBUG, factory.getLevel("DEBUG"));
+		assertEquals(Level.INFO, factory.getLevel("INFO"));
+		assertEquals(Level.WARNING, factory.getLevel("WARNING"));
+		assertEquals(Level.ERROR, factory.getLevel("ERROR"));
+		assertEquals(Level.FATAL, factory.getLevel("FATAL"));
 	}
 
 }

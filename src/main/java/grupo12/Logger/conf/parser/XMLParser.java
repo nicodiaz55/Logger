@@ -37,6 +37,11 @@ public class XMLParser implements Parser {
 		}
 		
 		doc.getDocumentElement().normalize();
+		
+		// Get every level:
+		// TODO
+				
+		// Get every logger:
 		NodeList loggers = doc.getElementsByTagName("logger");
 		int totalUsers = loggers.getLength();
 

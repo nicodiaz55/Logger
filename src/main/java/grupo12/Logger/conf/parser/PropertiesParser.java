@@ -79,6 +79,9 @@ public class PropertiesParser implements Parser {
 	 * stores them in an ArrayList. 
 	 */
 	private void createConfigurations(Properties conf, List<Configuration> configurations) {
+		// We get each level available:
+		String levels = conf.getProperty("levels");
+		
 		// We get each name of the Loggers:
 		List<String> names = Arrays.asList(conf.getProperty("names").split(","));
 		
@@ -95,6 +98,7 @@ public class PropertiesParser implements Parser {
 				outputs = conf.getProperty(name + ".outputs", "");
 
 				Configuration aConfiguration = new Configuration();
+				aConfiguration.setAvailableLevels(levels);
 				aConfiguration.setLevel(level);
 				aConfiguration.setFilter(filter);
 				aConfiguration.setFormatters(formatters);

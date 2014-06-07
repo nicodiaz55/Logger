@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <Loggers>
+<levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
+<Loggers>
 <logger>
 	<name>Logger</name>
 	<level>INFO</level>

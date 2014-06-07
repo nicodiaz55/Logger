@@ -41,11 +41,12 @@ public class XMLParserTest {
 	public void loadsOneSimpleConfiguration() {
 		// Setup:
 		loadConf("one.xml");
+				
+		// Check:
+		assertEquals(1, configurations.size());
 		
 		Configuration conf = configurations.get(0);
 		
-		// Check:
-		assertEquals(1, configurations.size());
 		assertEquals("Logger", conf.getName());
 		assertEquals("INFO", conf.getLevel());
 		assertEquals("%d{HH:mm:ss} - %p - %t - %m", conf.getFormatters().get(0));

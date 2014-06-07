@@ -1,14 +1,22 @@
 package grupo12.Logger.level;
 
-/**
- * Abstract class which inherits to concrete levels (Debug, Info, Warning, Error or Fatal)
- * @author grupo12
- *
- */
-public abstract class Level {
-		
-	protected String levelStr;
-	protected int level;
+
+public class Level {
+	
+	public final static Level TRACE = new Level("TRACE", 0);
+	public final static Level DEBUG = new Level("DEBUG", 1);
+	public final static Level INFO = new Level("INFO", 2);
+	public final static Level WARNING = new Level("WARNING", 3);
+	public final static Level ERROR = new Level("ERROR", 4);
+	public final static Level FATAL = new Level("FATAL", 5);
+	
+	private String levelStr;
+	private int level;
+	
+	public Level(String levelName, int priority) {
+		levelStr = levelName;
+		level = priority;
+	}
 	
 	/**
 	 * Overrides "toString()" method from java class Object so it returns a levelStr.
@@ -19,12 +27,13 @@ public abstract class Level {
 	}
 	/**
 	 * Checks if otherLevel is major than this level.
+	 * 
 	 * @param otherLevel
 	 * @return true or false
 	 */
 	public boolean majorThan(Level otherLevel) {
 		if (otherLevel != null) {
-			return level >= otherLevel.level;
+			return level <= otherLevel.level;
 		}
 		return false;
 	}
@@ -33,5 +42,12 @@ public abstract class Level {
 	 * Overrides "equals" method from java class Object
 	 */
 	@Override
-	public abstract boolean equals(Object anObject);
+	public boolean equals(Object anObject) {
+		if (!(anObject instanceof Level)) {
+			return false;
+		}
+		
+		Level other = (Level) anObject;
+		return (level == other.level && levelStr.equals(other.levelStr));
+	}
 }

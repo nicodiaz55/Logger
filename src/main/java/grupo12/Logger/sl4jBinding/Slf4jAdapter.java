@@ -1,7 +1,6 @@
 package grupo12.Logger.sl4jBinding;
 
-import grupo12.Logger.level.*;
-import grupo12.Logger.level.Error;
+import grupo12.Logger.level.Level;
 
 import org.slf4j.Marker;
 
@@ -170,52 +169,52 @@ public class Slf4jAdapter implements org.slf4j.Logger {
 
 	@Override
 	public boolean isDebugEnabled() {
-		return logger.getLevel().majorThan(new Debug());
+		return logger.getLevel().majorThan(Level.DEBUG);
 	}
 
 	@Override
 	public boolean isDebugEnabled(Marker arg0) {
-		return logger.getLevel().majorThan(new Debug());
+		return logger.getLevel().majorThan(Level.DEBUG);
 	}
 
 	@Override
 	public boolean isErrorEnabled() {
-		return logger.getLevel().majorThan(new Error());
+		return logger.getLevel().majorThan(Level.ERROR);
 	}
 
 	@Override
 	public boolean isErrorEnabled(Marker arg0) {
-		return logger.getLevel().majorThan(new Error());
+		return logger.getLevel().majorThan(Level.ERROR);
 	}
 
 	@Override
 	public boolean isInfoEnabled() {
-		return logger.getLevel().majorThan(new Info());
+		return logger.getLevel().majorThan(Level.INFO);
 	}
 
 	@Override
 	public boolean isInfoEnabled(Marker arg0) {
-		return logger.getLevel().majorThan(new Info());
+		return logger.getLevel().majorThan(Level.INFO);
 	}
 
 	@Override
 	public boolean isTraceEnabled() {
-		return logger.getLevel().majorThan(new Trace());
+		return logger.getLevel().majorThan(Level.TRACE);
 	}
 
 	@Override
 	public boolean isTraceEnabled(Marker arg0) {
-		return logger.getLevel().majorThan(new Trace());
+		return logger.getLevel().majorThan(Level.TRACE);
 	}
 
 	@Override
 	public boolean isWarnEnabled() {
-		return logger.getLevel().majorThan(new Warning());
+		return logger.getLevel().majorThan(Level.WARNING);
 	}
 
 	@Override
 	public boolean isWarnEnabled(Marker arg0) {
-		return logger.getLevel().majorThan(new Warning());
+		return logger.getLevel().majorThan(Level.WARNING);
 	}
 
 	@Override

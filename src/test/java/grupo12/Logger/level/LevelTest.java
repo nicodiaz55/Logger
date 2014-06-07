@@ -1,12 +1,7 @@
 package grupo12.Logger.level;
 
 import static org.junit.Assert.*;
-import grupo12.Logger.level.Debug;
-import grupo12.Logger.level.Error;
-import grupo12.Logger.level.Fatal;
-import grupo12.Logger.level.Info;
 import grupo12.Logger.level.Level;
-import grupo12.Logger.level.Warning;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,12 +17,12 @@ public class LevelTest {
 
 	@Before
 	public void setUp() throws Exception {
-		trace = new Trace();
-		debug = new Debug();
-		info = new Info();
-		warn = new Warning();
-		error = new Error();
-		fatal = new Fatal();
+		trace = Level.TRACE;
+		debug = Level.DEBUG;
+		info = Level.INFO;
+		warn = Level.WARNING;
+		error = Level.ERROR;
+		fatal = Level.FATAL;
 	}
 
 	@Test
@@ -40,7 +35,7 @@ public class LevelTest {
 		assertTrue(trace.majorThan(error));
 		assertTrue(trace.majorThan(fatal));
 	}
-	
+
 	@Test
 	public void debugTesting() {
 		assertEquals("DEBUG", debug.toString());
@@ -62,7 +57,7 @@ public class LevelTest {
 		assertTrue(info.majorThan(error));
 		assertTrue(info.majorThan(fatal));
 	}
-	
+
 	@Test
 	public void warnTesting() {
 		assertEquals("WARNING", warn.toString());
@@ -73,7 +68,7 @@ public class LevelTest {
 		assertTrue(warn.majorThan(error));
 		assertTrue(warn.majorThan(fatal));
 	}
-	
+
 	@Test
 	public void errorTesting() {
 		assertEquals("ERROR", error.toString());
@@ -84,7 +79,7 @@ public class LevelTest {
 		assertTrue(error.majorThan(error));
 		assertTrue(error.majorThan(fatal));
 	}
-	
+
 	@Test
 	public void fatalTesting() {
 		assertEquals("FATAL", fatal.toString());
@@ -95,7 +90,7 @@ public class LevelTest {
 		assertFalse(fatal.majorThan(error));
 		assertTrue(fatal.majorThan(fatal));
 	}
-	
+
 	@Test
 	public void nullTesting() {
 		assertFalse(trace.majorThan(null));

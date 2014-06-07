@@ -1,7 +1,7 @@
 package grupo12.Logger.format;
 
 import static org.junit.Assert.*;
-import grupo12.Logger.level.Info;
+import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
 
 import org.junit.Before;
@@ -14,7 +14,7 @@ public class FormatterTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		message = new LogMessage(new Info(), "Test message", null, null, "MyLogger");
+		message = new LogMessage(Level.INFO, "Test message", null, null, "MyLogger");
 	}
 	
 	@Test

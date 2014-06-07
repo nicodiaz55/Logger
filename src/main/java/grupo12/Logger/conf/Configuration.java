@@ -16,7 +16,8 @@ public class Configuration {
 	public static final String defaultFormatter = "%d{HH:mm:ss} - %p - %t - %m";
 	public static final String defaultOutput = "console";
 	public static final String defaultSeparator = "-";
-	public static final String defaultFilter = ""; //No filter is default
+	public static final String defaultFilter = ".*"; // REGEX
+	public static final String defaultLevels = "TRACE,DEBUG,INFO,WARNING,ERROR,FATAL";
 	
 	private String name;
 	private String level;
@@ -24,17 +25,19 @@ public class Configuration {
 	private List<String> formatters;
 	private List<String> separators;
 	private List<String> outputs;
+	private List<String> availableLevels;
 	
 	/**
 	 * Creates an empty configuration. Use the "set" methods to load the configuration.
 	 */
 	public Configuration() {
-		name = "";
-		level = "";
-		filter = "";
-		formatters = null;
-		separators = null;
-		outputs = null;
+		name = defaultName;
+		level = defaultLevel;
+		filter = defaultFilter;
+		formatters = Arrays.asList(defaultFormatter.split(","));
+		separators = Arrays.asList(defaultSeparator.split(","));
+		outputs = Arrays.asList(defaultOutput.split(","));
+		availableLevels = Arrays.asList(defaultLevels.split(","));
 	}
 	
 	/**
@@ -177,6 +180,7 @@ public class Configuration {
 		formatters = Arrays.asList(defaultFormatter.split(","));
 		separators = Arrays.asList(defaultSeparator.split(","));
 		outputs = Arrays.asList(defaultOutput.split(","));
+		availableLevels = Arrays.asList(defaultLevels.split(","));
 	}
 	
 	@Override
@@ -195,8 +199,26 @@ public class Configuration {
 			return false;
 		if (!outputs.equals(other.outputs))
 			return false;
+		if (!availableLevels.equals(other.availableLevels))
+			return false;
 		
 		return true;
 		
+	}
+
+	public List<String> getAvailableLevels() {
+		return availableLevels;
+	}
+	
+	public void setAvailableLevels(String levels) {
+		availableLevels = Arrays.asList(levels.split(","));
+	}
+	
+	public void addAvailableLevel(String level) {
+		if (this.availableLevels == null) {
+			setAvailableLevels(level);
+		} else {
+			availableLevels .add(level);
+		}
 	}
 }

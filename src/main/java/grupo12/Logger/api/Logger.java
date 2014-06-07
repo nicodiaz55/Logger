@@ -1,7 +1,6 @@
 package grupo12.Logger.api;
 
-import grupo12.Logger.level.*;
-import grupo12.Logger.level.Error;
+import grupo12.Logger.level.Level;
 import grupo12.Logger.output.Output;
 import grupo12.Logger.filter.Filter;
 
@@ -27,7 +26,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param message to log.
 	 */
 	public void trace(String message) {
-		logger.log(message, new Trace(), null);
+		logger.log(message, Level.TRACE, null);
 	}
 
 	/**
@@ -36,7 +35,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param message to log.
 	 */
 	public void debug(String message) {
-		logger.log(message, new Debug(), null);
+		logger.log(message, Level.DEBUG, null);
 	}
 
 	/**
@@ -45,7 +44,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param message to log.
 	 */
 	public void info(String message) {
-		logger.log(message, new Info(), null);
+		logger.log(message, Level.INFO, null);
 	}
 	
 	/**
@@ -54,7 +53,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param message to log.
 	 */
 	public void warn(String message) {
-		logger.log(message, new Warning(), null);
+		logger.log(message, Level.WARNING, null);
 	}
 	
 	/**
@@ -63,7 +62,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param message to log.
 	 */
 	public void error(String message) {
-		logger.log(message, new Error(), null);
+		logger.log(message, Level.ERROR, null);
 	}
 	
 	/**
@@ -72,7 +71,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param message to log.
 	 */
 	public void fatal(String message) {
-		logger.log(message, new Fatal(), null);
+		logger.log(message, Level.FATAL, null);
 	}
 	
 	
@@ -83,7 +82,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param exception to log.
 	 */
 	public void trace(String message, Throwable exception) {
-		logger.log(message, new Trace(), exception);
+		logger.log(message, Level.TRACE, exception);
 	}
 
 	/**
@@ -93,7 +92,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param exception to log.
 	 */
 	public void debug(String message, Throwable exception) {
-		logger.log(message, new Debug(), exception);
+		logger.log(message, Level.DEBUG, exception);
 	}
 
 	/**
@@ -103,7 +102,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param exception to log.
 	 */
 	public void info(String message, Throwable exception) {
-		logger.log(message, new Info(), exception);
+		logger.log(message, Level.INFO, exception);
 	}
 	
 	/**
@@ -113,7 +112,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param exception to log.
 	 */
 	public void warn(String message, Throwable exception) {
-		logger.log(message, new Warning(), exception);
+		logger.log(message, Level.WARNING, exception);
 	}
 	
 	/**
@@ -123,7 +122,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param exception to log.
 	 */
 	public void error(String message, Throwable exception) {
-		logger.log(message, new Error(), exception);
+		logger.log(message, Level.ERROR, exception);
 	}
 	
 	/**
@@ -133,7 +132,7 @@ public class Logger { // TODO: falta un implements para ser completamenete un ad
 	 * @param exception to log.
 	 */
 	public void fatal(String message, Throwable exception) {
-		logger.log(message, new Fatal(), exception);
+		logger.log(message, Level.FATAL, exception);
 	}
 	
 	/**
