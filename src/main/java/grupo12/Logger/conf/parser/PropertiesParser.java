@@ -5,6 +5,8 @@ import grupo12.Logger.conf.Configuration;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -47,7 +49,9 @@ public class PropertiesParser implements Parser {
 	public boolean init() {
 		String getFile;
 		try {
-			getFile = this.getClass().getResource("/" + file).getFile();
+			URL url = this.getClass().getResource("/" + file);
+			URI uri = new URI(url.toString());
+			getFile = uri.getPath();
 		} catch (Exception e) {
 			return false;
 		}
