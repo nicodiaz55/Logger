@@ -5,6 +5,8 @@ import grupo12.Logger.conf.Configuration;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.w3c.dom.*;
@@ -39,8 +41,12 @@ public class XMLParser implements Parser {
 		doc.getDocumentElement().normalize();
 		
 		// Get every level:
-		// TODO
-				
+		NodeList levels = doc.getElementsByTagName("levels");
+		Element levelElement = (Element) levels.item(0);
+		NodeList textLevelList = levelElement.getChildNodes();
+		String parsedLevels = ((Node) textLevelList.item(0)).getNodeValue().trim();
+		
+		
 		// Get every logger:
 		NodeList loggers = doc.getElementsByTagName("logger");
 		int totalUsers = loggers.getLength();
@@ -56,12 +62,7 @@ public class XMLParser implements Parser {
                 Element loggerNameElement = (Element) loggerNameList.item(0);
                 NodeList textLoggerNameList = loggerNameElement.getChildNodes();
                 aConfiguration.setName(((Node) textLoggerNameList.item(0)).getNodeValue().trim());
-                
-                NodeList levelList = confElement.getElementsByTagName("level");
-        		Element levelElement = (Element) levelList.item(0);
-        		NodeList textLevelList = levelElement.getChildNodes();
-        		aConfiguration.setLevel(((Node) textLevelList.item(0)).getNodeValue().trim());
-        		
+                                   		
         		NodeList filterList = confElement.getElementsByTagName("filter");
         		Element filterElement = (Element) filterList.item(0);
         		NodeList textFilterList = filterElement.getChildNodes();
@@ -71,6 +72,11 @@ public class XMLParser implements Parser {
             	Element outputsElement = (Element) outputsList.item(0);
             	NodeList textOutputsList = outputsElement.getChildNodes();
             	int totalOutputs = textOutputsList.getLength();
+            	StringBuilder appendedOutputs = new StringBuilder();
+            	StringBuilder appendedSeparators = new StringBuilder();
+            	StringBuilder appendedFormatters = new StringBuilder();
+
+            	
             	for (int l = 0; l < totalOutputs; l++) {
             		Node outputNode = textOutputsList.item(l);
                     if (outputNode.getNodeType() == Node.ELEMENT_NODE) {	
@@ -78,21 +84,27 @@ public class XMLParser implements Parser {
                     		NodeList typeList = outputElement.getElementsByTagName("type");
                     		Element typeElement = (Element) typeList.item(0);
                     		NodeList textTypeList = typeElement.getChildNodes();
-                    		aConfiguration.addOutput(((Node) textTypeList.item(0)).getNodeValue().trim());
+                    		appendedOutputs.append(((Node) textTypeList.item(0)).getNodeValue().trim());
+                    		appendedOutputs.append(",");
                     		
                     		NodeList separatorList = outputElement.getElementsByTagName("separator");
                     		Element separatorElement = (Element) separatorList.item(0);
                     		NodeList textSeparatorList = separatorElement.getChildNodes();
-                    		aConfiguration.addSeparator(((Node) textSeparatorList.item(0)).getNodeValue().trim());
+                    		appendedSeparators.append(((Node) textSeparatorList.item(0)).getNodeValue().trim());
+                    		appendedSeparators.append(",");
 
                     		NodeList formatterList = outputElement.getElementsByTagName("formatter");
                     		Element formatterElement = (Element) formatterList.item(0);
                     		NodeList textFormatterList = formatterElement.getChildNodes();
-                    		aConfiguration.addFormatter(((Node) textFormatterList.item(0)).getNodeValue().trim());
-
+                    		appendedFormatters.append(((Node) textFormatterList.item(0)).getNodeValue().trim());
+                    		appendedFormatters.append(",");
                    		
                     }
             	}
+            	aConfiguration.setOutputs(appendedOutputs.toString());
+            	aConfiguration.setSeparators(appendedSeparators.toString());
+            	aConfiguration.setFormatters(appendedFormatters.toString());
+            	aConfiguration.setAvailableLevels(parsedLevels);
                 configurations.add(aConfiguration);
             }
 		}
