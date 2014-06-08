@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
 <Loggers>
+<levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
 <logger>
 	<name>Logger1</name>
 	<level>INFO</level>
+	<filter>REGEX1</filter>
 	<outputs>
 		<output>
 			<type>log1.txt</type>
@@ -26,6 +27,7 @@
 <logger>
 	<name>Logger2</name>
 	<level>INFO</level>
+	<filter>REGEX2</filter>
 	<outputs>
 		<output>
 			<type>log1.txt</type>

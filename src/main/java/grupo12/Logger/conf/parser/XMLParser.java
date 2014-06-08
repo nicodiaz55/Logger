@@ -5,7 +5,6 @@ import grupo12.Logger.conf.Configuration;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import java.util.List;
 
@@ -42,9 +41,9 @@ public class XMLParser implements Parser {
 		
 		// Get every level:
 		NodeList levels = doc.getElementsByTagName("levels");
-		Element levelElement = (Element) levels.item(0);
-		NodeList textLevelList = levelElement.getChildNodes();
-		String parsedLevels = ((Node) textLevelList.item(0)).getNodeValue().trim();
+		Element levelsElement = (Element) levels.item(0);
+		NodeList textLevelsList = levelsElement.getChildNodes();
+		String parsedLevels = ((Node) textLevelsList.item(0)).getNodeValue().trim();
 		
 		
 		// Get every logger:
@@ -63,6 +62,11 @@ public class XMLParser implements Parser {
                 NodeList textLoggerNameList = loggerNameElement.getChildNodes();
                 aConfiguration.setName(((Node) textLoggerNameList.item(0)).getNodeValue().trim());
                                    		
+                NodeList levelList = confElement.getElementsByTagName("level");
+        		Element levelElement = (Element) levelList.item(0);
+        		NodeList textLevelList = levelElement.getChildNodes();
+        		aConfiguration.setLevel(((Node) textLevelList.item(0)).getNodeValue().trim());
+                
         		NodeList filterList = confElement.getElementsByTagName("filter");
         		Element filterElement = (Element) filterList.item(0);
         		NodeList textFilterList = filterElement.getChildNodes();

@@ -1,6 +1,5 @@
 package grupo12.Logger.conf;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -122,18 +121,6 @@ public class Configuration {
 	}
 	
 	/**
-	 * If it exists, it adds a separator to the end of the separators array list
-	 * @param separator to be added
-	 */
-	public void addSeparator(String separator) {
-		if (this.separators == null) {
-			this.separators = new ArrayList<String>(Arrays.asList(separator.split(",")));
-		} else {
-			separators.add(separator);
-		}
-	}
-	
-	/**
 	 * Sets a list of outputs.
 	 * The outputs must be comma-separated.
 	 */
@@ -142,35 +129,11 @@ public class Configuration {
 	}
 	
 	/**
-	 * If it exists, it adds an output to the end of the outputs array list
-	 * @param output to be added
-	 */
-	public void addOutput(String output) {
-		if (this.outputs == null) {
-			this.outputs = new ArrayList<String>(Arrays.asList(output.split(",")));
-		} else {
-			outputs.add(output);
-		}
-	}
-	
-	/**
 	 * Sets a list of formatters.
 	 * The formatters must be comma-separated.
 	 */
 	public void setFormatters(String formatters) {
 		this.formatters = Arrays.asList(formatters.split(","));
-	}
-	
-	/**
-	 * If it exists, it adds a formatter to the end of the formatters array list
-	 * @param formatter to be added
-	 */
-	public void addFormatter(String formatter) {
-		if (this.formatters == null) {
-			this.formatters = new ArrayList<String>(Arrays.asList(formatter.split(",")));
-		} else {
-			formatters.add(formatter);
-		}
 	}
 	
 	public void configureAsDefault() {
@@ -212,13 +175,5 @@ public class Configuration {
 	
 	public void setAvailableLevels(String levels) {
 		availableLevels = Arrays.asList(levels.split(","));
-	}
-	
-	public void addAvailableLevel(String level) {
-		if (this.availableLevels == null) {
-			setAvailableLevels(level);
-		} else {
-			availableLevels .add(level);
-		}
 	}
 }

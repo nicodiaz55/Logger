@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
 <Loggers>
+<levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
 <logger>
 	<name>Logger</name>
 	<level>INFO</level>
+	<filter>REGEX1</filter>
 	<outputs>
 		<output>
 			<type>console</type>
