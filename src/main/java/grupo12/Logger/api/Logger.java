@@ -11,14 +11,13 @@ import grupo12.Logger.filter.Filter;
  * @author Grupo 12
  * @see    LoggerBuilder
  */
-public class Logger { // TODO: falta un implements para ser completamenete un adapter... y modificar otras clases.
+public class Logger {
 
 	private GenericLogger logger;
 	
 	public Logger(String name) {
 		logger = new GenericLogger(name);
 	}
-	
 	
 	/**
 	 * Logs a message with Trace priority.

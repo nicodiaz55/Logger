@@ -42,6 +42,9 @@ public class FileWriter implements Writer {
 		} catch (FileNotFoundException e) {
 			writer = null;
 			throw new NotInitializedException("Can't open the file " + filename);
+		} catch (NullPointerException e) {
+			writer = null;
+			throw new NotInitializedException("The file name passed is null");
 		}
 	}
 

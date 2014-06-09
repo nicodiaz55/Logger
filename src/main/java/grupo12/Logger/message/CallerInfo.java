@@ -26,6 +26,9 @@ public class CallerInfo {
 	 * @return the line number where log method was called
 	 */
 	public int getLineNumber() {
+		if (callerStackTraceElement == null) {
+			return 0;
+		}
 		return callerStackTraceElement.getLineNumber();
 	}
 	/**
@@ -41,6 +44,9 @@ public class CallerInfo {
 	 * @return the method name where log method was called
 	 */
 	public String getCallingMethodName() {
+		if (callerStackTraceElement == null) {
+			return "";
+		}
 		return callerStackTraceElement.getMethodName();
 	}
 	/**
@@ -55,6 +61,9 @@ public class CallerInfo {
 	 * @return the name of the file where log method was called
 	 */
 	public String getCallingFilename() {
+		if (callerStackTraceElement == null) {
+			return "";
+		}
 		return callerStackTraceElement.getFileName();
 	}
 

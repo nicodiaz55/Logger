@@ -84,10 +84,13 @@ public class Example {
 		Writer writer = new ConsoleWriter();
 		
 		// Finally, we need to add the Output to our Logger:
-		Output output = new Output(writer, formatter);
-		logger.addOutput(output);
+		Output output = new Output();
+		output.setWriter(writer);
+		output.setFormatter(formatter);
+		
 		// We can add as many outputs as we wish, each with different levels and formats.
 		// We recommend to use the configuration file, however. 
+		logger.addOutput(output);
 		
 		// We must init the logger:
 		logger.init();

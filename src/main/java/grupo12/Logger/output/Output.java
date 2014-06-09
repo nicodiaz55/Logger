@@ -22,9 +22,9 @@ public class Output {
 	 * @param writer implementation. Could be a {@link ConsoleWriter} or a {@link grupo12.Logger.output.FileWriter FileWriter}.
 	 * @param formatter to format the messages.
 	 */
-	public Output(Writer writer, Formatter formatter) {
-		setOutput(writer);
-		setFormatter(formatter);
+	public Output() {
+		writer = null;
+		formatter = null;
 	}
 	
 	/**
@@ -32,18 +32,21 @@ public class Output {
 	 * 
 	 * @param formatter to set.
 	 */
-	private void setFormatter(Formatter formatter) {
+	public void setFormatter(Formatter formatter) {
 		this.formatter = formatter;
 	}
 	
 	/**
 	 * Sets the output {@link grupo12.Logger.output.Writer Writer}.
 	 * 
-	 * @param output ({@link grupo12.Logger.output.Writer Writer}) to set.
+	 * @param outputWriter ({@link grupo12.Logger.output.Writer Writer}) to set.
 	 */
-	public void setOutput(Writer output) {
+	public void setWriter(Writer outputWriter) {
+		if (writer != null) {
+			writer.end();
+		}
 		logging = false;
-		writer = output;
+		writer = outputWriter;
 	}
 	
 	/**
@@ -65,7 +68,7 @@ public class Output {
 	/**
 	 * Returns if the Output is logging.
 	 */
-	private boolean isOn() {
+	public boolean isOn() {
 		return logging;
 	}
 
@@ -75,6 +78,8 @@ public class Output {
 	public void end() {
 		if (writer != null) {
 			writer.end();
+			writer = null;
+			logging = false;
 		}
 	}
 

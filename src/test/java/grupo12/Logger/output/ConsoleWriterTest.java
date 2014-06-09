@@ -23,17 +23,13 @@ public class ConsoleWriterTest {
 	    System.setOut(null);
 	}
 	@Test
-	public void testWrite() {
+	public void testWrite() throws NotInitializedException {
 		Writer console = new ConsoleWriter();
 		String message = "test Message";
 		
-		try {
-			console.init();
-			console.write(message);
-			console.end();
-		} catch (NotInitializedException e) {
-			fail(e.getMessage());
-		}
+		console.init();
+		console.write(message);
+		console.end();
 		
 		assertEquals(message + "\n", outContent.toString());
 	}

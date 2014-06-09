@@ -66,7 +66,9 @@ public class LoggerBuilder {
 		int i = 0;
 		for (Writer writer : writers) {
 			Formatter formatter = formatterFactory.getFormatter(confFormatters.get(i), confSeparators.get(i));
-			Output manager = new Output(writer, formatter);
+			Output manager = new Output();
+			manager.setFormatter(formatter);
+			manager.setWriter(writer);
 			logger.addOutput(manager);
 			i++;
 		}

@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +22,18 @@ public class FileWriterTest {
 	}
 	
 	@Test
+	public void nullFileName() {
+		FileWriter writer = new FileWriter(null); // bad file writer.
+		try {
+			writer.init();
+			fail("Exception should be throwed");
+		} catch (NotInitializedException e) {
+			assertFalse(writer.canWrite());
+			assertEquals("The file name passed is null", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void cantWriteIfNotIntialized() {		
 		assertFalse(writer.canWrite());
 	}
@@ -31,51 +45,32 @@ public class FileWriterTest {
 	}
 	
 	@Test
-	public void canWriteIfIntialized() {	
-		try {
-			writer.init();
-		} catch (NotInitializedException e) {
-			assertFalse(writer.canWrite());
-			fail(e.getMessage());
-		}
+	public void canWriteIfIntialized() throws NotInitializedException {	
+		writer.init();
 		
 		assertTrue(writer.canWrite());
 		
 		writer.end();
 		
 		File file = new File(filetest);
-		if (file.exists()) {
-			file.delete();
-		}
+		file.delete();
 	}	
 
 	@Test
-	public void fileExistsAfterIntialized() {	
-		try {
-			writer.init();
-		} catch (NotInitializedException e) {
-			assertFalse(writer.canWrite());
-			fail(e.getMessage());
-		}
+	public void fileExistsAfterIntialized() throws NotInitializedException {	
+		writer.init();
 		
 		File file = new File(filetest);
 		assertTrue(file.exists());
 		
 		writer.end();
 		
-		if (file.exists()) {
-			file.delete();
-		}
+		file.delete();
 	}
 	
 	@Test
-	public void cantWriteAfterEnd() {	
-		try {
-			writer.init();
-		} catch (NotInitializedException e) {
-			assertFalse(writer.canWrite());
-			fail(e.getMessage());
-		}
+	public void cantWriteAfterEnd() throws NotInitializedException {	
+		writer.init();
 		
 		writer.end();
 		assertFalse(writer.canWrite());
@@ -94,14 +89,8 @@ public class FileWriterTest {
 	}	
 	
 	@Test
-	public void writeAString() throws IOException {
-		try {
-			writer.init();
-		} catch (NotInitializedException e) {
-			assertFalse(writer.canWrite());
-			fail(e.getMessage());
-		}
-
+	public void writeAString() throws IOException, NotInitializedException {
+		writer.init();
 		assertTrue(writer.canWrite());
 
 		String message = "message";
