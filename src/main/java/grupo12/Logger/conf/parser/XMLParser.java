@@ -55,15 +55,14 @@ public class XMLParser implements Parser {
 		for (int s = 0; s < totalUsers; s++) {
 			Node confNode = loggers.item(s);
             if (confNode.getNodeType() == Node.ELEMENT_NODE) {
-            	
-            	
-                configurationList.add(createConfiguration(parsedLevels, confNode));
+            	Configuration aConfiguration = createConfiguration(parsedLevels, confNode);
+                configurationList.add(aConfiguration);
             }
 		}
 		return configurationList;
 	}
 
-	private Configuration createConfiguration(String parsedLevels, Node confNode){
+	private Configuration createConfiguration(String parsedLevels, Node confNode) {
 		
 		Element confElement = (Element) confNode;
     	Configuration aConfiguration = new Configuration();
@@ -88,11 +87,11 @@ public class XMLParser implements Parser {
     	NodeList outputsList = confElement.getElementsByTagName("outputs");
     	Element outputsElement = (Element) outputsList.item(0);
     	NodeList textOutputsList = outputsElement.getChildNodes();
+    	
     	int totalOutputs = textOutputsList.getLength();
     	StringBuilder appendedOutputs = new StringBuilder();
     	StringBuilder appendedSeparators = new StringBuilder();
     	StringBuilder appendedFormatters = new StringBuilder();
-
     	
     	for (int l = 0; l < totalOutputs; l++) {
     		Node outputNode = textOutputsList.item(l);
@@ -115,7 +114,6 @@ public class XMLParser implements Parser {
             		NodeList textFormatterList = formatterElement.getChildNodes();
             		appendedFormatters.append(((Node) textFormatterList.item(0)).getNodeValue().trim());
             		appendedFormatters.append(",");
-           		
             }
     	}
     	aConfiguration.setOutputs(appendedOutputs.toString());
@@ -132,7 +130,7 @@ public class XMLParser implements Parser {
 			getFile = this.getClass().getResource("/" + file).toURI().getPath();
 		} catch (Exception e) {
 			ready = false;
-			return false;
+			return false; // empty
 		}
 		
 		InputStream input = null;
@@ -162,7 +160,6 @@ public class XMLParser implements Parser {
 				}
 			}
 		}
-		
 		ready = true;
 		return true;
 	}
@@ -171,6 +168,4 @@ public class XMLParser implements Parser {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	
-
 }

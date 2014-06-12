@@ -16,9 +16,9 @@ public class ParserFactory {
 	public Parser getParser(String file) {
 		String fileType = file.substring(file.lastIndexOf("."));
 		switch (fileType) {
-		case "xml":
+		case ".xml":
 			return new XMLParser(file);
-		case "properties":
+		case ".properties":
 			return new PropertiesParser(file);
 		default:
 			return null;
