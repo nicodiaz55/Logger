@@ -173,7 +173,7 @@ public class OutputTest {
 	
 	
 	// TODO: hacer que este test funcione, de seguro tiene que ver con la excepcion.
-/*	private static StackTraceElement getCallingStackTraceElement() {
+	private static StackTraceElement getCallingStackTraceElement() {
 		StackTraceElement[] st = Thread.currentThread().getStackTrace();
 		StackTraceElement callingSTE = st[5];
 		return callingSTE;
@@ -190,7 +190,7 @@ public class OutputTest {
 		output.log(new LogMessage(Level.INFO, "message", getCallingStackTraceElement(), new Exception(), "logger"));
 		assertEquals("INFO - message\n", outContent.toString());
 		System.setOut(null);
-	}*/
+	}
 	
 	@Test
 	public void wontLogIfTurnedOff() {

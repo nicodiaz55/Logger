@@ -15,19 +15,33 @@ public class ConfigurationParser {
 	public final String defaultXMLFile = "logger-config.xml";
 	
 	// Parsers:
-	private static final String propertiesParser = "Properties";
-	private static final String xmlParser = "XML";
+	private static final String propertiesParser = "properties";
+	private static final String xmlParser = "xml";
 	
 	private List<Configuration> configurations; 
 	private Map<String, Parser> parsers;
 	
-	public ConfigurationParser() {
-		configurations = new ArrayList<Configuration>();
+	public ConfigurationParser(String file) {
+		configurations = null;
 		parsers = new LinkedHashMap<String, Parser>(); // keeps the order by insertion of the keys when iterated
-		addParsers();
+		if (file == null) {
+			addDefaultParsers();
+		} else {
+			addCustomParser(file);
+		}
+		
 	}
 	
-	private void addParsers() {
+	private void addCustomParser(String file) {
+		ParserFactory factory = new ParserFactory();
+		Parser parser = factory.getParser(file);
+		if (parser != null) {
+			String fileType = file.substring(file.lastIndexOf("."));
+			parsers.put(fileType, parser);
+		}
+	}
+
+	private void addDefaultParsers() {
 		// We first search for the Properties File:
 		parsers.put(propertiesParser, new PropertiesParser(defaultPropertiesFile));
 		// Then the XML Parser:
@@ -35,7 +49,7 @@ public class ConfigurationParser {
 	}
 	
 	public List<Configuration> getConfigurations() {
-		loadConfiguration();
+		configurations = loadConfiguration();
 		addDefaultConfiguration(); // We always add it
 		return configurations;
 	}
@@ -46,15 +60,15 @@ public class ConfigurationParser {
 		configurations.add(defconf);	
 	}
 
-	private void loadConfiguration() {
+	private List<Configuration> loadConfiguration() {
 		// The LinkedHashMap keeps the order of insertion defined in the method addParsers():
 		for (Parser parser : parsers.values()) {
 			// If the configuration file exists:
 			if (parser.init()) {
-				parser.loadConfigurations(configurations);
-				return;
+				return parser.loadConfigurations();
 			}
 		}
+		return new ArrayList<Configuration>();
 	}
 	
 	public void setPropertiesFile(String file) {

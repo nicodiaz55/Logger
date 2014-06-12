@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -33,11 +34,8 @@ public class PropertiesParser implements Parser {
 	 * @param a {@link Configuration} List to edit
 	 */
 	@Override
-	public void loadConfigurations(List<Configuration> configurations) {
-		if (!canParse()) {
-			return;
-		}
-		createConfigurations(conf, configurations);
+	public List<Configuration> loadConfigurations() {
+		return createConfigurations(conf);
 	}
 
 	/**
@@ -82,7 +80,13 @@ public class PropertiesParser implements Parser {
 	 * Creates a Configuration instance for each {@link grupo12.Logger.api.Logger Logger} named in the properties file, and
 	 * stores them in an ArrayList. 
 	 */
-	private void createConfigurations(Properties conf, List<Configuration> configurations) {
+	private List<Configuration> createConfigurations(Properties configuration) {
+		List<Configuration> configurationList = new ArrayList<Configuration>();
+		
+		if (!canParse()) {
+			return configurationList; // empty
+		}
+		
 		// We get each level available:
 		String levels = conf.getProperty("levels");
 		
@@ -110,9 +114,10 @@ public class PropertiesParser implements Parser {
 				aConfiguration.setOutputs(outputs);
 				aConfiguration.setName(name);
 				
-				configurations.add(aConfiguration);
+				configurationList.add(aConfiguration);
 			}
-		}	
+		}
+		return configurationList;
 	}
 
 	@Override

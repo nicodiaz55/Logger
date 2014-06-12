@@ -21,16 +21,27 @@ public class Example {
 
 	// Recommended way to create a Logger:
 	private static void createLoggerFromConfigurationFile() {
-		// With a configuration file we can configure easyly a lot of parameters of our Loggers
-		// For example, we can also define our custom Level names and ordering.
+		
+		// We need a LoggerFactory to start:
 		LoggerFactory factory = LoggerFactory.getInstance();
+		
+		/* With a configuration file we can configure easyly a lot of parameters of our Loggers
+		 * For example, we can also define our custom Level names and ordering.
+		 * If we want to load our custom configuration file, simply call this method:
+		 */
+		//factory.setConfigurationFile("myfile.xml");
+		
+		/* We now support xml and properties files. Please specify what file type it's your configuration
+		 * file like this: myfile.xml or myfile.properties
+		 */ 
+		
+		/* If you don't set a configuration file, or it can be loaded, we load a default configuration,
+		 * specified in the file logger-config.properties or logger-config.xml (if they exists).
+		 */
 		
 		Logger logger = factory.getLogger(); // Preloaded default logger;
 		
-		// If we write our logger-config.properties or logger-config.xml, we can load
-		// custom loggers. If the name of the logger doesn't exists, or no configuration
-		// file is provided, we get default loggers with this method:
-		
+		// We can get a default logger with this method, always:		
 		//Logger logger = factory.getLogger("MyLogger");
 		
 		// We need to init the logger:
@@ -73,7 +84,7 @@ public class Example {
 		Logger logger = new Logger("MyLogger");
 		
 		// We need a Level for our logger:
-		logger.setLevel(Level.INFO); // Only logs info, warning, error and fatal messages.
+		logger.setLevel(Level.WARNING); // Only logs warning, error and fatal messages.
 		// We can only use the Levels TRACE, DEBUG, INFO, WARNING, ERROR and FATAL in this mode.
 		
 		// We need a Formatter for our message:

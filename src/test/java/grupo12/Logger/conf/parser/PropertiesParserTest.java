@@ -3,7 +3,6 @@ package grupo12.Logger.conf.parser;
 import static org.junit.Assert.*;
 import grupo12.Logger.conf.Configuration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -16,9 +15,8 @@ public class PropertiesParserTest {
 	private void loadConf(String file) {
 		// Setup:
 		parser = new PropertiesParser(file);
-		configurations = new ArrayList<Configuration>();
 		parser.init();
-		parser.loadConfigurations(configurations);
+		configurations = parser.loadConfigurations();
 	}
 
 	@Test
@@ -30,10 +28,9 @@ public class PropertiesParserTest {
 
 	@Test
 	public void cantLoadConfigurationIfFileDoesntExists() {
-		configurations = new ArrayList<Configuration>();
 		parser = new PropertiesParser("");
 		parser.init();
-		parser.loadConfigurations(configurations);
+		configurations = parser.loadConfigurations();
 		assertTrue(configurations.isEmpty());
 	}
 	

@@ -10,7 +10,7 @@ public interface Parser {
 
 	public boolean canParse();
 	
-	public void loadConfigurations(List<Configuration> configurations);
+	public List<Configuration> loadConfigurations();
 
 	public void setFile(String file);
 }

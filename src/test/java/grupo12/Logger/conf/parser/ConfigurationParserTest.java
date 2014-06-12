@@ -17,18 +17,17 @@ public class ConfigurationParserTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		parser = new ConfigurationParser();
+		parser = new ConfigurationParser(null); // Default parser
 	}
 	
 	@Test
 	public void testGetConfigurationsWithExistingPropertiesFile() {
 		// We test if the ConfigurationParser parsed the default properties file:
-		List<Configuration> configurations = parser.getConfigurations();
-		List<Configuration> expected = new ArrayList<Configuration>();
+		List<Configuration> configurations = parser.getConfigurations(); 
 		
 		Parser propParser = new PropertiesParser(parser.defaultPropertiesFile);
 		propParser.init();
-		propParser.loadConfigurations(expected);
+		List<Configuration> expected = propParser.loadConfigurations();
 		
 		// Don't forget the default configuration:
 		Configuration def = new Configuration();
@@ -46,11 +45,10 @@ public class ConfigurationParserTest {
 		parser.setPropertiesFile("");
 		
 		List<Configuration> configurations = parser.getConfigurations();
-		List<Configuration> expected = new ArrayList<Configuration>();
 		
 		Parser xmlParser = new XMLParser(parser.defaultXMLFile);
 		xmlParser.init();
-		xmlParser.loadConfigurations(expected);
+		List<Configuration> expected = xmlParser.loadConfigurations();
 		
 		// Don't forget the default configuration:
 		Configuration def = new Configuration();

@@ -16,9 +16,8 @@ public class XMLParserTest {
 	private void loadConf(String file) {
 		// Setup:
 		parser = new XMLParser(file);
-		configurations = new ArrayList<Configuration>();
 		parser.init();
-		parser.loadConfigurations(configurations);
+		configurations = parser.loadConfigurations();
 	}
 	
 	@Test
@@ -33,7 +32,7 @@ public class XMLParserTest {
 		configurations = new ArrayList<Configuration>();
 		parser = new XMLParser("");
 		parser.init();
-		parser.loadConfigurations(configurations);
+		configurations = parser.loadConfigurations();
 		assertTrue(configurations.isEmpty());
 	}
 	

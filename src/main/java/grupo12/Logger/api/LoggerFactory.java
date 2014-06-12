@@ -35,24 +35,29 @@ public class LoggerFactory{
 
 	private Hashtable<String, Logger> loggers;
 	private LoggerBuilder builder;
-
+	private boolean loaded;
+	
 	/**
 	 * Creates a new Logger Factory.
 	 */
 	private LoggerFactory() {
 		loggers = new Hashtable<String, Logger>();
 		builder = new LoggerBuilder();
-		loadConfiguration();
+		loaded = false;
 	}
 
+	
+	
 	/**
 	 * Initializes the factory. Search and load the
 	 * configuration files (via ConfigurationParser)
 	 * and then stores the Loggers.
 	 */
-	private void loadConfiguration() {
+	public void setConfigurationFile(String file) {
+		//TODO: usar file
+		
 		// Get the configurations:
-		ConfigurationParser parser = new ConfigurationParser();
+		ConfigurationParser parser = new ConfigurationParser(file);
 		List<Configuration> parsedConfigurations = parser.getConfigurations();
 
 		// Construct every logger:
@@ -60,6 +65,7 @@ public class LoggerFactory{
 			Logger log = builder.build(conf);
 			loggers.put(log.getName(), log);
 		}
+		loaded = true;
 	}
 
 	/**
@@ -68,7 +74,7 @@ public class LoggerFactory{
 	 * @return a Logger with default configuration, named "Logger"
 	 */
 	public Logger getLogger() {
-		return loggers.get(DEFAULTNAME);
+		return getLogger(DEFAULTNAME);
 	}
 	
 	/**
@@ -82,6 +88,10 @@ public class LoggerFactory{
 	 * @return the Logger
 	 */
 	public Logger getLogger(String name) {
+		if (!loaded) {
+			setConfigurationFile(null);
+		}
+		
 		Logger log = loggers.get(name);
 
 		// Returns a new default Logger:

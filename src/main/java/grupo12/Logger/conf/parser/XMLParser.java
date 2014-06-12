@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.*;
@@ -33,9 +34,11 @@ public class XMLParser implements Parser {
 	}
 	
 	@Override
-	public void loadConfigurations(List<Configuration> configurations) {
+	public List<Configuration> loadConfigurations() {
+		List<Configuration> configurationList = new ArrayList<Configuration>();
+		
 		if (!canParse()) {
-			return;
+			return configurationList; // empty
 		}
 		
 		doc.getDocumentElement().normalize();
@@ -110,9 +113,10 @@ public class XMLParser implements Parser {
             	aConfiguration.setSeparators(appendedSeparators.toString());
             	aConfiguration.setFormatters(appendedFormatters.toString());
             	aConfiguration.setAvailableLevels(parsedLevels);
-                configurations.add(aConfiguration);
+                configurationList.add(aConfiguration);
             }
 		}
+		return configurationList;
 	}
 
 	@Override
