@@ -149,25 +149,36 @@ public class Configuration {
 	
 	@Override
 	public boolean equals(Object o) {
+		if (!(o instanceof Configuration)) {
+			return false;
+		}
+		
 		Configuration other = (Configuration) o;
 		
-		if (!name.equals(other.name))
+		if (!name.equals(other.name)) {
 			return false;
-		if (!level.equals(other.level))
+		}
+		if (!level.equals(other.level)) {
 			return false;
-		if (!filter.equals(other.filter))
+		}
+		if (!filter.equals(other.filter)) {
 			return false;
-		if (!formatters.equals(other.formatters))
+		}
+		if (!formatters.equals(other.formatters)) {
 			return false;
-		if (!separators.equals(other.separators))
+		}
+		if (!separators.equals(other.separators)) {
 			return false;
-		if (!outputs.equals(other.outputs))
+		}
+		if (!outputs.equals(other.outputs)) {
 			return false;
-		if (!availableLevels.equals(other.availableLevels))
+		}
+		if (!availableLevels.equals(other.availableLevels)) {
 			return false;
-		
-		return true;
-		
+		}
+		else {
+			return true;
+		}
 	}
 
 	public List<String> getAvailableLevels() {

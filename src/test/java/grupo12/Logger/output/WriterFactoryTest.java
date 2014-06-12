@@ -11,7 +11,16 @@ public class WriterFactoryTest {
 		WriterFactory factory = new WriterFactory();
 		
 		assertEquals(new ConsoleWriter(), factory.getWriter("console"));
-		assertEquals(new FileWriter("asd"), factory.getWriter("asd"));
+		assertEquals(new FileWriter("foo"), factory.getWriter("foo"));
+	}
+	
+	@Test
+	public void equalsTesting() {
+		assertTrue(new ConsoleWriter().equals(new ConsoleWriter()));
+		assertFalse(new ConsoleWriter().equals(new FileWriter("foo")));
+		assertFalse(new FileWriter("foo").equals(new ConsoleWriter()));
+		assertFalse(new FileWriter("foo").equals(new FileWriter("bar")));
+		assertTrue(new FileWriter("foo").equals(new FileWriter("foo")));
 	}
 
 }

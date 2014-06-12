@@ -26,6 +26,26 @@ public class LevelTest {
 	}
 
 	@Test
+	public void equalsTesting() {
+		assertTrue(Level.INFO.equals(Level.INFO));
+		assertFalse(Level.INFO.equals(Level.ERROR));
+		
+		// Tricky tests:
+		Level sameName = new Level("INFO", 100000);
+		assertFalse(Level.INFO.equals(sameName));
+		
+		Level samePriority = new Level("foo", 1); 
+		assertFalse(Level.DEBUG.equals(samePriority));
+		
+		Level same = new Level("DEBUG", 1);
+		assertTrue(Level.DEBUG.equals(same));
+		
+		// Other object:
+		Object foo = new Object();
+		assertFalse(Level.INFO.equals(foo));
+	}
+	
+	@Test
 	public void traceTesting() {
 		assertEquals("TRACE", trace.toString());
 		assertTrue(trace.majorThan(trace));

@@ -13,19 +13,36 @@ import org.junit.Test;
 
 public class ConfigurationParserTest {
 
-	ConfigurationParser parser;
+	ConfigurationParser defaultParser;
 	
 	@Before
 	public void setUp() throws Exception {
-		parser = new ConfigurationParser(null); // Default parser
+		defaultParser = new ConfigurationParser(null); // Default parser
 	}
 	
 	@Test
-	public void testGetConfigurationsWithExistingPropertiesFile() {
-		// We test if the ConfigurationParser parsed the default properties file:
-		List<Configuration> configurations = parser.getConfigurations(); 
+	public void notSupportedFile() {
+		ConfigurationParser customParser = new ConfigurationParser("file.txt");
 		
-		Parser propParser = new PropertiesParser(parser.defaultPropertiesFile);
+		List<Configuration> configurations = customParser.getConfigurations(); 
+		
+		// Whe should get the default configuration only:
+		List<Configuration> expected = new ArrayList<Configuration>();
+		Configuration def = new Configuration();
+		def.configureAsDefault();
+		expected.add(def);
+		
+		assertEquals(expected, configurations);
+	}
+	
+	@Test
+	public void testGetCustomConfigurationsWithPropertiesFile() {
+		ConfigurationParser customParser = new ConfigurationParser(ConfigurationParser.defaultPropertiesFile);
+		
+		// We test if the ConfigurationParser parsed the default properties file:
+		List<Configuration> configurations = customParser.getConfigurations(); 
+		
+		Parser propParser = new PropertiesParser(ConfigurationParser.defaultPropertiesFile);
 		propParser.init();
 		List<Configuration> expected = propParser.loadConfigurations();
 		
@@ -36,17 +53,15 @@ public class ConfigurationParserTest {
 		
 		assertEquals(expected, configurations);
 	}
-
+	
 	@Test
-	public void testGetConfigurationsWithExistingXMLFile() {
-		// We test if the ConfigurationParser parsed the default xml file:
+	public void testGetCustomConfigurationsWithXMLFile() {
+		ConfigurationParser customParser = new ConfigurationParser(ConfigurationParser.defaultXMLFile);
 		
-		// We set a properties file that doesn't exists first, so it looks for the xml instead:
-		parser.setPropertiesFile("");
+		// We test if the ConfigurationParser parsed the default properties file:
+		List<Configuration> configurations = customParser.getConfigurations(); 
 		
-		List<Configuration> configurations = parser.getConfigurations();
-		
-		Parser xmlParser = new XMLParser(parser.defaultXMLFile);
+		Parser xmlParser = new XMLParser(ConfigurationParser.defaultXMLFile);
 		xmlParser.init();
 		List<Configuration> expected = xmlParser.loadConfigurations();
 		
@@ -59,15 +74,53 @@ public class ConfigurationParserTest {
 	}
 	
 	@Test
-	public void testGetConfigurationsWithoutConfigurationFiles() {
+	public void testGetDefaultConfigurationsWithExistingPropertiesFile() {
+		// We test if the ConfigurationParser parsed the default properties file:
+		List<Configuration> configurations = defaultParser.getConfigurations(); 
+		
+		Parser propParser = new PropertiesParser(ConfigurationParser.defaultPropertiesFile);
+		propParser.init();
+		List<Configuration> expected = propParser.loadConfigurations();
+		
+		// Don't forget the default configuration:
+		Configuration def = new Configuration();
+		def.configureAsDefault();
+		expected.add(def);
+		
+		assertEquals(expected, configurations);
+	}
+
+	@Test
+	public void testGetDefaultConfigurationsWithExistingXMLFile() {
+		// We test if the ConfigurationParser parsed the default xml file:
+		
+		// We set a properties file that doesn't exists first, so it looks for the xml instead:
+		defaultParser.setPropertiesFile("");
+		
+		List<Configuration> configurations = defaultParser.getConfigurations();
+		
+		Parser xmlParser = new XMLParser(ConfigurationParser.defaultXMLFile);
+		xmlParser.init();
+		List<Configuration> expected = xmlParser.loadConfigurations();
+		
+		// Don't forget the default configuration:
+		Configuration def = new Configuration();
+		def.configureAsDefault();
+		expected.add(def);
+		
+		assertEquals(expected, configurations);
+	}
+	
+	@Test
+	public void testGetDefaultConfigurationsWithoutConfigurationFiles() {
 		// We test if the ConfigurationParser parsed the default configuration:
 		
 		// We set a properties file that doesn't exists first, so it looks for the xml instead:
-		parser.setPropertiesFile("");
+		defaultParser.setPropertiesFile("");
 		// And also a xml file that doesn't exists, so it loads the default configuration:
-		parser.setXMLFile("");
+		defaultParser.setXMLFile("");
 		
-		List<Configuration> configurations = parser.getConfigurations();
+		List<Configuration> configurations = defaultParser.getConfigurations();
 		List<Configuration> expected = new ArrayList<Configuration>();
 		
 		// The default configuration:

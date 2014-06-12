@@ -39,4 +39,11 @@ public class FormatterTest {
 		
 		assertEquals(new JsonFormatter(), formatter);
 	}
+	
+	@Test
+	public void equalsTesting() {
+		Object foo = new Object();
+		Formatter formatter = new Pattern("%d{HH:mm:ss}", "-");
+		assertFalse(formatter.equals(foo));
+	}
 }

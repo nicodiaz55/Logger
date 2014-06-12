@@ -50,7 +50,12 @@ public class Pattern implements Formatter {
 
 	@Override
 	public boolean equals(Object anObject) {
-		return anObject instanceof Pattern;
+		if (!(anObject instanceof Pattern)) {
+			return false;
+		} else {
+			Pattern other = (Pattern) anObject;
+			return format.equals(other.format);
+		}
 	}
 	
 }

@@ -11,8 +11,8 @@ import grupo12.Logger.conf.parser.*;
 public class ConfigurationParser {
 	
 	// Default properties and xml configuration files:
-	public final String defaultPropertiesFile = "logger-config.properties";
-	public final String defaultXMLFile = "logger-config.xml";
+	public final static String defaultPropertiesFile = "logger-config.properties";
+	public final static String defaultXMLFile = "logger-config.xml";
 	
 	// Parsers:
 	private static final String propertiesParser = "properties";

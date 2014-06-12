@@ -3,6 +3,7 @@ package grupo12.Logger.conf;
 import static org.junit.Assert.*;
 import grupo12.Logger.conf.Configuration;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -69,6 +70,41 @@ public class ConfigurationTest {
 		conf2.setOutputs("2");
 		
 		assertFalse(conf1.equals(conf2));
+		
+		conf1.setName("");
+		conf2.setName("");
+		conf1.setLevel("");
+		conf2.setLevel("");
+		conf1.setFormatters("");
+		conf2.setFormatters("");
+		conf1.setSeparators("");
+		conf2.setSeparators("");
+		conf1.setOutputs("");
+		conf2.setOutputs("");
+		conf1.setFilter("1");
+		conf2.setFilter("2");
+		
+		assertFalse(conf1.equals(conf2));
+		
+		conf1.setName("");
+		conf2.setName("");
+		conf1.setLevel("");
+		conf2.setLevel("");
+		conf1.setFormatters("");
+		conf2.setFormatters("");
+		conf1.setSeparators("");
+		conf2.setSeparators("");
+		conf1.setOutputs("");
+		conf2.setOutputs("");
+		conf1.setFilter("");
+		conf2.setFilter("");
+		conf1.setAvailableLevels("1,2");
+		conf2.setAvailableLevels("2");
+		
+		assertFalse(conf1.equals(conf2));
+		
+		Object foo = new Object();
+		assertFalse(conf1.equals(foo));
 	}
 	
 	@Test
@@ -84,19 +120,28 @@ public class ConfigurationTest {
 		// Check level:
 		assertEquals(Configuration.defaultLevel, conf.getLevel());
 		
-		// Check message format:
+		// Check filter:
+		assertEquals(Configuration.defaultFilter, conf.getFilter());
+		
+		// Check formatters:
 		strings = conf.getFormatters();
 		assertEquals(1, strings.size());
 		assertTrue(strings.contains(Configuration.defaultFormatter));
 		
-		// Check separator:
+		// Check separators:
 		strings = conf.getSeparators();
 		assertEquals(1, strings.size());
 		assertTrue(strings.contains(Configuration.defaultSeparator));
 		
-		// Check output:
+		// Check outputs:
 		strings = conf.getOutputs();
 		assertEquals(1, strings.size());
 		assertTrue(strings.contains(Configuration.defaultOutput));
+		
+		// Check available levels:
+		strings = conf.getAvailableLevels();
+		assertEquals(6, strings.size());
+		List<String> expected = Arrays.asList(Configuration.defaultLevels.split(","));
+		assertEquals(expected, strings);
 	}
 }

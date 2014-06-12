@@ -58,7 +58,12 @@ public class FileWriter implements Writer {
 	
 	@Override
 	public boolean equals(Object anObject) {
-		return anObject instanceof FileWriter;
+		if (!(anObject instanceof FileWriter)) {
+			return false;
+		} else {
+			FileWriter other = (FileWriter) anObject;
+			return filename.equals(other.filename);
+		}
 	}
 
 }

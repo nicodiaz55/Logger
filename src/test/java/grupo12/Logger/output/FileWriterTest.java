@@ -76,9 +76,7 @@ public class FileWriterTest {
 		assertFalse(writer.canWrite());
 		
 		File file = new File(filetest);
-		if (file.exists()) {
-			file.delete();
-		}
+		file.delete();
 	}	
 
 	@Test
@@ -106,8 +104,6 @@ public class FileWriterTest {
 		
 		
 		File file = new File(filetest);
-		if (file.exists()) {
-			file.delete();
-		}
+		file.delete();
 	}
 }
