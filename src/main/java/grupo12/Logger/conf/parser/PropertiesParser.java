@@ -5,8 +5,6 @@ import grupo12.Logger.conf.Configuration;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +33,25 @@ public class PropertiesParser implements Parser {
 	 */
 	@Override
 	public List<Configuration> loadConfigurations() {
-		return createConfigurations(conf);
+		List<Configuration> configurationList = new ArrayList<Configuration>();
+		
+		if (!canParse()) {
+			return configurationList; // empty
+		}
+		
+		// Get each level available:
+		String levels = conf.getProperty("levels");
+		
+		// Get each name of the Loggers:
+		List<String> names = Arrays.asList(conf.getProperty("names").split(","));
+		
+		// Create a configuration for each name: 
+		for (String name : names) {
+			Configuration configuration = createConfiguration(name, levels);
+			configurationList.add(configuration);
+		}
+		
+		return configurationList;
 	}
 
 	/**
@@ -47,9 +63,7 @@ public class PropertiesParser implements Parser {
 	public boolean init() {
 		String getFile;
 		try {
-			URL url = this.getClass().getResource("/" + file);
-			URI uri = new URI(url.toString());
-			getFile = uri.getPath();
+			getFile = this.getClass().getResource("/" + file).toURI().getPath();
 		} catch (Exception e) {
 			return false;
 		}
@@ -77,47 +91,26 @@ public class PropertiesParser implements Parser {
 	}
 	
 	/**
-	 * Creates a Configuration instance for each {@link grupo12.Logger.api.Logger Logger} named in the properties file, and
-	 * stores them in an ArrayList. 
+	 * Creates a Configuration instance for each {@link grupo12.Logger.api.Logger Logger} name in the properties file
 	 */
-	private List<Configuration> createConfigurations(Properties configuration) {
-		List<Configuration> configurationList = new ArrayList<Configuration>();
-		
-		if (!canParse()) {
-			return configurationList; // empty
-		}
-		
-		// We get each level available:
-		String levels = conf.getProperty("levels");
-		
-		// We get each name of the Loggers:
-		List<String> names = Arrays.asList(conf.getProperty("names").split(","));
-		
-		// TODO: ver si el null (en asList) pasa:
-		if (names != null) {
-			String level, filter, formatters, separators, outputs;
+	private Configuration createConfiguration(String name, String levels) {
+		// Get the rest of its parameters:
+		String level = conf.getProperty(name + ".level", "");
+		String filter = conf.getProperty(name + ".filter", "");
+		String formatters = conf.getProperty(name + ".formatters", "");
+		String separators = conf.getProperty(name + ".separators", "");
+		String outputs = conf.getProperty(name + ".outputs", "");
 
-			// Create a configuration for each name (Logger):
-			for (String name : names) {
-				level = conf.getProperty(name + ".level", "");
-				filter = conf.getProperty(name + ".filter", "");
-				formatters = conf.getProperty(name + ".formatters", "");
-				separators = conf.getProperty(name + ".separators", "");
-				outputs = conf.getProperty(name + ".outputs", "");
-
-				Configuration aConfiguration = new Configuration();
-				aConfiguration.setAvailableLevels(levels);
-				aConfiguration.setLevel(level);
-				aConfiguration.setFilter(filter);
-				aConfiguration.setFormatters(formatters);
-				aConfiguration.setSeparators(separators);
-				aConfiguration.setOutputs(outputs);
-				aConfiguration.setName(name);
-				
-				configurationList.add(aConfiguration);
-			}
-		}
-		return configurationList;
+		Configuration configuration = new Configuration();
+		configuration.setName(name);
+		configuration.setAvailableLevels(levels);
+		configuration.setLevel(level);
+		configuration.setFilter(filter);
+		configuration.setFormatters(formatters);
+		configuration.setSeparators(separators);
+		configuration.setOutputs(outputs);
+							
+		return configuration;
 	}
 
 	@Override

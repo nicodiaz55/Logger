@@ -54,8 +54,6 @@ public class LoggerFactory{
 	 * and then stores the Loggers.
 	 */
 	public void setConfigurationFile(String file) {
-		//TODO: usar file
-		
 		// Get the configurations:
 		ConfigurationParser parser = new ConfigurationParser(file);
 		List<Configuration> parsedConfigurations = parser.getConfigurations();

@@ -5,8 +5,6 @@ import grupo12.Logger.conf.Configuration;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +31,7 @@ public class XMLParser implements Parser {
 		return ready;
 	}
 	
+	// TODO: este es un método muy largo, hay que refactorizarlo para que sea mas legible. (Ver el de Properties como guía)
 	@Override
 	public List<Configuration> loadConfigurations() {
 		List<Configuration> configurationList = new ArrayList<Configuration>();
@@ -123,9 +122,7 @@ public class XMLParser implements Parser {
 	public boolean init() {
 		String getFile;
 		try {
-			URL url = this.getClass().getResource("/" + file);
-			URI uri = new URI(url.toString());
-			getFile = uri.getPath();
+			getFile = this.getClass().getResource("/" + file).toURI().getPath();
 		} catch (Exception e) {
 			ready = false;
 			return false;
