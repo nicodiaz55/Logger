@@ -3,6 +3,7 @@ package grupo12.Logger;
 import java.io.IOException;
 
 import grupo12.Logger.api.Logger;
+import grupo12.Loggger.filter.RegexFilter;
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.api.LoggerFactory;
 import grupo12.Logger.format.Pattern;
@@ -94,7 +95,7 @@ public class Example {
 		// We need an output writer, in this case, the console:
 		Writer writer = new ConsoleWriter();
 		
-		// Finally, we need to add the Output to our Logger:
+		// We need to add the Output to our Logger:
 		Output output = new Output();
 		output.setWriter(writer);
 		output.setFormatter(formatter);
@@ -102,6 +103,12 @@ public class Example {
 		// We can add as many outputs as we wish, each with different levels and formats.
 		// We recommend to use the configuration file, however. 
 		logger.addOutput(output);
+	
+		/* Optionally, we can set a Filter to log only certain messages:
+		 * This step must be done after adding all the outputs.
+		 */
+		logger.setFilter(new RegexFilter(".*"));
+		// In this case, the regex is ".*", so all messages will be logged.
 		
 		// We must init the logger:
 		logger.init();

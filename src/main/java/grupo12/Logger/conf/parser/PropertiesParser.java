@@ -90,6 +90,7 @@ public class PropertiesParser implements Parser {
 		return true;
 	}
 	
+	// TODO: revisar que poner por default si getProperty falla (no esta en el archivo)
 	/**
 	 * Creates a Configuration instance for each {@link grupo12.Logger.api.Logger Logger} name in the properties file
 	 */

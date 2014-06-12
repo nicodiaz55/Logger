@@ -51,11 +51,7 @@ public class LoggerBuilder {
 		// Set its level:
 		Level level = levelFactory.getLevel(confLevel);
 		logger.setLevel(level);
-		
-		// Set its filter:
-				Filter filter = filterFactory.getFilter(confFilter);
-				logger.setFilter(filter);
-		
+			
 		// Create writers:
 		List<Writer> writers = new ArrayList<Writer>();
 		for (String output : confOutputs) {
@@ -72,6 +68,10 @@ public class LoggerBuilder {
 			logger.addOutput(manager);
 			i++;
 		}
+		
+		// Set its filter:
+		Filter filter = filterFactory.getFilter(confFilter);
+		logger.setFilter(filter);
 		
 		return logger;
 	}

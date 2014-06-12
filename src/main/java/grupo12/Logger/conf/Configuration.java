@@ -136,6 +136,7 @@ public class Configuration {
 		this.formatters = Arrays.asList(formatters.split(","));
 	}
 	
+	// TODO: revisar que poner por default.
 	public void configureAsDefault() {
 		name = defaultName;
 		level = defaultLevel;

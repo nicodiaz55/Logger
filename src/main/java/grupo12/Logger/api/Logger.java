@@ -181,7 +181,7 @@ public class Logger {
 	}
 	
 	/**
-	 * Returns the level of the Logger.
+	 * Returns the Level of the Logger.
 	 * 
 	 * @return the level.
 	 */
@@ -190,26 +190,18 @@ public class Logger {
 	}
 	
 	/**
-	 * Sets the level of the Logger.
+	 * Sets the Level of the Logger.
 	 * 
 	 * @param level to set.
 	 */
 	public void setLevel(Level level) {
 		logger.setLevel(level);
 	}
-	/**
-	 * Returns the level of the Logger.
-	 * 
-	 * @return the level.
-	 */
-	public Filter getFilter() {
-		return logger.getFilter();
-	}
 	
 	/**
-	 * Sets the level of the Logger.
+	 * Sets the Filter of the Logger.
 	 * 
-	 * @param level to set.
+	 * @param filter to set.
 	 */
 	public void setFilter(Filter filter) {
 		logger.setFilter(filter);

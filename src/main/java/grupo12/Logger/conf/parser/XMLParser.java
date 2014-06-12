@@ -60,6 +60,8 @@ public class XMLParser implements Parser {
             	Element confElement = (Element) confNode;
             	Configuration aConfiguration = new Configuration();
             	
+            	// TODO: revisar que poner por default si falla (no esta en el archivo)
+            	
             	NodeList loggerNameList = confElement.getElementsByTagName("name");
                 Element loggerNameElement = (Element) loggerNameList.item(0);
                 NodeList textLoggerNameList = loggerNameElement.getChildNodes();
