@@ -15,10 +15,7 @@ import grupo12.Logger.output.Writer;
 
 public class Example {
 
-	public static void main(String[] args) {
-		createLoggerFromConfigurationFile();
-		createLoggerManualMode();
-	}
+	
 
 	// Recommended way to create a Logger:
 	private static void createLoggerFromConfigurationFile() {
@@ -143,5 +140,9 @@ public class Example {
 		logger.error("An exception occured:", new IOException("IO exception"));
 		
 		logger.end(); // Always end the logger!
+	}
+	public static void main (String[] args) {
+		createLoggerFromConfigurationFile();
+		createLoggerManualMode();
 	}
 }

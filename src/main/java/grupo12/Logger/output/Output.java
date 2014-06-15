@@ -2,6 +2,7 @@ package grupo12.Logger.output;
 
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.message.LogMessage;
+import grupo12.Logger.filter.*;
 
 /**
  * This class represent an output. Writes and formats a message
@@ -14,17 +15,19 @@ public class Output {
 	private Writer writer;
 	private Formatter formatter;
 	private boolean logging;
+	private Filterer filterer;
 	
 	/**
 	 * Creates an Output.
 	 * It requires a {@link grupo12.Logger.output.Writer Writer} and a {@link grupo12.Logger.output.Formatter Formatter}.
 	 * 
-	 * @param writer implementation. Could be a {@link ConsoleWriter} or a {@link grupo12.Logger.output.FileWriter FileWriter}.
+	 * @param writer implementation.igual, eso funca...  Could be a {@link ConsoleWriter} or a {@link grupo12.Logger.output.FileWriter FileWriter}.
 	 * @param formatter to format the messages.
 	 */
 	public Output() {
 		writer = null;
 		formatter = null;
+		filterer = null;
 	}
 	
 	/**
@@ -50,6 +53,14 @@ public class Output {
 	}
 	
 	/**
+	 * Sets the {@link grupo12.Logger.filter.Filter Filter} of the Output.
+	 * 
+	 * @param filter to set.
+	 */
+	public void setFilterer(Filterer filterer) {
+		this.filterer = filterer;
+	}
+	/**
 	 * Logs the {@link LogMessage} (if publishable) to the defined output and format.
 	 * 
 	 * @param message to log
@@ -61,6 +72,7 @@ public class Output {
 				 formatedMessage = formatter.format(message);
 			}
 			// TODO: Meter filtro aca
+			formatedMessage=filterer.filter(formatedMessage);
 			writer.write(formatedMessage);
 		}
 	}

@@ -3,7 +3,7 @@ package grupo12.Logger.api;
 import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
 import grupo12.Logger.output.Output;
-import grupo12.Logger.filter.Filter;
+import grupo12.Logger.filter.Filterer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 public class GenericLogger {
 	private String name;
 	private Level level;
-	private Filter filter;
+	private Filterer filterer;
 	private List<Output> outputs;
 	private static final int stCallerDepth = 5;
 
@@ -26,6 +26,7 @@ public class GenericLogger {
 		this.name = name;
 		outputs = new ArrayList<Output>();
 		level = null;
+		filterer = null;
 	}
 
 	/**
@@ -61,8 +62,8 @@ public class GenericLogger {
 	 * 
 	 * @param filter to set.
 	 */
-	public void setFilter(Filter filter) {
-		this.filter = filter;
+	public void setFilterer(Filterer filter) {
+		this.filterer = filter;
 	}
 	
 	
@@ -169,7 +170,7 @@ public class GenericLogger {
 	 * 
 	 * @return the filter.
 	 */
-	public Filter getFilter() {
-		return filter;
+	public Filterer getFilter() {
+		return filterer;
 	}
 }

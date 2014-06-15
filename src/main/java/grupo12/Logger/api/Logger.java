@@ -2,7 +2,7 @@ package grupo12.Logger.api;
 
 import grupo12.Logger.level.Level;
 import grupo12.Logger.output.Output;
-import grupo12.Logger.filter.Filter;
+import grupo12.Logger.filter.Filterer;
 
 
 /**
@@ -203,7 +203,7 @@ public class Logger {
 	 * 
 	 * @param filter to set.
 	 */
-	public void setFilter(Filter filter) {
-		logger.setFilter(filter);
+	public void setFilterer(Filterer filterer) {
+		logger.setFilterer(filterer);
 	}
 }
