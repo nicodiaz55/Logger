@@ -59,7 +59,9 @@ public class LoggerBuilder {
 		}
 
 		// Set its filter:
-		Filterer filterer = filtererFactory.getFilterer(confFilterer);
+		//TODO: if (!confFilterer.equals("^%..*\\.class")){
+			Filterer filterer = filtererFactory.getFilterer(confFilterer);
+		
 		logger.setFilterer(filterer);
 				
 		// Create the outputs and add them to the logger:

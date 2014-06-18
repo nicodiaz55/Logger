@@ -71,8 +71,11 @@ public class Output {
 			if (formatter != null) {
 				 formatedMessage = formatter.format(message);
 			}
-			// TODO: Meter filtro aca
-			formatedMessage=filterer.filter(formatedMessage);
+			if (filterer.getCustomFilter().equals("")){
+				formatedMessage=filterer.filter(formatedMessage);
+			}else{
+				formatedMessage=filterer.customFilter(formatedMessage);
+			}
 			writer.write(formatedMessage);
 		}
 	}

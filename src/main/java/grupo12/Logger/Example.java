@@ -23,7 +23,7 @@ public class Example {
 		// We need a LoggerFactory to start:
 		LoggerFactory factory = LoggerFactory.getInstance();
 		
-		/* With a configuration file we can configure easyly a lot of parameters of our Loggers
+		/* With a configuration file we can configure easily a lot of parameters of our Loggers
 		 * For example, we can also define our custom Level names and ordering.
 		 * If we want to load our custom configuration file, simply call this method:
 		 */
@@ -92,10 +92,19 @@ public class Example {
 		// We need an output writer, in this case, the console:
 		Writer writer = new ConsoleWriter();
 		
-		//We create a default filter, to log only certain messages:
+		//We create a default filter, to log only certain messages
+		//WARNING: the filter IS needed.
 		//If you do not wish to filter, just don't use any parameters and it will
-		//use by default the regex ".*" which won't filter anything.
+		//use by default the regex ".*" which won't filter anything.	
 		Filterer filterer = new Filterer();
+		
+		//Also you can add a custom filter. Just develop it implementing the IFilterer interface.
+		//Put it in the same directory as the interface and compile it using "javac *.java", the logger
+		//uses the .class file
+		//This is the way to set it. Here we use one as an example
+		//If the error is FATAL, it prints "Rotten Orange", else it prints "Sweet Orange".
+		//Also, use the whole class name, including package
+		filterer.setCustomFilter("grupo12.Logger.filter.OrangeFilter");
 		
 		// We need to add the Output to our Logger:
 		Output output = new Output();

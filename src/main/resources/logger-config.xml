@@ -4,7 +4,7 @@
 <logger>
 	<name>Logger1</name>
 	<level>INFO</level>
-	<filter>REGEX1</filter>
+	<filter>.*</filter>
 	<outputs>
 		<output>
 			<type>Log1.json</type>
@@ -22,7 +22,7 @@
 <logger>
 	<name>MyLogger</name>
 	<level>TRACE</level>
-	<filter>REGEX2</filter>
+	<filter>.*</filter>
 	<outputs>
 		<output>
 			<type>Log2.txt</type>

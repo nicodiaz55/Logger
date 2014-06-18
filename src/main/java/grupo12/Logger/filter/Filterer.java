@@ -6,15 +6,18 @@ import java.util.regex.Pattern;
 public class Filterer {
 
 	private String regexFilter;
+	private String customFilter;
 	private static final String defaultFilter = ".*";
 	
 	public Filterer(){
 		regexFilter=defaultFilter;
+		customFilter="";
 	}
 	
 	public Filterer(String regex){
 		String offset=".*";
 		regexFilter=offset+regex+offset;
+		customFilter="";
 	}
 	
 	public String filter(String message){
@@ -31,6 +34,23 @@ public class Filterer {
 		return myStringBuffer.toString();
 	}
 	
+	public String customFilter(String message){
+		try {
+			Class<?> filterClass = Class.forName(customFilter);
+			IFilterer filter = (IFilterer) filterClass.newInstance();
+			return filter.filter(message);
+		} catch (Exception e) {
+			return message;
+		}
+	}
+	
+	public void setCustomFilter(String className){
+		this.customFilter = className;
+	}
+	public String getCustomFilter(){
+		return customFilter;
+	}
+	
 	public String getRegexFilter(){
 		return regexFilter;
 	}
@@ -39,14 +59,6 @@ public class Filterer {
 	}
 	
 	
-//	public static void main (String [] args){
-//	
-//		Filterer myFilterer = new Filterer("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
-//		String message = "caca 120.0.10.4";		
-//		System.out.println(message);
-//		String newMessage = myFilterer.filter(message);
-//		System.out.println(newMessage);
-//		
-//	}
+
 }
 
