@@ -144,4 +144,26 @@ public class ConfigurationTest {
 		List<String> expected = Arrays.asList(Configuration.defaultLevels.split(","));
 		assertEquals(expected, strings);
 	}
+	
+	@Test
+	public void sameHashCode(){
+		
+		Configuration conf1 = new Configuration();
+		conf1.setFilter("^[Hh]");
+		conf1.setLevel("INFO");
+		conf1.setName("Pepe");
+		conf1.setOutputs("console,mamasa,out.txt,tuvieja");
+		conf1.setSeparators(" ;,-/");
+		conf1.setFormatters("%d{HH:mm:ss} - %p - %t - %m");
+	
+		Configuration conf2 = new Configuration();
+		conf2.setFilter("^[Hh]");
+		conf2.setLevel("INFO");
+		conf2.setName("Pepe");
+		conf2.setOutputs("console,mamasa,out.txt,tuvieja");
+		conf2.setSeparators(" ;,-/");
+		conf2.setFormatters("%d{HH:mm:ss} - %p - %t - %m");
+		
+		assertTrue(conf1.hashCode()==conf2.hashCode());
+	}
 }

@@ -139,4 +139,13 @@ public class FormatLogMessageTest {
 		String expected = message.getTimestamp() + " - " + message.getLoggerName() + " - " + message.getLevel().toString() + " - " + message.getThreadName() + " - %  - " + message.getCallingFilename() + " - " + message.getLineNumber() + " - " + message.getCallingMethodName() + " - " + message.getMessage();
 		assertEquals(expected, message.toString());
 	}
+	
+	@Test
+	public void patternSameHashCode(){
+		Pattern p1 = new Pattern(date + separator + name + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text, " - ");
+		Pattern p2 = new Pattern(date + separator + name + separator + level + separator + thread + separator + literal + separator + filename + separator + line + separator + method + separator + text, " - ");
+
+		assertTrue(p1.hashCode()==p2.hashCode());
+		
+	}
 }

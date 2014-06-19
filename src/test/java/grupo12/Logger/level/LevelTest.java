@@ -120,4 +120,13 @@ public class LevelTest {
 		assertFalse(error.majorThan(null));
 		assertFalse(fatal.majorThan(null));
 	}
+	
+	@Test
+	public void sameHashCode(){
+		Level l1 = new Level("INFO", 100000);
+		Level l2 = new Level("INFO", 100000);
+
+		assertTrue(l1.hashCode()==l2.hashCode());
+		
+	}
 }

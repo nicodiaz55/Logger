@@ -108,4 +108,14 @@ public class FileWriterTest {
 		File file = new File(filetest);
 		file.delete();
 	}
+	
+	@Test
+	public void sameHashCode(){
+		
+		FileWriter fw1 = new FileWriter("output.csv");
+		FileWriter fw2 = new FileWriter("output.csv");
+
+		assertTrue(fw1.hashCode()==fw2.hashCode());
+	}
+	
 }
