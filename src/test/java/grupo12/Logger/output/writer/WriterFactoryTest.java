@@ -1,6 +1,9 @@
-package grupo12.Logger.output;
+package grupo12.Logger.output.writer;
 
 import static org.junit.Assert.*;
+import grupo12.Logger.output.writer.ConsoleWriter;
+import grupo12.Logger.output.writer.FileWriter;
+import grupo12.Logger.output.writer.WriterFactory;
 
 import org.junit.Test;
 

@@ -1,10 +1,11 @@
 package grupo12.Logger.conf;
 
 import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
- * This class stores the configuration for a single @{link Logger}.
+ * This class stores the configuration for a single {@link grupo12.Logger.api.Logger Logger}.
  * 
  * @author Grupo 12
  */
@@ -24,6 +25,7 @@ public class Configuration {
 	private List<String> formatters;
 	private List<String> separators;
 	private List<String> outputs;
+	private Hashtable<String, List<String>> customOutputs;
 	private List<String> availableLevels;
 	
 	/**
@@ -37,6 +39,8 @@ public class Configuration {
 		separators = Arrays.asList(defaultSeparator.split(","));
 		outputs = Arrays.asList(defaultOutput.split(","));
 		availableLevels = Arrays.asList(defaultLevels.split(","));
+		
+		customOutputs = new Hashtable<String, List<String>>();
 	}
 	
 	/**
@@ -58,9 +62,9 @@ public class Configuration {
 	}
 	
 	/**
-	 * Returns the level of the Logger.
+	 * Returns the filter of the Logger.
 	 * 
-	 * @return the level.
+	 * @return the filter.
 	 */
 	public String getFilter() {
 		return filter;
@@ -81,6 +85,10 @@ public class Configuration {
 	 */
 	public List<String> getOutputs() {
 		return outputs;
+	}
+	
+	public Hashtable<String, List<String>> getCustomOutputs() {
+		return customOutputs;
 	}
 
 	/**
@@ -126,6 +134,17 @@ public class Configuration {
 	 */
 	public void setOutputs(String outputs) {
 		this.outputs = Arrays.asList(outputs.split(","));
+	}
+	
+	/**
+	 * Sets a list of custom outputs.
+	 */
+	public void setCustomOutputs(List<String> coList) {
+		for (String customOutput : coList) {
+			String coImplementor = customOutput.split(":")[0];
+			List<String> parameters = Arrays.asList(customOutput.split(":")[1].split(","));
+			customOutputs.put(coImplementor, parameters);
+		}
 	}
 	
 	/**
@@ -179,9 +198,8 @@ public class Configuration {
 		else {
 			return true;
 		}
-		
-	
 	}
+	
 	@Override
 	public int hashCode() {
 		int h=47;
@@ -202,10 +220,21 @@ public class Configuration {
 		  }
 		return (h*formatters.size())+(p*separators.size())+(j*outputs.size());
 	}
+
+	/**
+	 * Returns the levels supported by the Logger.
+	 * 
+	 * @return list of the names of the suported levels, ordered by decreasing priority
+	 */
 	public List<String> getAvailableLevels() {
 		return availableLevels;
 	}
 	
+	/**
+	 * Sets the levels supported by the Logger.
+	 * 
+	 * @param levels name list, ordered by decreasing priorty, and comma-sepparated.
+	 */
 	public void setAvailableLevels(String levels) {
 		availableLevels = Arrays.asList(levels.split(","));
 	}

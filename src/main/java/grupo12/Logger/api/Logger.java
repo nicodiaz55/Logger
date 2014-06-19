@@ -2,7 +2,7 @@ package grupo12.Logger.api;
 
 import grupo12.Logger.level.Level;
 import grupo12.Logger.output.Output;
-import grupo12.Logger.filter.Filter;
+import grupo12.Logger.output.filter.Filter;
 
 
 /**
@@ -15,6 +15,11 @@ public class Logger {
 
 	private GenericLogger logger;
 	
+	/**
+	 * Creates an empty Logger with the given name.
+	 * 
+	 * @param name of the Logger
+	 */
 	public Logger(String name) {
 		logger = new GenericLogger(name);
 	}
@@ -127,11 +132,32 @@ public class Logger {
 	/**
 	 * Logs a message with Fatal priority.
 	 * 
-	 * @param message to log.
-	 * @param exception to log.
+	 * @param message to log
+	 * @param exception to log
 	 */
 	public void fatal(String message, Throwable exception) {
 		logger.log(message, Level.FATAL, exception);
+	}
+	
+	/**
+	 * Logs a message with a given level.
+	 * 
+	 * @param message to log
+	 * @param level of the message
+	 * @param exception to log
+	 */
+	public void log(String message, Level level, Throwable exception) {
+		logger.log(message, level, exception);
+	}
+	
+	/**
+	 * Logs a message with a given level.
+	 * 
+	 * @param message to log
+	 * @param level of the message
+	 */
+	public void log(String message, Level level) {
+		logger.log(message, level, null);
 	}
 	
 	/**

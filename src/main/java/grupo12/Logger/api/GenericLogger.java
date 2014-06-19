@@ -3,7 +3,7 @@ package grupo12.Logger.api;
 import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
 import grupo12.Logger.output.Output;
-import grupo12.Logger.filter.Filter;
+import grupo12.Logger.output.filter.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class GenericLogger {
 
 	/**
 	 * Creates an empty Logger with a given name. It's recommended to use {@link LoggerBuilder} to create a Logger.
-	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Pattern Formatter} and a {@link grupo12.Logger.output.Writer Writer} to
+	 * Otherwise, just add some {@link Output}'s with a {@link grupo12.Logger.format.Pattern Formatter} and a {@link grupo12.grupo12.Logger.output.writer.Writer Writer} to
 	 * start logging.
 	 * 
 	 * @param name of the Logger.
@@ -41,7 +41,7 @@ public class GenericLogger {
 	}
 	
 	/**
-	 * Adds an output to the Logger.
+	 * Adds an {@link Output} to the Logger.
 	 * 
 	 * @param output to add.
 	 */
@@ -50,22 +50,33 @@ public class GenericLogger {
 	}
 	
 	/**
-	 * Sets the level of the Logger.
+	 * Returns the list of Outputs this Logger has.
+	 * 
+	 * @return list of outputs
+	 */
+	public List<Output> getOutputs() {
+		return outputs;
+	}
+	
+	/**
+	 * Sets the {@link grupo12.Logger.level.Level Level} of the Logger.
 	 * 
 	 * @param level to set.
 	 */
 	public void setLevel(Level level) {
 		this.level = level;
 	}
+	
 	/**
-	 * Sets the filter of the Logger.
+	 * Sets the {@link grupo12.grupo12.Logger.output.filter.Filter Filter} of the Logger, to all it's outputs.
 	 * 
 	 * @param filter to set.
 	 */
 	public void setFilter(Filter filter) {
-		this.filter = filter;
+		for (Output output : outputs) {
+			output.setFilter(filter);
+		}
 	}
-	
 	
 	/**
 	 * Logs the message for all outputs.
@@ -103,13 +114,15 @@ public class GenericLogger {
 	 * @param the message to log.
 	 * @return boolean indicating if the message is publishable or not.
 	 */
-	private boolean isPublishable(LogMessage message) {
+	public boolean isPublishable(LogMessage message) {
 		// If no level is set, all messages are publishable
-		if (level == null) {
+		if (message == null) {
+			return false;
+		} else if (level == null) {
 			return true;
+		} else {
+			return level.majorThan(message.getLevel());
 		}
-		
-		return level.majorThan(message.getLevel());
 	}
 	
 	/**

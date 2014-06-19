@@ -1,8 +1,13 @@
 package grupo12.Logger.level;
 
-
+/**
+ * Class that represents a level. Used by the {@link LogMessage} and {@link grupo12.Logger.api.Logger Logger} classes.
+ * 
+ * @author Grupo 12
+ */
 public class Level {
 	
+	// Default levels. Accesible to the user.
 	public final static Level TRACE = new Level("TRACE", 0);
 	public final static Level DEBUG = new Level("DEBUG", 1);
 	public final static Level INFO = new Level("INFO", 2);
@@ -13,18 +18,25 @@ public class Level {
 	private String levelStr;
 	private int level;
 	
+	/**
+	 * Creates a level with a name and a priority.
+	 * 
+	 * @param levelName
+	 * @param priority of the level
+	 */
 	public Level(String levelName, int priority) {
 		levelStr = levelName;
 		level = priority;
 	}
 	
 	/**
-	 * Overrides "toString()" method from java class Object so it returns a levelStr.
+	 * Returns the name of the Level
 	 */
 	@Override
 	public String toString() {
 		return levelStr;
 	}
+	
 	/**
 	 * Checks if otherLevel is major than this level.
 	 * 
@@ -38,9 +50,6 @@ public class Level {
 		return false;
 	}
 
-	/**
-	 * Overrides "equals" method from java class Object
-	 */
 	@Override
 	public boolean equals(Object anObject) {
 		if (!(anObject instanceof Level)) {

@@ -1,10 +1,10 @@
-package grupo12.Logger.output;
+package grupo12.Logger.output.writer;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 /**
- * Writes messages to a file.
+ * Class that writes messages to a file.
  * 
  * @author Grupo 12
  */
@@ -23,19 +23,22 @@ public class FileWriter implements Writer {
 		writer = null;
 	}
 	
-	/**
-	 * Returns if it can write to the file.
-	 */
+	@Override
 	public boolean canWrite() {
 		return (writer != null);
 	}
 	
+	/**
+	 * Writes the message to the file.
+	 */
+	@Override
 	public void write(String message) {
 		if (canWrite()) {
 			writer.println(message);
 		}
 	}
 
+	@Override
 	public void init() throws NotInitializedException {
 		try {
 			writer = new PrintWriter(filename);
@@ -48,6 +51,7 @@ public class FileWriter implements Writer {
 		}
 	}
 
+	@Override
 	public void end() {
 		if (writer != null) {
 			writer.close();
@@ -65,6 +69,7 @@ public class FileWriter implements Writer {
 			return filename.equals(other.filename);
 		}
 	}
+	
 	@Override
 	public int hashCode() {
 		int h=277;

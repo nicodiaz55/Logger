@@ -34,12 +34,10 @@ public class DateFormat extends Format {
 		String oldRepr = message.toString();
 		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(dateFormatPattern);
 		Matcher m = pattern.matcher(oldRepr);
-		m.find();
-		String dateFormatString = m.group(1);
-				
-		if (dateFormatString.equals(oldRepr)) {
+		if (!m.find()) {
 			return "";
 		}
+		String dateFormatString = m.group(1);
 		
 		return dateFormatString;
 	}

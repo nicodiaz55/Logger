@@ -1,5 +1,7 @@
 package grupo12.Logger.format;
 
+import java.util.regex.Matcher;
+
 import grupo12.Logger.message.LogMessage;
 
 /**
@@ -33,7 +35,7 @@ public abstract class Format {
 	 */
 	protected void updateFormat(LogMessage message, String data) {
 		String oldFormat = message.toString();
-		String newFormat = oldFormat.replaceAll(pattern, data);
+		String newFormat = oldFormat.replaceAll(pattern, Matcher.quoteReplacement(data));
 		message.changeFormat(newFormat);
 	}
 }

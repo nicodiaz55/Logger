@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import grupo12.Logger.format.Formatter;
@@ -11,6 +12,11 @@ import grupo12.Logger.format.JsonFormatter;
 import grupo12.Logger.format.Pattern;
 import grupo12.Logger.level.Level;
 import grupo12.Logger.message.LogMessage;
+import grupo12.Logger.output.filter.Filter;
+import grupo12.Logger.output.filter.RegexFilter;
+import grupo12.Logger.output.writer.ConsoleWriter;
+import grupo12.Logger.output.writer.FileWriter;
+import grupo12.Logger.output.writer.Writer;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -171,14 +177,6 @@ public class OutputTest {
 		System.setOut(null);
 	}
 	
-	
-	// TODO: hacer que este test funcione, de seguro tiene que ver con la excepcion.
-	private static StackTraceElement getCallingStackTraceElement() {
-		StackTraceElement[] st = Thread.currentThread().getStackTrace();
-		StackTraceElement callingSTE = st[5];
-		return callingSTE;
-	}
-	
 	@Test
 	public void logsIfTurnedOnWithFormatter() {
 		System.setOut(new PrintStream(outContent));
@@ -187,7 +185,7 @@ public class OutputTest {
 		output.setWriter(aWriter);
 		output.setFormatter(formatter);
 		output.init();		
-		output.log(new LogMessage(Level.INFO, "message", getCallingStackTraceElement(), new Exception(), "logger"));
+		output.log(new LogMessage(Level.INFO, "message", null, null, "logger"));
 		assertEquals("INFO - message\n", outContent.toString());
 		System.setOut(null);
 	}
@@ -200,6 +198,58 @@ public class OutputTest {
 		output.init();		
 		output.turnOff();
 		output.log(new LogMessage(Level.INFO, "message", null, null, "logger"));
+		assertEquals("", outContent.toString());
+		System.setOut(null);
+	}
+	
+	@Test
+	public void logsWithoutFormatterAndWithoutFilter() {
+		System.setOut(new PrintStream(outContent));
+		Writer aWriter = new ConsoleWriter();
+		output.setWriter(aWriter);
+		output.init();		
+		output.log(new LogMessage(Level.INFO, "message", null, new Exception(), "logger"));
+		assertEquals("message\n", outContent.toString());
+		System.setOut(null);
+	}
+	
+	@Test
+	public void logsWithoutFormatter() {
+		System.setOut(new PrintStream(outContent));
+		Writer aWriter = new ConsoleWriter();
+		Filter aFilter = new RegexFilter(".*");
+		output.setWriter(aWriter);
+		output.setFilter(aFilter);
+		output.init();		
+		output.log(new LogMessage(Level.INFO, "message", null, new Exception(), "logger"));
+		assertEquals("message\n", outContent.toString());
+		System.setOut(null);
+	}
+	
+	@Test
+	public void doesNotLogsBecauseFilterWithoutFormatter() {
+		System.setOut(new PrintStream(outContent));
+		Writer aWriter = new ConsoleWriter();
+		Filter aFilter = new RegexFilter("NO");
+		output.setWriter(aWriter);
+		output.setFilter(aFilter);
+		output.init();		
+		output.log(new LogMessage(Level.INFO, "message", null, new Exception(), "logger"));
+		assertEquals("", outContent.toString());
+		System.setOut(null);
+	}
+	
+	@Test
+	public void doesNotLogsBecauseFilter() {
+		System.setOut(new PrintStream(outContent));
+		Writer aWriter = new ConsoleWriter();
+		Filter aFilter = new RegexFilter("WARNING - message");
+		Formatter aFormatter = new Pattern("%p - %m", "-");
+		output.setWriter(aWriter);
+		output.setFilter(aFilter);
+		output.setFormatter(aFormatter);
+		output.init();		
+		output.log(new LogMessage(Level.INFO, "message", null, new IOException(), "logger"));
 		assertEquals("", outContent.toString());
 		System.setOut(null);
 	}

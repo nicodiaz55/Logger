@@ -2,37 +2,14 @@
 <Loggers>
 <levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
 <logger>
-	<name>Logger1</name>
+	<name>Logger</name>
 	<level>INFO</level>
 	<filter>.*</filter>
 	<outputs>
 		<output>
-			<type>Log1.json</type>
-			<formatter>JSON</formatter>
-			<separator>|</separator>
-		</output>
-		<output>
 			<type>console</type>
-			<formatter>%d{HH:mm:ss} | %p | %m</formatter>
+			<formatter>%d{HH:mm:ss} - %p - %t - %m</formatter>
 			<separator>-</separator>
-		</output>
-	</outputs>
-</logger>
-
-<logger>
-	<name>MyLogger</name>
-	<level>TRACE</level>
-	<filter>.*</filter>
-	<outputs>
-		<output>
-			<type>Log2.txt</type>
-			<formatter>%d{HH:mm:ss} %n %g %n %m</formatter>
-			<separator>/</separator>
-		</output>
-		<output>
-			<type>Log22.txt</type>
-			<formatter>%d{HH:mm:ss} %n %p %n %m</formatter>
-			<separator>#</separator>
 		</output>
 	</outputs>
 </logger>

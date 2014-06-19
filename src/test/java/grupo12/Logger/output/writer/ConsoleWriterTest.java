@@ -1,6 +1,9 @@
-package grupo12.Logger.output;
+package grupo12.Logger.output.writer;
 
 import static org.junit.Assert.*;
+import grupo12.Logger.output.writer.ConsoleWriter;
+import grupo12.Logger.output.writer.NotInitializedException;
+import grupo12.Logger.output.writer.Writer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -28,6 +31,7 @@ public class ConsoleWriterTest {
 		String message = "test Message";
 		
 		console.init();
+		assertTrue(console.canWrite());
 		console.write(message);
 		console.end();
 		

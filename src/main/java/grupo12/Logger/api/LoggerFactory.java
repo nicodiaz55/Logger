@@ -8,7 +8,7 @@ import java.util.Hashtable;
 
 /**
  * Factory of Loggers. This is the main class you can use to
- * get Loggers. It uses the configuration files to create them.
+ * get Loggers. It uses configuration files to create them.
  * 
  * @author Grupo 12
  */
@@ -52,6 +52,10 @@ public class LoggerFactory{
 	 * Initializes the factory. Search and load the
 	 * configuration files (via ConfigurationParser)
 	 * and then stores the Loggers.
+	 * 
+	 * If no file is provided, it loads the default configuration files.
+	 * 
+	 * @param file containing the configuration.
 	 */
 	public void setConfigurationFile(String file) {
 		// Get the configurations:

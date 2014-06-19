@@ -10,6 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Parser for a properties file
+ * 
+ * @author Grupo 12
+ */
 public class PropertiesParser implements Parser {
 	
 	private Properties conf;
@@ -17,7 +22,7 @@ public class PropertiesParser implements Parser {
 	private boolean ready;
 	
 	/**
-	 * Creates a parser for Properties files, so we can load the configuration for each {@link grupo12.Logger.api.Logger Logger} to create.
+	 * Creates a parser for Properties files, so we can load the configuration for each {@link grupo12.Logger.api.Logger Logger}.
 	 * 
 	 * @param propertiesFile to parse
 	 */
@@ -26,11 +31,6 @@ public class PropertiesParser implements Parser {
 		ready = false;
 	}
 
-	/**
-	 * Parses a properties file containing the configuration for each {@link grupo12.Logger.api.Logger Logger}.
-	 * 
-	 * @param a {@link Configuration} List to edit
-	 */
 	@Override
 	public List<Configuration> loadConfigurations() {
 		List<Configuration> configurationList = new ArrayList<Configuration>();
@@ -54,12 +54,7 @@ public class PropertiesParser implements Parser {
 		return configurationList;
 	}
 
-	/**
-	 * Loads a Properties file.
-	 * 
-	 * @param file to load
-	 * @return boolean to indicate if the file was loaded correctly or not.
-	 */
+	@Override
 	public boolean init() {
 		String getFile;
 		try {
@@ -77,13 +72,11 @@ public class PropertiesParser implements Parser {
 			ready = false;
 			return false; // empty
 		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					ready = false;
-					return false; // empty
-				}
+			try {
+				input.close();
+			} catch (Exception e) {
+				ready = false;
+				return false; // empty
 			}
 		}
 		ready = true;
@@ -93,6 +86,9 @@ public class PropertiesParser implements Parser {
 	// TODO: revisar que poner por default si getProperty falla (no esta en el archivo)
 	/**
 	 * Creates a Configuration instance for each {@link grupo12.Logger.api.Logger Logger} name in the properties file
+	 * 
+	 * @param name of the logger
+	 * @param levels supported by the logger
 	 */
 	private Configuration createConfiguration(String name, String levels) {
 		// Get the rest of its parameters:
@@ -101,8 +97,21 @@ public class PropertiesParser implements Parser {
 		String formatters = conf.getProperty(name + ".formatters", "");
 		String separators = conf.getProperty(name + ".separators", "");
 		String outputs = conf.getProperty(name + ".outputs", "");
-
+		String customOutputs = conf.getProperty(name + ".customOutputs", "");
+		
 		Configuration configuration = new Configuration();
+		
+		if (!customOutputs.isEmpty()) {
+			List<String> customOutputsList = Arrays.asList(customOutputs.split(",")); 
+			List<String> toConfigFormat = new ArrayList<String>();
+			for (String customOutput : customOutputsList) {
+				String implementor = conf.getProperty(name + "." + customOutput + ".implementor", "");
+				String parameters = conf.getProperty(name + "." + customOutput + ".parameters", "");	
+				toConfigFormat.add(implementor + ":" + parameters);
+			}
+			configuration.setCustomOutputs(toConfigFormat);
+		}
+		
 		configuration.setName(name);
 		configuration.setAvailableLevels(levels);
 		configuration.setLevel(level);

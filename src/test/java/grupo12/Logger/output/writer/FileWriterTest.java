@@ -1,10 +1,12 @@
-package grupo12.Logger.output;
+package grupo12.Logger.output.writer;
+
+import grupo12.Logger.output.writer.FileWriter;
+import grupo12.Logger.output.writer.NotInitializedException;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
 
 import static org.junit.Assert.*;
 

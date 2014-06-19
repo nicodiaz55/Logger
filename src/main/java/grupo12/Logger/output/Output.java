@@ -2,11 +2,13 @@ package grupo12.Logger.output;
 
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.message.LogMessage;
-import grupo12.Logger.filter.*;
+import grupo12.Logger.output.filter.Filter;
+import grupo12.Logger.output.writer.NotInitializedException;
+import grupo12.Logger.output.writer.Writer;
 
 /**
- * This class represent an output. Writes and formats a message
- * to an output according to its level.
+ * This class represent an output. Writes, filter and formats a message
+ * to an output.
  * 
  * @author Grupo 12
  */
@@ -14,20 +16,17 @@ public class Output {
 
 	private Writer writer;
 	private Formatter formatter;
-	private boolean logging;
 	private Filter filter;
+	private boolean logging;
 	
 	/**
-	 * Creates an Output.
-	 * It requires a {@link grupo12.Logger.output.Writer Writer} and a {@link grupo12.Logger.output.Formatter Formatter}.
-	 * 
-	 * @param writer implementation.igual, eso funca...  Could be a {@link ConsoleWriter} or a {@link grupo12.Logger.output.FileWriter FileWriter}.
-	 * @param formatter to format the messages.
+	 * Creates an empty Output.
 	 */
 	public Output() {
 		writer = null;
 		formatter = null;
 		filter = null;
+		logging = false;
 	}
 	
 	/**
@@ -40,9 +39,9 @@ public class Output {
 	}
 	
 	/**
-	 * Sets the output {@link grupo12.Logger.output.Writer Writer}.
+	 * Sets the output {@link grupo12.Logger.output.writer.Writer Writer}.
 	 * 
-	 * @param outputWriter ({@link grupo12.Logger.output.Writer Writer}) to set.
+	 * @param outputWriter ({@link grupo12.Logger.output.writer.Writer Writer}) to set.
 	 */
 	public void setWriter(Writer outputWriter) {
 		if (writer != null) {
@@ -53,15 +52,17 @@ public class Output {
 	}
 	
 	/**
-	 * Sets the {@link grupo12.Logger.filter.Filter Filter} of the Output.
+	 * Sets the {@link grupo12.Logger.output.filter.Filter Filter} of the Output.
 	 * 
 	 * @param filter to set.
 	 */
 	public void setFilter(Filter filter) {
 		this.filter = filter;
 	}
+	
 	/**
-	 * Logs the {@link LogMessage} (if publishable) to the defined output and format.
+	 * Logs the {@link LogMessage} to the defined output.
+	 * It can format the message and filter it.
 	 * 
 	 * @param message to log
 	 */
@@ -71,6 +72,7 @@ public class Output {
 			if (formatter != null) {
 				 formatedMessage = formatter.format(message);
 			}
+			
 			boolean canWrite = true;
 			if (filter != null) {
 				canWrite = filter.filter(message);
@@ -115,6 +117,9 @@ public class Output {
 		}
 	}
 
+	/**
+	 * Initializes the Output.
+	 */
 	public void init() {
 		if (writer != null) {
 			try {

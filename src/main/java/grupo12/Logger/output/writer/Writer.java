@@ -1,4 +1,4 @@
-package grupo12.Logger.output;
+package grupo12.Logger.output.writer;
 
 /**
  * A Writer interface.
@@ -7,6 +7,7 @@ package grupo12.Logger.output;
  * @author Grupo 12
  */
 public interface Writer {
+	
 	/**
 	 * Writes a message to the output.
 	 * 
@@ -23,4 +24,9 @@ public interface Writer {
 	 * Ends the writer.
 	 */
 	public void end();
+	
+	/**
+	 * Returns if it can write.
+	 */
+	public boolean canWrite();
 }

@@ -23,8 +23,6 @@ public class FormatLogMessageTest {
 	private static String separator = "%n";
 	private static String name = "%g";
 	
-	// TODO: faltan test para Excepciones
-	
 	@Before
 	public void setUp() throws Exception {
 		StackTraceElement[] st = Thread.currentThread().getStackTrace();

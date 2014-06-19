@@ -7,9 +7,9 @@ import java.io.StringWriter;
 import java.util.Date;
 
 /**
- * The message which is logged. It has a level and a caller info. It also carries a string message and a formatted string message.
- * @author grupo12
- *
+ * The message that is logged. It has a level and a caller info. It also carries a string message and a formatted string message.
+ * 
+ * @author Grupo 12
  */
 public class LogMessage {
 
@@ -19,11 +19,10 @@ public class LogMessage {
 	private String message;
 	private String formatedMessage;
 	private Throwable exception;
-
-	// TODO: este constructor recibe muchos parametros...
 	
 	/**
 	 * Constructor
+	 * 
 	 * @param message level
 	 * @param string message to log
 	 * @param callingSTE is a StackTraceElement in order to know where the message came from. Goes to CallerInfo
@@ -31,10 +30,20 @@ public class LogMessage {
 	 * @param loggerName the name of the Logger
 	 */
 	public LogMessage(Level level, String message, StackTraceElement callingSTE, Throwable exception, String loggerName) {
-		this.loggerName = loggerName;
+		if (loggerName == null) {
+			this.loggerName = "";
+		} else {
+			this.loggerName = loggerName;
+		}
 		this.level = level;
 		this.info = new CallerInfo(callingSTE);
-		this.message = message;
+		if (message == null) {
+			this.message = "";
+			this.formatedMessage = "";
+		} else {
+			this.message = message;
+			this.formatedMessage = message;
+		}
 		this.formatedMessage = message;
 		this.exception = exception;
 		
@@ -47,12 +56,18 @@ public class LogMessage {
 		}
 	}
 
+	/**
+	 * Returns the exception this message has.
+	 * 
+	 * @return an exception
+	 */
 	public Throwable getException() {
 		return exception;
 	}
 	
 	/**
-	 * Getter for the logger name
+	 * Gets the {@link grupo12.Logger.api.Logger Logger}'s name.
+	 * 
 	 * @return the name of the logger
 	 */
 	public String getLoggerName() {
@@ -60,61 +75,83 @@ public class LogMessage {
 	}
 	
 	/**
-	 * Getter for the line number
-	 * @return the line number where log method was called
+	 * Gets the number of the line.
+	 * 
+	 * @return the line number where the log method was called
 	 */
 	public int getLineNumber() {
 		return info.getLineNumber();
 	}
 	
 	/**
-	 * Getter for the thread name
-	 * @return the thread name where log method was called
+	 * Gets the name of the thread.
+	 * 
+	 * @return the thread name where the log method was called
 	 */
 	public String getThreadName() {
 		return info.getThreadName();
 	}
 	
 	/**
-	 * Getter for the method name
-	 * @return the method name where log method was called
+	 * Gets the name of the method
+	 * 
+	 * @return the method name where the log method was called
 	 */
 	public String getCallingMethodName() {
 		return info.getCallingMethodName();
 	}
+	
 	/**
-	 * Getter for the time stamp
-	 * @return the date and time where log method was called
+	 * Gets the date
+	 * 
+	 * @return the date and time when the log method was called
 	 */
 	public Date getTimestamp() {
 		return info.getTimestamp();
 	}
+	
 	/**
-	 * Getter for the file name
-	 * @return the name of the file where log method was called
+	 * Gets the file name
+	 * 
+	 * @return the name of the file where the log method was called
 	 */
 	public String getCallingFilename() {
 		return info.getCallingFilename();
 	}
+	
 	/**
-	 * Getter for the level
-	 * @return level to which the logmessage belongs to
+	 * Gets the level of the message
+	 * 
+	 * @return level of this LogMessage
 	 */
 	public Level getLevel() {
 		return level;
 	}
+	
 	/**
-	 * Getter for the message
-	 * @return string containing the message
+	 * Gets the message
+	 * 
+	 * @return the message that was logged
 	 */
 	public String getMessage() {
 		return message;
 	}
 	
+	/**
+	 * Changes the format of the message (how it's going to be shown)
+	 * 
+	 * @param newFormat of the message
+	 */
 	public void changeFormat(String newFormat) {
 		formatedMessage = newFormat;
 	}
 	
+	/**
+	 * Returns the string representation of the LogMessage.
+	 * This is how it's going to be writen in the output.
+	 * 
+	 * @return the message formated for the output
+	 */
 	public String toString() {
 		return formatedMessage;
 	}

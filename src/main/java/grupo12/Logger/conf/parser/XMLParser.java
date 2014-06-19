@@ -15,12 +15,22 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ * Parser for XML files.
+ * 
+ * @author Grupo 12
+ */
 public class XMLParser implements Parser {
 
 	private String file;
 	private Document doc;
 	private boolean ready;
 
+	/**
+	 * Creates a parser for XML files, so we can load the configuration for each {@link grupo12.Logger.api.Logger Logger}.
+	 * 
+	 * @param xmlFile to parse
+	 */
 	public XMLParser(String xmlFile) {
 		file = xmlFile;
 		ready = false;
@@ -62,6 +72,12 @@ public class XMLParser implements Parser {
 		return configurationList;
 	}
 
+	/**
+	 * Creates a Configuration instance for each {@link grupo12.Logger.api.Logger Logger} name in the xml file.
+	 * 
+	 * @param parsedLevels supported by the logger
+	 * @param confNode containing the information of the logger
+	 */
 	private Configuration createConfiguration(String parsedLevels, Node confNode) {
 		
 		Element confElement = (Element) confNode;
@@ -116,10 +132,58 @@ public class XMLParser implements Parser {
             		appendedFormatters.append(",");
             }
     	}
+    	
+    	
+    	
+    	NodeList customOutputsList = confElement.getElementsByTagName("customOutputs");
+    	if (customOutputsList.getLength() != 0){
+    		List<String> coList= new ArrayList<String>();
+        	Element customOutputElement = (Element) customOutputsList.item(0);
+        	NodeList textCustomOutputsList = customOutputElement.getChildNodes();
+        	
+        	int totalCustomOutputs = textCustomOutputsList.getLength();
+        	
+        	for (int i = 0; i < totalCustomOutputs; i++) {
+        		StringBuilder appendedCustomOutputs= new StringBuilder();
+        		Node customOutputNode = textCustomOutputsList.item(i);
+        		
+        		 if (customOutputNode.getNodeType() == Node.ELEMENT_NODE) {
+        			 
+        			Element aCustomOutputElement = (Element) customOutputNode;
+        			
+        			NodeList implementorList = aCustomOutputElement.getElementsByTagName("implementor");
+             		Element implementorElement = (Element) implementorList.item(0);
+             		NodeList textImplementorList = implementorElement.getChildNodes();
+        			String implementor= textImplementorList.item(0).getNodeValue().trim();
+        			
+        			appendedCustomOutputs.append(implementor);
+        			appendedCustomOutputs.append(":");
+        			
+        			NodeList parametersList=  aCustomOutputElement.getElementsByTagName("parameters");
+        			if (!(parametersList.getLength() ==0 )) {
+        				Element parametersElement = (Element) parametersList.item(0);
+        				NodeList parameterList = parametersElement.getChildNodes();
+        			
+        				for (int j=0; j<parameterList.getLength(); j++) {
+        					Node parameterNode = parameterList.item(j);        					
+        					if (parameterNode.getNodeType() == Node.ELEMENT_NODE) {
+        						String apnd = parameterNode.getFirstChild().getNodeValue().trim();	       					
+        						appendedCustomOutputs.append(apnd);
+        						appendedCustomOutputs.append(",");
+        					}
+        				}
+        				coList.add(appendedCustomOutputs.toString());	    	
+        			}
+        		}
+        	}
+        	aConfiguration.setCustomOutputs(coList);
+    	}
+
     	aConfiguration.setOutputs(appendedOutputs.toString());
     	aConfiguration.setSeparators(appendedSeparators.toString());
     	aConfiguration.setFormatters(appendedFormatters.toString());
     	aConfiguration.setAvailableLevels(parsedLevels);
+    	
     	return aConfiguration;
 	}
 	
@@ -151,13 +215,11 @@ public class XMLParser implements Parser {
 			ready = false;
 			return false;
 		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					ready = false;
-					return false; // empty
-				}
+			try {
+				input.close();
+			} catch (Exception e) {
+				ready = false;
+				return false; // empty
 			}
 		}
 		ready = true;
