@@ -65,5 +65,14 @@ public class FileWriter implements Writer {
 			return filename.equals(other.filename);
 		}
 	}
+	@Override
+	public int hashCode() {
+		int h=277;
+		int fileNameLen = filename.length();
+		for (int i = 0; i < fileNameLen; i++) {
+		    h = 31*h + filename.charAt(i);
+		  }
+		return h * 37;
+	}
 
 }

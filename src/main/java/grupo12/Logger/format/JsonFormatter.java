@@ -15,4 +15,8 @@ public class JsonFormatter implements Formatter {
 	public boolean equals(Object anObject) {
 		return anObject instanceof JsonFormatter;
 	}
+	@Override
+	public int hashCode() {
+		return 293;
+	}
 }

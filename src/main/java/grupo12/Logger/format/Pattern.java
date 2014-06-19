@@ -58,4 +58,15 @@ public class Pattern implements Formatter {
 		}
 	}
 	
+	 @Override
+	 public int hashCode() {
+		int h=19;
+		int formatLen = format.length();
+		for (int i = 0; i < formatLen; i++) {
+		    h = 31*h + format.charAt(i);
+		}
+		int y= formatList.size();
+		return h * 43 + y;
+	 }
+	
 }

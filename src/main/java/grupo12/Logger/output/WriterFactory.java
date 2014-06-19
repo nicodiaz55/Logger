@@ -22,4 +22,8 @@ public class WriterFactory {
 			return new FileWriter(output);
 		}
 	}
+	@Override
+	public int hashCode() {
+		return 307;
+	}
 }

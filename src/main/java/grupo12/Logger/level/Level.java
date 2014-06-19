@@ -50,4 +50,13 @@ public class Level {
 		Level other = (Level) anObject;
 		return (level == other.level && levelStr.equals(other.levelStr));
 	}
+	@Override
+	public int hashCode() {
+		int h=111;
+		int levelStrLen = levelStr.length();
+		for (int i = 0; i < levelStrLen; i++) {
+		    h = 31*h + levelStr.charAt(i);
+		  }
+		return level * 37 + h;
+	}
 }

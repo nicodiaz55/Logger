@@ -179,8 +179,29 @@ public class Configuration {
 		else {
 			return true;
 		}
+		
+	
 	}
-
+	@Override
+	public int hashCode() {
+		int h=47;
+		int p=37;
+		int j=17;
+		
+		int levelLen = level.length();
+		for (int i = 0; i < levelLen; i++) {
+		    h = 31*h + level.charAt(i);
+		  }
+		int nameLen = name.length();
+		for (int i = 0; i < nameLen; i++) {
+		    p = 31*p + name.charAt(i);
+		  }
+		int filterLen = filter.length();
+		for (int i = 0; i < filterLen; i++) {
+		    j = 31*j + filter.charAt(i);
+		  }
+		return (h*formatters.size())+(p*separators.size())+(j*outputs.size());
+	}
 	public List<String> getAvailableLevels() {
 		return availableLevels;
 	}
