@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import grupo12.Logger.conf.Configuration;
-import grupo12.Logger.filter.Filterer;
-import grupo12.Logger.filter.FiltererFactory;
+import grupo12.Logger.filter.Filter;
+import grupo12.Logger.filter.FilterFactory;
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.format.FormatterFactory;
 import grupo12.Logger.level.Level;
@@ -35,12 +35,12 @@ public class LoggerBuilder {
 		WriterFactory writerFactory = new WriterFactory();
 		LevelFactory levelFactory = new LevelFactory(conf.getAvailableLevels());
 		FormatterFactory formatterFactory = new FormatterFactory();
-		FiltererFactory filtererFactory = new FiltererFactory();
+		FilterFactory filterFactory = new FilterFactory();
 
 		// Get all configuration attributes:
 		String confName = conf.getName();
 		String confLevel = conf.getLevel();
-		String confFilterer = conf.getFilter();
+		String confFilter = conf.getFilter();
 		List<String> confOutputs = conf.getOutputs();
 		List<String> confFormatters = conf.getFormatters();
 		List<String> confSeparators = conf.getSeparators();
@@ -60,9 +60,9 @@ public class LoggerBuilder {
 
 		// Set its filter:
 		//TODO: if (!confFilterer.equals("^%..*\\.class")){
-			Filterer filterer = filtererFactory.getFilterer(confFilterer);
+		Filter filter = filterFactory.getFilterer(confFilter);
 		
-		logger.setFilterer(filterer);
+		logger.setFilter(filter);
 				
 		// Create the outputs and add them to the logger:
 		int i = 0;
@@ -71,7 +71,7 @@ public class LoggerBuilder {
 			Output manager = new Output();
 			manager.setFormatter(formatter);
 			manager.setWriter(writer);
-			manager.setFilterer(filterer);
+			manager.setFilter(filter);
 			logger.addOutput(manager);
 			i++;
 		}

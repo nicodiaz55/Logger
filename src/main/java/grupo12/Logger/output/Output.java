@@ -15,7 +15,7 @@ public class Output {
 	private Writer writer;
 	private Formatter formatter;
 	private boolean logging;
-	private Filterer filterer;
+	private Filter filter;
 	
 	/**
 	 * Creates an Output.
@@ -27,7 +27,7 @@ public class Output {
 	public Output() {
 		writer = null;
 		formatter = null;
-		filterer = null;
+		filter = null;
 	}
 	
 	/**
@@ -57,8 +57,8 @@ public class Output {
 	 * 
 	 * @param filter to set.
 	 */
-	public void setFilterer(Filterer filterer) {
-		this.filterer = filterer;
+	public void setFilter(Filter filter) {
+		this.filter = filter;
 	}
 	/**
 	 * Logs the {@link LogMessage} (if publishable) to the defined output and format.
@@ -71,12 +71,13 @@ public class Output {
 			if (formatter != null) {
 				 formatedMessage = formatter.format(message);
 			}
-			if (filterer.getCustomFilter().equals("")){
-				formatedMessage=filterer.filter(formatedMessage);
-			}else{
-				formatedMessage=filterer.customFilter(formatedMessage);
+			boolean canWrite = true;
+			if (filter != null) {
+				canWrite = filter.filter(message);
 			}
-			writer.write(formatedMessage);
+			if (canWrite) {
+				writer.write(formatedMessage);
+			}
 		}
 	}
 
@@ -93,9 +94,9 @@ public class Output {
 	public void end() {
 		if (writer != null) {
 			writer.end();
-			writer = null;
-			logging = false;
 		}
+		writer = null;
+		logging = false;
 	}
 
 	/**

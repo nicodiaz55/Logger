@@ -3,7 +3,8 @@ package grupo12.Logger;
 import java.io.IOException;
 
 import grupo12.Logger.api.Logger;
-import grupo12.Logger.filter.Filterer;
+import grupo12.Logger.filter.Filter;
+import grupo12.Logger.filter.RegexFilter;
 import grupo12.Logger.format.Formatter;
 import grupo12.Logger.api.LoggerFactory;
 import grupo12.Logger.format.Pattern;
@@ -96,21 +97,18 @@ public class Example {
 		//WARNING: the filter IS needed.
 		//If you do not wish to filter, just don't use any parameters and it will
 		//use by default the regex ".*" which won't filter anything.	
-		Filterer filterer = new Filterer();
+		Filter filter = new RegexFilter(".*");
 		
 		//Also you can add a custom filter. Just develop it implementing the IFilterer interface.
-		//Put it in the same directory as the interface and compile it using "javac *.java", the logger
+		//Put it in the same directory as the interface and compile it, the logger
 		//uses the .class file
-		//This is the way to set it. Here we use one as an example
-		//If the error is FATAL, it prints "Rotten Orange", else it prints "Sweet Orange".
-		//Also, use the whole class name, including package
-		filterer.setCustomFilter("grupo12.Logger.filter.OrangeFilter");
+		//Filter filter = new CustomFilter("grupo12.Logger.filter.OrangeFilter");
 		
 		// We need to add the Output to our Logger:
 		Output output = new Output();
 		output.setWriter(writer);
 		output.setFormatter(formatter);
-		output.setFilterer(filterer);
+		output.setFilter(filter);
 		
 		
 		// We can add as many outputs as we wish, each with different levels and formats.
