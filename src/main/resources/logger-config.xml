@@ -2,15 +2,41 @@
 <Loggers>
 <levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
 <logger>
-	<name>Logger</name>
+	<name>logger1</name>
 	<level>INFO</level>
-	<filter>.*</filter>
+	<filter>otro.NumeroLineaImpares.class</filter>
 	<outputs>
 		<output>
 			<type>console</type>
-			<formatter>%d{HH:mm:ss} - %p - %t - %m</formatter>
+			<formatter>%d{dd-MM-YYYY hh:mm:ss.SSS} - [%p] [%g] %t %F %L %%- %m %n</formatter>
 			<separator>-</separator>
 		</output>
 	</outputs>
 </logger>
+
+<logger>
+	<name>logger2</name>
+	<level>DEBUG</level>
+	<filter>otro.FiltraTP.class</filter>
+	
+	<customOutputs>
+		<customOutput>
+			<implementor>otro.MiEscritor.class</implementor>
+		</customOutput>
+	</customOutputs>
+</logger>
+
+<logger>
+	<name>logger3</name>
+	<level>TRACE</level>
+	<filter>otro.FiltraNivelWarning.class</filter>
+	<outputs>
+		<output>
+			<type>MyJson.json</type>
+			<formatter>JSON</formatter>
+			<separator>-</separator>
+		</output>
+	</outputs>
+</logger>
+
 </Loggers>

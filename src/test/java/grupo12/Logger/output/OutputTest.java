@@ -38,7 +38,7 @@ public class OutputTest {
 		output.setWriter(writer);
 		output.init();
 		assertFalse(output.isOn());
-		assertTrue(outContent.toString().contains("Warning: Output not initialized. Reason: "));
+		assertTrue(outContent.toString().contains("Warning: Writer " + writer.getClass().getName() + " not initialized. Reason: "));
 		System.setOut(null);
 	}
 	

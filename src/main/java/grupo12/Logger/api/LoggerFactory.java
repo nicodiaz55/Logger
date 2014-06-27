@@ -12,7 +12,7 @@ import java.util.Hashtable;
  * 
  * @author Grupo 12
  */
-public class LoggerFactory{
+public class LoggerFactory {
 
 	/**
 	 * The unique instance of this class.

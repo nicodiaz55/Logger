@@ -1,0 +1,5 @@
+{‘datetime’: ‘Thu Jun 26 21:04:28 ART 2014’, ‘level’: ‘WARNING’, ‘logger’: ‘logger3’, ‘message’: ‘esto deberia loggearse con excepcion
+   java.lang.NullPointerException
+	at Main.main(Main.java:24)
+’}
+{‘datetime’: ‘Thu Jun 26 21:04:28 ART 2014’, ‘level’: ‘ERROR’, ‘logger’: ‘logger3’, ‘message’: ‘esto deberia loggearse tambien..’}

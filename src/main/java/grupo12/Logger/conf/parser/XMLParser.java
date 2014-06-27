@@ -101,39 +101,42 @@ public class XMLParser implements Parser {
 		aConfiguration.setFilter(((Node) textFilterList.item(0)).getNodeValue().trim());
         
     	NodeList outputsList = confElement.getElementsByTagName("outputs");
-    	Element outputsElement = (Element) outputsList.item(0);
-    	NodeList textOutputsList = outputsElement.getChildNodes();
+    	if (outputsList.getLength() != 0) {
+    		Element outputsElement = (Element) outputsList.item(0);
+    		NodeList textOutputsList = outputsElement.getChildNodes();
     	
-    	int totalOutputs = textOutputsList.getLength();
-    	StringBuilder appendedOutputs = new StringBuilder();
-    	StringBuilder appendedSeparators = new StringBuilder();
-    	StringBuilder appendedFormatters = new StringBuilder();
-    	
-    	for (int l = 0; l < totalOutputs; l++) {
-    		Node outputNode = textOutputsList.item(l);
-            if (outputNode.getNodeType() == Node.ELEMENT_NODE) {	
-    				Element outputElement = (Element) outputNode;
-            		NodeList typeList = outputElement.getElementsByTagName("type");
-            		Element typeElement = (Element) typeList.item(0);
-            		NodeList textTypeList = typeElement.getChildNodes();
-            		appendedOutputs.append(((Node) textTypeList.item(0)).getNodeValue().trim());
-            		appendedOutputs.append(",");
-            		
-            		NodeList separatorList = outputElement.getElementsByTagName("separator");
-            		Element separatorElement = (Element) separatorList.item(0);
-            		NodeList textSeparatorList = separatorElement.getChildNodes();
-            		appendedSeparators.append(((Node) textSeparatorList.item(0)).getNodeValue().trim());
-            		appendedSeparators.append(",");
-
-            		NodeList formatterList = outputElement.getElementsByTagName("formatter");
-            		Element formatterElement = (Element) formatterList.item(0);
-            		NodeList textFormatterList = formatterElement.getChildNodes();
-            		appendedFormatters.append(((Node) textFormatterList.item(0)).getNodeValue().trim());
-            		appendedFormatters.append(",");
-            }
+	    	int totalOutputs = textOutputsList.getLength();
+	    	StringBuilder appendedOutputs = new StringBuilder();
+	    	StringBuilder appendedSeparators = new StringBuilder();
+	    	StringBuilder appendedFormatters = new StringBuilder();
+	    	
+	    	for (int l = 0; l < totalOutputs; l++) {
+	    		Node outputNode = textOutputsList.item(l);
+	            if (outputNode.getNodeType() == Node.ELEMENT_NODE) {	
+	    				Element outputElement = (Element) outputNode;
+	            		NodeList typeList = outputElement.getElementsByTagName("type");
+	            		Element typeElement = (Element) typeList.item(0);
+	            		NodeList textTypeList = typeElement.getChildNodes();
+	            		appendedOutputs.append(((Node) textTypeList.item(0)).getNodeValue().trim());
+	            		appendedOutputs.append(",");
+	            		
+	            		NodeList separatorList = outputElement.getElementsByTagName("separator");
+	            		Element separatorElement = (Element) separatorList.item(0);
+	            		NodeList textSeparatorList = separatorElement.getChildNodes();
+	            		appendedSeparators.append(((Node) textSeparatorList.item(0)).getNodeValue().trim());
+	            		appendedSeparators.append(",");
+	
+	            		NodeList formatterList = outputElement.getElementsByTagName("formatter");
+	            		Element formatterElement = (Element) formatterList.item(0);
+	            		NodeList textFormatterList = formatterElement.getChildNodes();
+	            		appendedFormatters.append(((Node) textFormatterList.item(0)).getNodeValue().trim());
+	            		appendedFormatters.append(",");
+	            }
+	    	}
+	    	aConfiguration.setOutputs(appendedOutputs.toString());
+	    	aConfiguration.setSeparators(appendedSeparators.toString());
+	    	aConfiguration.setFormatters(appendedFormatters.toString());
     	}
-    	
-    	
     	
     	NodeList customOutputsList = confElement.getElementsByTagName("customOutputs");
     	if (customOutputsList.getLength() != 0){
@@ -160,7 +163,7 @@ public class XMLParser implements Parser {
         			appendedCustomOutputs.append(":");
         			
         			NodeList parametersList=  aCustomOutputElement.getElementsByTagName("parameters");
-        			if (!(parametersList.getLength() ==0 )) {
+        			if (!(parametersList.getLength() == 0)) {
         				Element parametersElement = (Element) parametersList.item(0);
         				NodeList parameterList = parametersElement.getChildNodes();
         			
@@ -172,16 +175,12 @@ public class XMLParser implements Parser {
         						appendedCustomOutputs.append(",");
         					}
         				}
-        				coList.add(appendedCustomOutputs.toString());	    	
         			}
+        			coList.add(appendedCustomOutputs.toString());
         		}
         	}
         	aConfiguration.setCustomOutputs(coList);
     	}
-
-    	aConfiguration.setOutputs(appendedOutputs.toString());
-    	aConfiguration.setSeparators(appendedSeparators.toString());
-    	aConfiguration.setFormatters(appendedFormatters.toString());
     	aConfiguration.setAvailableLevels(parsedLevels);
     	
     	return aConfiguration;

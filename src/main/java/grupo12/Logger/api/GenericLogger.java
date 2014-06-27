@@ -13,7 +13,7 @@ public class GenericLogger {
 	private Level level;
 	private Filter filter;
 	private List<Output> outputs;
-	private static final int stCallerDepth = 5;
+	private static final int stCallerDepth = 6; // 5 si no nos llaman del binding
 
 	/**
 	 * Creates an empty Logger with a given name. It's recommended to use {@link LoggerBuilder} to create a Logger.

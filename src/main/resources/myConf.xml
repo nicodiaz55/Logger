@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Loggers>
+<levels>TRACE,DEBUG,INFO,WARNING,ERROR,FATAL</levels>
+<logger>
+	<name>LoggerPASO</name>
+	<level>INFO</level>
+	<filter>.*PASO</filter>
+	<outputs>
+		<output>
+			<type>console</type>
+			<formatter>%d{HH:mm:ss} - %p - %t - %m</formatter>
+			<separator>-</separator>
+		</output>
+	</outputs>
+</logger>
+</Loggers>

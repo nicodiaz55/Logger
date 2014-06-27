@@ -1,5 +1,6 @@
 package grupo12.Logger.conf;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
@@ -37,7 +38,7 @@ public class Configuration {
 		filter = defaultFilter;
 		formatters = Arrays.asList(defaultFormatter.split(","));
 		separators = Arrays.asList(defaultSeparator.split(","));
-		outputs = Arrays.asList(defaultOutput.split(","));
+		outputs = new ArrayList<String>();
 		availableLevels = Arrays.asList(defaultLevels.split(","));
 		
 		customOutputs = new Hashtable<String, List<String>>();
@@ -142,7 +143,14 @@ public class Configuration {
 	public void setCustomOutputs(List<String> coList) {
 		for (String customOutput : coList) {
 			String coImplementor = customOutput.split(":")[0];
-			List<String> parameters = Arrays.asList(customOutput.split(":")[1].split(","));
+			
+			List<String> ls = Arrays.asList(customOutput.split(":"));
+			List<String> parameters = null;
+			if (ls.size() == 2) {
+				parameters = Arrays.asList(customOutput.split(":")[1].split(","));
+			} else {
+				parameters = new ArrayList<String>();
+			}
 			customOutputs.put(coImplementor, parameters);
 		}
 	}

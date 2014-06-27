@@ -35,6 +35,7 @@ public class FileWriter implements Writer {
 	public void write(String message) {
 		if (canWrite()) {
 			writer.println(message);
+			writer.flush();
 		}
 	}
 

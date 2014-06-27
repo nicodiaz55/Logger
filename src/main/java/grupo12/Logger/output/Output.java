@@ -126,7 +126,7 @@ public class Output {
 				writer.init();
 				logging = true;
 			} catch (NotInitializedException e) {
-				System.out.println("Warning: Output not initialized. Reason: " + e.getMessage());
+				System.out.println("Warning: Writer " + writer.getClass().getName() + " not initialized. Reason: " + e.getMessage());
 				logging = false;
 			}
 		}
